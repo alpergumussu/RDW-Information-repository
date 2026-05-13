@@ -26,8 +26,6 @@ It covers the broader context surrounding modern automotive cybersecurity: how v
 
 ## Project Context
 
-| | |
-|---|---|
 | **Client** | RDW — Rijksdienst voor het Wegverkeer |
 | **Institution** | Windesheim University of Applied Sciences |
 | **Programme** | HBO-ICT, Security Engineering / Cyber routes |
