@@ -221,27 +221,7 @@
   animation: scroll-x 50s linear infinite;
 }
 
-.StartReadingBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
-  border-radius: 999px;
-  background: #00A85A;
-  opacity: 90%;
-  color: var(--bg);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  transition: transform .15s ease, background .2s ease;
-}
-
-.StartReadingBtn:hover {
-  background: var(--ink);
-  color: var(--bg);
-  border-color: var(--ink);
-}
-
+.StartReadingBtn,
 .OpenModuleBtn {
   display: inline-flex;
   align-items: center;
@@ -249,7 +229,6 @@
   padding: 14px 22px;
   border-radius: 999px;
   background: #00A85A;
-  opacity: 90%;
   color: var(--bg);
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
@@ -257,12 +236,23 @@
   transition: transform .15s ease, background .2s ease;
 }
 
+.StartReadingBtn:hover,
 .OpenModuleBtn:hover {
   background: var(--ink);
   color: var(--bg);
-  border-color: var(--ink);
 }
 
+[data-theme="dark"] .StartReadingBtn,
+[data-theme="dark"] .OpenModuleBtn {
+  background: #2EE893;
+  color: #0B0D0A;
+}
+
+[data-theme="dark"] .StartReadingBtn:hover,
+[data-theme="dark"] .OpenModuleBtn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
 
 @keyframes scroll-x {
   from {
