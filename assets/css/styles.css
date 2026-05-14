@@ -236,6 +236,17 @@ section {
   }
 }
 
+.nav-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .brand-mark::after {
   content: "";
   width: 8px;

@@ -70,19 +70,21 @@
       return `<a href="${href}"${active}>${label}</a>`;
     }).join('\n      ');
     root.outerHTML = `<nav class="nav">
-  <div class="wrap nav-inner">
+<div class="wrap nav-inner">
+  <div class="nav-left">
     <a href="../../Models/HomePage/index.html" class="brand">
       <span class="brand-mark"></span>
       <span>AUTO/CYBER</span>
       <small>v.2026</small>
     </a>
-    <div class="nav-links">
-      ${linksHTML}
-    </div>
-    <div class="nav-tools">
-      <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"></button>
-    </div>
   </div>
+  <div class="nav-links">
+    ${linksHTML}
+  </div>
+  <div class="nav-right">
+    <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"></button>
+  </div>
+</div>
 </nav>`;
   }
 
