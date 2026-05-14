@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Automotive Cybersecurity — Defenses &amp; Regulation</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .page-hero { padding-top: 80px; padding-bottom: 60px; }
+  .page-hero h1 { font-size: clamp(48px, 7vw, 110px); }
+  .page-hero h1 .accent { color: var(--accent); font-style: italic; }
+
+  /* Defense in depth diagram */
+  .layers {
+    margin-block: 50px;
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--bg-elev);
+  }
+  .layer {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    border-bottom: 1px solid var(--rule);
+    align-items: stretch;
+  }
+  .layer:last-child { border-bottom: 0; }
+  @media (max-width: 700px) { .layer { grid-template-columns: 60px 1fr; } .layer .layer-detail { display: none; } }
+  .layer-num {
+    background: var(--ink); color: var(--bg);
+    display: grid; place-items: center;
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 28px; letter-spacing: -0.02em;
+  }
+  .layer:nth-child(odd) .layer-num { background: var(--accent); color: var(--accent-ink); }
+  .layer-name {
+    padding: 22px 24px;
+    border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .layer-name h4 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px; line-height: 1.05; letter-spacing: -0.01em;
+  }
+  .layer-name .scope {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--ink-mute); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .layer-detail {
+    padding: 22px 24px;
+    color: var(--ink-soft);
+    font-size: 14px; line-height: 1.55;
+  }
+
+  /* Reg cards */
+  .regs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (max-width: 900px) { .regs { grid-template-columns: 1fr; } }
+  .reg {
+    padding: 36px 32px 36px 0;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding-right: 32px;
+  }
+  .reg:nth-child(2n) { border-right: 0; padding-left: 32px; padding-right: 0; }
+  @media (max-width: 900px) {
+    .reg { border-right: 0; padding-left: 0; padding-right: 0; }
+    .reg:nth-child(2n) { padding-left: 0; }
+  }
+  .reg .id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--accent); letter-spacing: 0.06em;
+  }
+  .reg h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(32px, 3.4vw, 44px); line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-top: 8px; margin-bottom: 14px;
+  }
+  .reg .meta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--ink-mute);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .reg .meta b { color: var(--ink); font-weight: 500; }
+  .reg p { color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+
+  /* Future split */
+  .future {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  @media (max-width: 900px) { .future { grid-template-columns: 1fr; } }
+  .future .photo { aspect-ratio: 4 / 5; }
+
+  .closing {
+    padding-block: clamp(80px, 10vw, 140px);
+    background: var(--bg-elev);
+    border-block: 1px solid var(--rule);
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span>AUTO/CYBER</span>
+      <small>v.2026</small>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Overview</a>
+      <a href="attack-surfaces.html">Attack&nbsp;Surfaces</a>
+      <a href="case-studies.html">Case&nbsp;Studies</a>
+      <a href="defenses.html" class="active">Defenses</a>
+    </div>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Chapter 03 · Defenses &amp; regulation</div>
+    <h1 class="display" style="margin-top: 24px;">
+      Building<br/>
+      the car<br/>
+      that <span class="accent">won't break</span>.
+    </h1>
+    <p class="lede" style="margin-top: 32px; max-width: 60ch;">
+      The first decade of automotive cybersecurity was diagnosis. The second decade — the one we are in now — is treatment. This chapter covers what manufacturers, regulators, and researchers actually do about it.
+    </p>
+  </div>
+</header>
+
+<!-- ===== Defense in depth ===== -->
+<section>
+  <div class="wrap">
+    <div class="grid-2" style="align-items: end;">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>03.1 · Defense in depth</div>
+        <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 14ch;">
+          Layers,<br/>not walls.
+        </h2>
+      </div>
+      <p class="lede" style="max-width: 50ch;">
+        No single control is good enough. The discipline is to make every step of an attacker's chain expensive — so that a vulnerability in one place stops, rather than propagates.
+      </p>
+    </div>
+
+    <div class="layers">
+      <div class="layer">
+        <div class="layer-num">01</div>
+        <div class="layer-name">
+          <h4>Secure boot</h4>
+          <div class="scope">Per-ECU firmware</div>
+        </div>
+        <div class="layer-detail">Each ECU verifies the cryptographic signature of its firmware at every reset. A flashed binary that has not been signed by the manufacturer's private key never executes — closing the attack vector that ended the 2015 Jeep chain.</div>
+      </div>
+      <div class="layer">
+        <div class="layer-num">02</div>
+        <div class="layer-name">
+          <h4>Hardware security modules</h4>
+          <div class="scope">SHE / EVITA / TPM</div>
+        </div>
+        <div class="layer-detail">A small tamper-resistant block inside each ECU holds long-term keys, performs signing and MAC operations, and gates access to the rest of the chip. The host CPU never sees the raw key material.</div>
+      </div>
+      <div class="layer">
+        <div class="layer-num">03</div>
+        <div class="layer-name">
+          <h4>Domain separation</h4>
+          <div class="scope">Hypervisor / mixed-criticality SoC</div>
+        </div>
+        <div class="layer-detail">A single high-end chip is partitioned by a hypervisor into "comfort" and "real-time" domains. The infotainment Linux cannot, by hardware-enforced policy, send a CAN frame to the brake controller.</div>
+      </div>
+      <div class="layer">
+        <div class="layer-num">04</div>
+        <div class="layer-name">
+          <h4>Authenticated CAN</h4>
+          <div class="scope">SecOC, AUTOSAR</div>
+        </div>
+        <div class="layer-detail">Truncated MACs and freshness counters appended to safety-critical CAN frames. A spoofed frame on the wire is silently dropped because its MAC does not validate against the receiver's session key.</div>
+      </div>
+      <div class="layer">
+        <div class="layer-num">05</div>
+        <div class="layer-name">
+          <h4>In-vehicle IDS</h4>
+          <div class="scope">Anomaly detection at the gateway</div>
+        </div>
+        <div class="layer-detail">A lightweight engine on the central gateway watches the bus for impossible patterns — out-of-bounds rates, unexpected senders, malformed frames — and alerts the backend over the telematics link in real time.</div>
+      </div>
+      <div class="layer">
+        <div class="layer-num">06</div>
+        <div class="layer-name">
+          <h4>Backend SOC &amp; OTA</h4>
+          <div class="scope">Vehicle-SOC, signed OTA</div>
+        </div>
+        <div class="layer-detail">A 24/7 Vehicle Security Operations Center ingests fleet telemetry, detects emerging threats, and dispatches signed OTA updates through the telematics module. The Uptane standard governs how those updates are authorized.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Regulation ===== -->
+<section id="regulation">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>03.2 · Regulation</div>
+    <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 16ch;">
+      Three documents<br/>
+      that govern the field.
+    </h2>
+    <p class="lede" style="margin-top: 24px; max-width: 60ch;">
+      A decade of incidents convinced regulators that cybersecurity could not be left to manufacturer discretion. Three texts now define the work.
+    </p>
+
+    <div class="regs" style="margin-top: 60px;">
+      <div class="reg">
+        <div class="id">// REG · UNECE WP.29 R155</div>
+        <h3>Cybersecurity Management System.</h3>
+        <div class="meta">
+          <span><b>2021</b> · adopted</span>
+          <span>EU + 60 markets</span>
+          <span>Type approval</span>
+        </div>
+        <p>Requires every manufacturer to operate a documented Cybersecurity Management System covering the entire vehicle lifecycle: design, development, production, post-production, decommissioning. Without a valid CSMS certificate, type approval — the legal permission to sell — is withheld in EU member states. Mandatory for all new types from July 2022 and for <em>all</em> new vehicles produced from July 2024.</p>
+      </div>
+      <div class="reg">
+        <div class="id">// REG · UNECE WP.29 R156</div>
+        <h3>Software Update Management.</h3>
+        <div class="meta">
+          <span><b>2021</b> · adopted</span>
+          <span>Companion to R155</span>
+          <span>OTA scope</span>
+        </div>
+        <p>The companion regulation that R155 implicitly relies on. R156 requires manufacturers to operate a Software Update Management System: an auditable process for authoring, signing, distributing, and rolling back firmware. The point is to make OTA — the most powerful response tool the industry has — itself a controlled and documentable process rather than a black box.</p>
+      </div>
+      <div class="reg" style="border-bottom: 0;">
+        <div class="id">// STD · ISO/SAE 21434</div>
+        <h3>Engineering practice.</h3>
+        <div class="meta">
+          <span><b>2021</b> · published</span>
+          <span>Voluntary</span>
+          <span>De-facto required</span>
+        </div>
+        <p>Where R155 says <em>that</em> manufacturers must operate a CSMS, ISO/SAE 21434 says <em>how</em>. It defines the engineering practices — TARA (threat analysis &amp; risk assessment), CAL (cybersecurity assurance levels), the V-model integrated with security activities — that auditors look for during a CSMS audit. Voluntary in name; effectively mandatory in practice.</p>
+      </div>
+      <div class="reg" style="border-bottom: 0;">
+        <div class="id">// STD · Uptane</div>
+        <h3>Secure OTA framework.</h3>
+        <div class="meta">
+          <span><b>2017</b> · v1</span>
+          <span>Open spec</span>
+          <span>OTA backbone</span>
+        </div>
+        <p>An open, community-developed framework (rooted in TUF, the Update Framework used in PyPI and others) for delivering signed firmware to fleets in a way that survives the compromise of any single signing key or backend component. Adopted by Toyota, Ford, NXP, ETAS, and others as the canonical OTA security architecture.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Bug bounty / disclosure ===== -->
+<section>
+  <div class="wrap">
+    <div class="grid-2" style="align-items: start;">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>03.3 · The research relationship</div>
+        <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 14ch;">
+          Hackers, in<br/>
+          from the cold.
+        </h2>
+        <p class="lede" style="margin-top: 24px; max-width: 50ch;">
+          For the first decade of car-hacking research, OEMs and researchers spoke past each other. That has changed.
+        </p>
+
+        <div class="photo wide" style="margin-top: 32px;" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · DEFCON-CAR-HACKING-VILLAGE.JPG</span>
+        </div>
+      </div>
+
+      <div class="article-body">
+        <p>The Jeep disclosure in 2015 was, in retrospect, the moment manufacturers learned that ignoring or threatening external researchers was a worse strategy than working with them. By 2017 nearly every major OEM had a coordinated-vulnerability-disclosure policy and a paid bug-bounty program. The dollar values are real — six-figure rewards are routine for remote exploit chains — but the more important shift is cultural.</p>
+
+        <h3>What disclosure looks like now</h3>
+        <ul>
+          <li><strong>Coordinated timelines.</strong> Researchers report; the OEM acknowledges within a defined window; both parties agree on a fix-and-publish schedule, often 90 days.</li>
+          <li><strong>Safe-harbor language.</strong> Programs explicitly waive legal action for good-faith research within scope — a meaningful change from a decade of DMCA threats.</li>
+          <li><strong>Backends in scope.</strong> The 2024 Kia disclosure happened because the bounty program covered dealer portals, not just vehicles. Programs that drew their scope tighter would have missed it entirely.</li>
+        </ul>
+
+        <h3>The Pwn2Own pivot</h3>
+        <p>In 2024 the Pwn2Own contest series — historically focused on browsers and operating systems — added a permanent automotive track. Tesla, infotainment platforms, EV chargers, and aftermarket telematics dongles are now annual targets. Hundreds of thousands of dollars in prize money are paid out for novel chains. Crucially, every winning entry is shared in detail with the affected vendor before public release.</p>
+
+        <div class="callout">
+          <div class="eyebrow"><span class="dot"></span>The economics</div>
+          <p>A bug-bounty payout of $200,000 sounds expensive until it is compared against the cost of the 2015 Jeep recall — estimated at hundreds of millions of dollars in repairs, brand damage, and remediation engineering. <strong>Disclosed bugs are dramatically cheaper than discovered ones.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Future ===== -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="future">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>03.4 · What's next</div>
+        <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 14ch;">
+          The horizon.
+        </h2>
+
+        <div class="photo wide" style="margin-top: 32px;" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · ZONAL-ARCHITECTURE-RENDER.JPG</span>
+        </div>
+      </div>
+
+      <div class="article-body">
+        <p>Three structural shifts are already visible in vehicles entering production now and over the next five years.</p>
+
+        <h3>Zonal architectures</h3>
+        <p>The 70-ECU bus-of-buses car is a relic of incremental supplier integration. Newer vehicles consolidate logic into a small number of high-performance <strong>zonal controllers</strong> — usually one per quadrant of the car — with Ethernet between them and dumb actuators on the spokes. From a security standpoint, this collapses dozens of weakly-trusted ECUs into a handful of well-trusted ones, with end-to-end authenticated transport between them.</p>
+
+        <h3>Software-defined vehicles</h3>
+        <p>The "software-defined vehicle" is the industry shorthand for cars whose feature set evolves through OTA over the vehicle's life — everything from acceleration profiles to autonomy capability arriving as a download. It magnifies the importance of OTA security: the update channel is now the principal threat.</p>
+
+        <h3>Post-quantum migration</h3>
+        <p>A car shipped today will still be on the road in 2040. The vehicle's signing keys may need to outlast the cryptographic algorithms they were chosen to use. Post-quantum signature schemes — Dilithium, SPHINCS+ — are now being prototyped in ECU firmware so that the lifecycle ahead is, finally, longer than the cryptography behind it.</p>
+
+        <p class="pull">The work doesn't end. Every layer of defense buys time. The point of automotive cybersecurity is to keep buying enough of it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Closing ===== -->
+<section class="closing">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>End of primer</div>
+    <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 18ch;">
+      You've now seen<br/>
+      the whole field<br/>
+      <span style="color: var(--accent);">in outline</span>.
+    </h2>
+
+    <div class="grid-3" style="margin-top: 60px;">
+      <div class="card">
+        <span class="num">// next read 01</span>
+        <h3>Charlie Miller &amp; Chris Valasek</h3>
+        <p style="color: var(--ink-soft); font-size: 14px;">"Remote Exploitation of an Unaltered Passenger Vehicle" — the 2015 Jeep paper. The single most influential document in the field.</p>
+      </div>
+      <div class="card">
+        <span class="num">// next read 02</span>
+        <h3>UNECE R155 &amp; ISO/SAE 21434</h3>
+        <p style="color: var(--ink-soft); font-size: 14px;">The texts every automotive security engineer keeps within reach. Public, free to read, mostly readable in an evening each.</p>
+      </div>
+      <div class="card">
+        <span class="num">// next read 03</span>
+        <h3>Curry et al. — web.car-hacks</h3>
+        <p style="color: var(--ink-soft); font-size: 14px;">The serial backend disclosures of the early 2020s. The single best ongoing demonstration of how the threat model has shifted off-vehicle.</p>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 60px;">
+      <a class="btn" href="index.html">Back to the start <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="case-studies.html">Re-read chapter 02</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 16px;">
+          <span class="brand-mark"></span><span>AUTO/CYBER</span>
+        </div>
+        <p style="color: var(--ink-soft); font-size: 14px; max-width: 36ch;">
+          An open educational primer on the cybersecurity of road vehicles.
+        </p>
+      </div>
+      <div>
+        <h4>Chapters</h4>
+        <ul>
+          <li><a href="index.html">00 — Overview</a></li>
+          <li><a href="attack-surfaces.html">01 — Attack Surfaces</a></li>
+          <li><a href="case-studies.html">02 — Case Studies</a></li>
+          <li><a href="defenses.html">03 — Defenses</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>This chapter</h4>
+        <ul>
+          <li><a href="#regulation">03.1 Defense in depth</a></li>
+          <li><a href="#regulation">03.2 Regulation</a></li>
+          <li><a href="#regulation">03.3 Disclosure</a></li>
+          <li><a href="#regulation">03.4 Horizon</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Color</h4>
+        <ul>
+          <li><a href="#" onclick="document.getElementById('tweaks-trigger').click();return false;">Switch palette →</a></li>
+          <li><a href="#" onclick="document.getElementById('theme-toggle').click();return false;">Toggle dark mode →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>// AUTO/CYBER · 2026</span>
+      <span>Set in Instrument Serif, Geist &amp; JetBrains Mono</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

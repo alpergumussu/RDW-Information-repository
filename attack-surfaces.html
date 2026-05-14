@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Automotive Cybersecurity — Attack Surfaces</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .page-hero { padding-top: 80px; padding-bottom: 60px; }
+  .page-hero h1 { font-size: clamp(48px, 7vw, 110px); }
+  .page-hero .accent { color: var(--accent); font-style: italic; }
+
+  .toc {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding-block: 28px;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px 32px;
+  }
+  @media (max-width: 900px) { .toc { grid-template-columns: 1fr 1fr; } }
+  .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-bottom: 1px dashed var(--rule);
+    transition: color .15s, padding-left .15s;
+  }
+  .toc a:hover { color: var(--accent); padding-left: 6px; }
+  .toc a .num { color: var(--ink-mute); }
+
+  .surface {
+    padding-block: clamp(80px, 9vw, 130px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .surface-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 60px;
+  }
+  @media (max-width: 900px) { .surface-grid { grid-template-columns: 1fr; } }
+  .surface-meta { position: sticky; top: 100px; align-self: start; }
+  .surface-meta .num {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 96px; line-height: 0.9;
+    color: var(--ink-mute);
+    letter-spacing: -0.03em;
+  }
+  .surface-meta h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 4.5vw, 60px);
+    line-height: 1.0; letter-spacing: -0.015em;
+    margin-top: 8px;
+  }
+  .surface-meta .tags { margin-top: 16px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .surface-meta .photo { margin-top: 28px; }
+
+  .risk {
+    margin-top: 22px;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 18px;
+    background: var(--bg-elev);
+  }
+  .risk-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--ink-soft);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .risk-row + .risk-row { border-top: 1px dashed var(--rule); }
+  .pips { display: inline-flex; gap: 3px; }
+  .pip { width: 10px; height: 10px; border-radius: 2px; background: var(--rule); }
+  .pip.on { background: var(--accent); }
+  .pip.support { background: var(--support); }
+
+  /* CAN bus diagram */
+  .can-diagram {
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 28px;
+    background: var(--bg-elev);
+    margin-block: 28px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .can-bus {
+    height: 4px; background: var(--ink); position: relative;
+    margin: 50px 0;
+    border-radius: 2px;
+  }
+  .can-node {
+    position: absolute; top: -42px; transform: translateX(-50%);
+    text-align: center; font-size: 10px; color: var(--ink-soft);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .can-node::after {
+    content: ""; display: block;
+    width: 1px; height: 26px; background: var(--ink-mute);
+    margin: 6px auto 0;
+  }
+  .can-node .box {
+    display: inline-block; padding: 6px 10px;
+    border: 1px solid var(--ink); background: var(--bg);
+    border-radius: 4px;
+    color: var(--ink);
+  }
+  .can-node.attacker .box { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .can-frame {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto auto;
+    gap: 0;
+    font-size: 11px;
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .can-frame > div {
+    padding: 10px 12px;
+    border-right: 1px solid var(--rule);
+    text-align: center;
+    color: var(--ink-soft);
+  }
+  .can-frame > div:last-child { border-right: 0; }
+  .can-frame > div .label {
+    display: block; font-size: 9px; color: var(--ink-mute);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .can-frame > div .val { color: var(--ink); font-weight: 500; }
+  .can-frame .id { background: color-mix(in oklab, var(--accent) 18%, transparent); }
+  @media (max-width: 700px) {
+    .can-frame { grid-template-columns: 1fr 1fr; }
+    .can-frame > div { border-bottom: 1px solid var(--rule); }
+  }
+
+  /* Spec table */
+  .spec {
+    margin-top: 24px;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .spec th, .spec td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+  }
+  .spec th {
+    color: var(--ink-mute); font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    font-size: 11px;
+  }
+  .spec td:first-child { color: var(--ink); width: 30%; }
+
+  /* Bottom summary */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+  @media (max-width: 900px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+  .summary-cell {
+    padding: 24px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg-elev);
+  }
+  .summary-cell:last-child { border-right: 0; }
+  .summary-cell .num {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 30px; color: var(--accent); letter-spacing: -0.02em;
+  }
+  .summary-cell h5 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px; line-height: 1.1;
+    margin-top: 6px;
+  }
+  .summary-cell p {
+    font-size: 12px; color: var(--ink-soft); margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace; line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span>AUTO/CYBER</span>
+      <small>v.2026</small>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Overview</a>
+      <a href="attack-surfaces.html" class="active">Attack&nbsp;Surfaces</a>
+      <a href="case-studies.html">Case&nbsp;Studies</a>
+      <a href="defenses.html">Defenses</a>
+    </div>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Chapter 01 · Attack surfaces</div>
+    <h1 class="display" style="margin-top: 24px;">
+      Where the<br/>
+      <span class="accent">soft spots</span><br/>
+      live.
+    </h1>
+    <p class="lede" style="margin-top: 32px; max-width: 60ch;">
+      An attack surface is anywhere an outsider's input meets the vehicle's logic. On a modern car there are six big ones — three you plug into, three that reach you over the air. This chapter takes them in turn.
+    </p>
+
+    <div class="toc">
+      <a href="#can"><span><span class="num">01.1</span> &nbsp; Controller Area Network</span><span>↓</span></a>
+      <a href="#obd"><span><span class="num">01.2</span> &nbsp; OBD-II diagnostic port</span><span>↓</span></a>
+      <a href="#info"><span><span class="num">01.3</span> &nbsp; Infotainment &amp; IVI</span><span>↓</span></a>
+      <a href="#telematics"><span><span class="num">01.4</span> &nbsp; Telematics &amp; cellular</span><span>↓</span></a>
+      <a href="#rke"><span><span class="num">01.5</span> &nbsp; Keyless entry</span><span>↓</span></a>
+      <a href="#tpms"><span><span class="num">01.6</span> &nbsp; TPMS &amp; sensors</span><span>↓</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 01.1 CAN ===== -->
+<section class="surface" id="can">
+  <div class="wrap">
+    <div class="surface-grid">
+      <aside class="surface-meta">
+        <div class="num">01.1</div>
+        <h2 class="serif-i">Controller<br/>Area<br/>Network.</h2>
+        <div class="tags">
+          <span class="tag">Internal bus</span>
+          <span class="tag solid">Highest impact</span>
+        </div>
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · CAN-WIRE-HARNESS.JPG</span>
+        </div>
+        <div class="risk">
+          <div class="risk-row"><span>Confidentiality</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Integrity</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></span></div>
+          <div class="risk-row"><span>Availability</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></span></div>
+          <div class="risk-row"><span>Reach</span><span>Local · physical</span></div>
+        </div>
+      </aside>
+
+      <div class="article-body">
+        <p>Open the dashboard of almost any car built since 1991 and you will find a pair of twisted wires running through it. Those wires are the <strong>Controller Area Network</strong> — CAN bus — a serial bus invented at Bosch in the early 1980s to let the engine, transmission, and brakes coordinate without a separate cable for every signal.</p>
+
+        <p>CAN is brilliant in its simplicity. Every node listens to every message; whoever transmits a lower-numbered (higher-priority) ID wins arbitration; corrupted frames are detected and retransmitted. It is robust, deterministic, and cheap.</p>
+
+        <p>It is also <strong>completely unauthenticated</strong>.</p>
+
+        <p class="pull">A CAN frame carries no source address, no signature, and no timestamp. If a message with the right ID and the right payload appears on the wire, every listening ECU treats it as gospel.</p>
+
+        <p>That design choice was reasonable in 1986, when the only thing on the bus was the engine controller and a fuel sensor. It is awkward in 2026, when the same bus can be reached through the infotainment system, the OBD-II port, the Bluetooth stack, and — through several layers of indirection — the cellular modem.</p>
+
+        <h3>The frame, exactly</h3>
+        <p>A standard CAN frame is small. The 11-bit identifier acts as both priority and topic; the data payload is at most eight bytes; a CRC and an acknowledgment slot close it out. The whole frame is typically transmitted in well under a millisecond at 500 kbit/s.</p>
+
+        <div class="can-diagram">
+          <div class="eyebrow" style="margin-bottom: 8px;">FIG. 01.1 · CAN bus topology</div>
+          <div class="can-bus">
+            <div class="can-node" style="left: 8%;"><div class="box">ENGINE</div></div>
+            <div class="can-node" style="left: 28%;"><div class="box">BRAKES</div></div>
+            <div class="can-node" style="left: 48%;"><div class="box">STEERING</div></div>
+            <div class="can-node attacker" style="left: 68%;"><div class="box">UNKNOWN</div></div>
+            <div class="can-node" style="left: 88%;"><div class="box">DASHBOARD</div></div>
+          </div>
+          <div class="eyebrow" style="margin-bottom: 8px;">FIG. 01.2 · A standard CAN data frame</div>
+          <div class="can-frame">
+            <div class="id"><span class="label">SOF</span><span class="val">1b</span></div>
+            <div class="id"><span class="label">ID (11b)</span><span class="val">0x2A0</span></div>
+            <div><span class="label">DLC</span><span class="val">8</span></div>
+            <div><span class="label">Data (≤64b)</span><span class="val">DE AD BE EF 00 00 01 7F</span></div>
+            <div><span class="label">CRC</span><span class="val">15b</span></div>
+            <div><span class="label">ACK / EOF</span><span class="val">2b + 7b</span></div>
+          </div>
+        </div>
+
+        <h3>How it actually fails</h3>
+        <p>Three failure modes recur in the literature:</p>
+        <ul>
+          <li><strong>Spoofing.</strong> An attacker who can write to the bus replays or fabricates a frame with the ID a target ECU is waiting for — for example, the message that tells the instrument cluster the speedometer reading, or the one that asks the brake controller to engage ABS.</li>
+          <li><strong>Bus-off &amp; flooding.</strong> Sending malformed frames repeatedly forces the targeted node into an error-passive then bus-off state. The result is a silent denial-of-service against, say, the brake ECU.</li>
+          <li><strong>Lateral movement.</strong> A node compromised elsewhere — typically the infotainment unit — bridges to the high-speed CAN segment and forwards frames the attacker has crafted. This is how nearly every published remote attack ends.</li>
+        </ul>
+
+        <div class="callout">
+          <div class="eyebrow"><span class="dot"></span>Why not just add authentication?</div>
+          <p>The space and time budgets are brutal: 8 bytes of payload, sub-millisecond deadlines, no key infrastructure between independently-supplied ECUs. <strong>CAN-FD</strong> raises the payload ceiling to 64 bytes, and standards like <strong>AUTOSAR SecOC</strong> bolt on truncated MACs and freshness counters — but retrofitting these protections into an existing fleet is a decade-long project.</p>
+        </div>
+
+        <table class="spec">
+          <tr><th colspan="2">CAN at a glance</th></tr>
+          <tr><td>Introduced</td><td>1986 (Bosch); standardised as ISO 11898</td></tr>
+          <tr><td>Bit rate</td><td>Up to 1 Mbit/s (CAN), up to 8 Mbit/s (CAN-FD)</td></tr>
+          <tr><td>Frame payload</td><td>0 – 8 bytes (CAN), 0 – 64 bytes (CAN-FD)</td></tr>
+          <tr><td>Authentication</td><td>None natively</td></tr>
+          <tr><td>Reachability</td><td>OBD-II port, gateway ECUs, supplier-installed dongles</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 01.2 OBD-II ===== -->
+<section class="surface" id="obd">
+  <div class="wrap">
+    <div class="surface-grid">
+      <aside class="surface-meta">
+        <div class="num">01.2</div>
+        <h2 class="serif-i">OBD-II<br/>diagnostic<br/>port.</h2>
+        <div class="tags">
+          <span class="tag">Wired entry</span>
+          <span class="tag support">Regulated</span>
+        </div>
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · OBDII-PORT-UNDER-DASH.JPG</span>
+        </div>
+        <div class="risk">
+          <div class="risk-row"><span>Confidentiality</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Integrity</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Availability</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Reach</span><span>Local · physical</span></div>
+        </div>
+      </aside>
+
+      <div class="article-body">
+        <p>Below the steering column on every passenger car sold in the United States since 1996 — and almost every car sold in Europe since 2001 — sits a 16-pin trapezoidal connector. It is the <strong>On-Board Diagnostics II</strong> port. Mechanics use it to read engine fault codes; emissions inspectors use it to check that the catalytic converter is working; insurers use it to drop in a usage-based driving dongle.</p>
+
+        <p>From a security standpoint, OBD-II is a regulated, vendor-neutral, physically-keyed door directly onto the vehicle's CAN buses.</p>
+
+        <h3>What sits behind it</h3>
+        <p>The connector exposes (depending on the manufacturer) one or more CAN channels, sometimes K-line, sometimes a manufacturer-specific protocol. A diagnostic tool talks to ECUs using <strong>UDS</strong> (Unified Diagnostic Services, ISO 14229), which defines services for reading data, writing memory, requesting a security access challenge, and — most consequentially — entering programming modes that allow firmware to be reflashed.</p>
+
+        <p>UDS includes a "security access" handshake (service <span class="inline-code">0x27</span>): the tool requests a seed, the ECU returns one, the tool computes a key. The algorithm that turns the seed into the key is <em>supposed</em> to be a manufacturer secret. It often is not. Researchers have repeatedly recovered the algorithms by reverse-engineering legitimate diagnostic software, leaving the port — to anyone with five minutes and physical access — effectively unauthenticated.</p>
+
+        <p class="pull">If you can plug something into the OBD port for five minutes, you can usually do anything the manufacturer's own service tool can do.</p>
+
+        <h3>Insurance dongles &amp; aftermarket fleets</h3>
+        <p>The risk profile changed when third-party dongles became commonplace. A telematics dongle that an insurer ships to its customers is, mechanically, a small computer permanently plugged into the CAN bus and reachable over cellular. Several have shipped with default credentials, unencrypted firmware updates, or remote code execution. <strong>The dongle inherits everything the port can do.</strong></p>
+
+        <div class="callout">
+          <div class="eyebrow"><span class="dot"></span>Ongoing tension</div>
+          <p>Locking down the OBD port collides with the <strong>right-to-repair</strong> movement, which depends on independent shops being able to read codes and reflash modules. Recent regulation tries to thread the needle with authenticated diagnostics — credentials issued per-mechanic by the manufacturer — but the rollout is uneven.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 01.3 Infotainment ===== -->
+<section class="surface" id="info">
+  <div class="wrap">
+    <div class="surface-grid">
+      <aside class="surface-meta">
+        <div class="num">01.3</div>
+        <h2 class="serif-i">Infotainment<br/>&amp; IVI.</h2>
+        <div class="tags">
+          <span class="tag">Wired + wireless</span>
+          <span class="tag solid">High blast radius</span>
+        </div>
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · CENTER-STACK-DISPLAY.JPG</span>
+        </div>
+        <div class="risk">
+          <div class="risk-row"><span>Confidentiality</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Integrity</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Availability</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Reach</span><span>Bluetooth · USB · Wi-Fi</span></div>
+        </div>
+      </aside>
+
+      <div class="article-body">
+        <p>The big touchscreen at the center of the dashboard — the <strong>In-Vehicle Infotainment</strong> head unit — is, in software terms, the most complex and most exposed component in the car. It typically runs an embedded Linux, Android Automotive, or QNX, and ships with full TCP/IP stacks, Bluetooth, Wi-Fi, USB, browser engines, media decoders, voice assistants, and increasingly an app sandbox.</p>
+
+        <p>Every protocol the head unit speaks is an attack surface, and the things it speaks are the same things every general-purpose computer speaks. <span class="marker">Bluetooth pairing, JPEG decoding, Wi-Fi WPA handshakes, audio codecs — every memory-corruption bug ever published against any of these has, at some point, been re-found inside an IVI.</span></p>
+
+        <h3>Why it is the keystone</h3>
+        <p>The head unit is rarely the attacker's <em>goal</em>. It is the <em>foothold</em>. From inside the IVI an attacker can usually:</p>
+        <ul>
+          <li>Read and exfiltrate microphone audio, navigation history, paired-phone contacts and messages</li>
+          <li>Display arbitrary content to the driver — a denial-of-attention attack</li>
+          <li>Reach the gateway ECU, and through it, the high-speed CAN bus where the safety-critical messages live</li>
+        </ul>
+
+        <p>The 2015 Jeep Cherokee attack (chapter 02) is the canonical demonstration: a Wi-Fi vulnerability in the Uconnect head unit, escalated to root, then used to reflash a separate microcontroller that bridged onto the high-speed CAN, from which the attackers could send brake and steering frames. <strong>Each step on its own was modest. The combination removed the driver from the loop.</strong></p>
+
+        <h3>Apps, app stores, and the web</h3>
+        <p>Recent infotainment platforms run third-party apps. Spotify, Waze, ChatGPT, the manufacturer's own update store. App sandboxes in Android Automotive draw a hard line between application code and the ECU world — at least on paper. The line is only as good as the kernel, the IPC layer, and the system services that mediate it.</p>
+
+        <div class="callout">
+          <div class="eyebrow"><span class="dot"></span>Mitigation summary</div>
+          <p>The principle in modern designs is <strong>strong domain separation</strong>: a hypervisor splits the SoC into a "comfort" partition (Linux, apps, browser) and a "real-time" partition (the ECU-facing networking stack), with a strictly-policed gateway between them. Done well, a compromised app cannot speak CAN at all.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 01.4 Telematics ===== -->
+<section class="surface" id="telematics">
+  <div class="wrap">
+    <div class="surface-grid">
+      <aside class="surface-meta">
+        <div class="num">01.4</div>
+        <h2 class="serif-i">Telematics<br/>&amp; cellular.</h2>
+        <div class="tags">
+          <span class="tag">Always-on radio</span>
+          <span class="tag solid">Remote · fleet-wide</span>
+        </div>
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · TELEMATICS-CONTROL-UNIT.JPG</span>
+        </div>
+        <div class="risk">
+          <div class="risk-row"><span>Confidentiality</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></span></div>
+          <div class="risk-row"><span>Integrity</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Availability</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Reach</span><span>Internet-wide</span></div>
+        </div>
+      </aside>
+
+      <div class="article-body">
+        <p>Somewhere behind your glovebox is a small box with a SIM card. The <strong>Telematics Control Unit</strong> (TCU) keeps a 4G or 5G connection open to the manufacturer's cloud at all times. It uploads location and diagnostic data, accepts remote commands (lock/unlock, climate pre-conditioning, find-my-car), brokers over-the-air firmware updates, and routes the eCall emergency line to first responders.</p>
+
+        <p>The TCU is what turns a single-vehicle vulnerability into a fleet-scale incident. <span class="marker">A flaw reachable through the cellular interface affects every car of that model, simultaneously, from the attacker's couch.</span></p>
+
+        <h3>The full chain</h3>
+        <p>A telematics attack rarely breaks one thing. It is a chain that may include:</p>
+        <ol>
+          <li>An exposed service on the TCU — perhaps a debug port left open on a public APN, or a parser bug in an SMS-handling code path</li>
+          <li>A privilege escalation on the TCU's operating system</li>
+          <li>A weakness in the gateway between the TCU and the CAN buses (a flat network, an over-permissive firewall, a chip that bridges segments without filtering)</li>
+          <li>Finally, the actual safety-impacting CAN frame</li>
+        </ol>
+
+        <p>Independently, each step is unremarkable. Combined, they take a researcher in another country to your steering rack.</p>
+
+        <h3>The cloud half of telematics</h3>
+        <p>The vehicle is only one end of the connection. The other end is the manufacturer's backend: web portals, mobile apps, partner APIs, and the dealer-facing service network. <strong>The 2024 Kia incident</strong> — discussed in chapter 02 — was not an attack on a car at all. It was an authentication flaw in a dealer web portal that allowed anyone with a VIN to take over a vehicle's mobile-app account, after which all the legitimate remote features were available to the attacker.</p>
+
+        <div class="callout">
+          <div class="eyebrow"><span class="dot"></span>Privacy footprint</div>
+          <p>Beyond compromise, the telematics surface raises ordinary privacy questions. Continuous location, voice activation, drive-quality scoring, and infotainment behavior flow back to the manufacturer by default. Several recent regulatory actions in the EU, US, and South Korea target this data flow rather than any specific exploit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 01.5 RKE ===== -->
+<section class="surface" id="rke">
+  <div class="wrap">
+    <div class="surface-grid">
+      <aside class="surface-meta">
+        <div class="num">01.5</div>
+        <h2 class="serif-i">Keyless<br/>entry.</h2>
+        <div class="tags">
+          <span class="tag">Short-range radio</span>
+          <span class="tag support">RKE / PKE / UWB</span>
+        </div>
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · KEY-FOB-INTERIOR.JPG</span>
+        </div>
+        <div class="risk">
+          <div class="risk-row"><span>Confidentiality</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Integrity</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Availability</span><span class="pips"><span class="pip on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Reach</span><span>Within RF range</span></div>
+        </div>
+      </aside>
+
+      <div class="article-body">
+        <p>Three generations of keyless systems have shipped, and each has been broken before its successor was deployed.</p>
+
+        <p><strong>Remote Keyless Entry</strong> (the original button-on-fob unlock) used rolling codes — a counter shared between fob and car, signed with a small block cipher. Early ciphers like Keeloq and Hitag-2 were broken in academic papers in the 2000s; cheap clone-fob devices have been on sale for nearly two decades.</p>
+
+        <p><strong>Passive Keyless Entry &amp; Start</strong> (PKES) replaces the button: the car wakes up the fob via low-frequency wake-up, the fob replies on UHF. Walk up, door unlocks; sit down, car starts. The convenience is enormous. So is the vulnerability. <strong>Relay attacks</strong> use two devices — one near the fob inside the house, one near the car on the driveway — to forward the radio handshake across hundreds of meters. From the car's point of view, the legitimate fob is in the driver's hand.</p>
+
+        <p class="pull">For a decade, the most reliable car-theft technique in northern Europe required no physical contact, no software exploit, and no special skill — just two amplifiers and a quiet street.</p>
+
+        <h3>Why amplification works</h3>
+        <p>The car's defense was distance: if the fob is more than a few meters away, the radio link should not close. But the protocol's notion of "distance" was just signal strength, which an amplifier trivially defeats. The fix — <strong>Ultra-Wideband (UWB)</strong> ranging, in CCC Digital Key 3.0 and similar systems — measures actual round-trip time at a resolution of centimeters. UWB is hard to relay because relaying it adds latency that the protocol can detect.</p>
+
+        <h3>Phone-as-key, NFC, and what comes next</h3>
+        <p>Newer vehicles let the smartphone replace the fob. The handshake moves to NFC at the door handle and Bluetooth + UWB once you're inside. The attack surface shifts: now an unlock requires an authenticated session against the manufacturer's backend, with possession of a phone whose Secure Element holds the credential. The threat model becomes phishing, account takeover, and SIM-swap — closer to mobile banking than to traditional car theft.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 01.6 TPMS ===== -->
+<section class="surface" id="tpms" style="border-bottom: 0;">
+  <div class="wrap">
+    <div class="surface-grid">
+      <aside class="surface-meta">
+        <div class="num">01.6</div>
+        <h2 class="serif-i">TPMS<br/>&amp; sensors.</h2>
+        <div class="tags">
+          <span class="tag">Peripheral radio</span>
+          <span class="tag">Lower impact</span>
+        </div>
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · TPMS-VALVE-STEM.JPG</span>
+        </div>
+        <div class="risk">
+          <div class="risk-row"><span>Confidentiality</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Integrity</span><span class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Availability</span><span class="pips"><span class="pip on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+          <div class="risk-row"><span>Reach</span><span>Within RF range · meters</span></div>
+        </div>
+      </aside>
+
+      <div class="article-body">
+        <p>Inside each tire is a small battery-powered radio that broadcasts pressure and temperature every few seconds at 315 or 433 MHz. <strong>Tire Pressure Monitoring Systems</strong> are mandatory on US passenger cars since 2007 and on EU cars since 2014. Each sensor ships with a unique ID. The car learns those IDs and trusts the broadcasts.</p>
+
+        <p>TPMS is, in itself, not a high-impact attack surface. An attacker who can spoof packets can falsely raise or lower the indicated tire pressure, perhaps annoyingly trigger the warning light. But the more interesting property — and the one that recurs in the academic literature — is that the sensor IDs are stable, unique, and broadcast continuously. That makes them <strong>excellent vehicle-tracking beacons</strong>. A pair of receivers on a roadway can identify and re-identify cars passing through.</p>
+
+        <h3>The broader sensor surface</h3>
+        <p>TPMS is the most commodity example of a wider class. A modern vehicle takes inputs from <span class="inline-code">~200</span> sensors: cameras, radars, LiDARs, ultrasonics, microphones, GPS receivers, IMUs, wheel-speed encoders. Each is a place where the physical world meets the software stack, and several have published attacks against them: laser pulses against LiDAR, projected images against camera-based traffic-sign recognition, GPS spoofing of navigation receivers. None has yet produced a real-world incident. All have produced peer-reviewed proofs of concept.</p>
+
+        <div class="callout">
+          <div class="eyebrow"><span class="dot"></span>The trend</div>
+          <p>As ADAS and autonomy expand, sensor inputs become safety-critical in ways they were not before. The defenses look less like cryptography and more like <strong>sensor fusion</strong>: redundant modalities cross-checking each other so that no single spoofable channel can move the vehicle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Recap ===== -->
+<section style="padding-block: clamp(60px, 8vw, 120px);">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Chapter recap</div>
+    <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 14ch;">
+      One car,<br/>six surfaces.
+    </h2>
+
+    <div class="summary-grid">
+      <div class="summary-cell">
+        <div class="num">01.1</div>
+        <h5>CAN bus</h5>
+        <p>Unauthenticated broadcast wire. Owns the safety-critical signals.</p>
+      </div>
+      <div class="summary-cell">
+        <div class="num">01.2</div>
+        <h5>OBD-II</h5>
+        <p>Regulated, vendor-neutral physical door onto CAN.</p>
+      </div>
+      <div class="summary-cell">
+        <div class="num">01.3</div>
+        <h5>Infotainment</h5>
+        <p>The most complex software in the car. The usual foothold.</p>
+      </div>
+      <div class="summary-cell">
+        <div class="num">01.4</div>
+        <h5>Telematics</h5>
+        <p>Always-on cellular. Turns one-car bugs into fleet incidents.</p>
+      </div>
+      <div class="summary-cell">
+        <div class="num">01.5</div>
+        <h5>Keyless</h5>
+        <p>Three generations, three rounds of relay and clone attacks.</p>
+      </div>
+      <div class="summary-cell" style="border-right: 0;">
+        <div class="num">01.6</div>
+        <h5>Sensors</h5>
+        <p>Low impact alone. Privacy-relevant. Critical to ADAS as it expands.</p>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 60px;">
+      <a class="btn" href="case-studies.html">Continue to chapter 02 <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="index.html">Back to overview</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 16px;">
+          <span class="brand-mark"></span><span>AUTO/CYBER</span>
+        </div>
+        <p style="color: var(--ink-soft); font-size: 14px; max-width: 36ch;">
+          An open educational primer on the cybersecurity of road vehicles.
+        </p>
+      </div>
+      <div>
+        <h4>Chapters</h4>
+        <ul>
+          <li><a href="index.html">00 — Overview</a></li>
+          <li><a href="attack-surfaces.html">01 — Attack Surfaces</a></li>
+          <li><a href="case-studies.html">02 — Case Studies</a></li>
+          <li><a href="defenses.html">03 — Defenses</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>This chapter</h4>
+        <ul>
+          <li><a href="#can">01.1 CAN</a></li>
+          <li><a href="#obd">01.2 OBD-II</a></li>
+          <li><a href="#info">01.3 Infotainment</a></li>
+          <li><a href="#telematics">01.4 Telematics</a></li>
+          <li><a href="#rke">01.5 Keyless</a></li>
+          <li><a href="#tpms">01.6 TPMS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Color</h4>
+        <ul>
+          <li><a href="#" onclick="document.getElementById('tweaks-trigger').click();return false;">Switch palette →</a></li>
+          <li><a href="#" onclick="document.getElementById('theme-toggle').click();return false;">Toggle dark mode →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>// AUTO/CYBER · 2026</span>
+      <span>Set in Instrument Serif, Geist &amp; JetBrains Mono</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

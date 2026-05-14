@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Automotive Cybersecurity — Case Studies</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .page-hero { padding-top: 80px; padding-bottom: 60px; }
+  .page-hero h1 { font-size: clamp(48px, 7vw, 110px); }
+  .page-hero h1 .accent { color: var(--accent); font-style: italic; }
+
+  .timeline {
+    margin-top: 60px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding-block: 28px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+  }
+  @media (max-width: 900px) { .timeline { grid-template-columns: repeat(2, 1fr); } }
+  .tl-item {
+    padding: 8px 18px;
+    border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tl-item:last-child { border-right: 0; }
+  .tl-item .year {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 36px; line-height: 1; color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .tl-item .name { font-size: 11px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.06em; }
+  .tl-item .label { font-size: 10px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .case {
+    padding-block: clamp(80px, 9vw, 130px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .case-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 900px) { .case-header { grid-template-columns: 1fr; } }
+  .case-header .num {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: clamp(140px, 18vw, 240px);
+    line-height: 0.8; color: var(--ink-mute);
+    letter-spacing: -0.04em;
+  }
+  .case-header h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: 0.95; letter-spacing: -0.02em;
+  }
+  .case-header h2 .accent { color: var(--accent); font-style: italic; }
+
+  .case-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 700px) { .case-meta { grid-template-columns: 1fr 1fr; } }
+  .case-meta-cell {
+    padding: 18px 22px;
+    border-right: 1px solid var(--rule);
+    background: var(--bg-elev);
+  }
+  .case-meta-cell:last-child { border-right: 0; }
+  .case-meta-cell .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .case-meta-cell .val {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px; line-height: 1.1;
+    color: var(--ink); margin-top: 6px;
+  }
+
+  .case-body-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+  }
+  @media (max-width: 900px) { .case-body-grid { grid-template-columns: 1fr; } }
+  .case-aside { display: flex; flex-direction: column; gap: 22px; }
+  .aside-card {
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 22px;
+    background: var(--bg-elev);
+  }
+  .aside-card h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 14px;
+  }
+  .aside-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .aside-card li {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--ink); line-height: 1.5;
+    padding-left: 18px; position: relative;
+  }
+  .aside-card li::before {
+    content: ""; position: absolute; left: 0; top: 8px;
+    width: 8px; height: 1px; background: var(--accent);
+  }
+
+  /* Attack chain */
+  .chain {
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 26px;
+    background: var(--bg-elev);
+    margin-block: 28px;
+  }
+  .chain-step {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .chain-step:last-child { border-bottom: 0; }
+  .chain-step .step-num {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 28px; line-height: 1;
+    color: var(--accent);
+  }
+  .chain-step .step-body {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .chain-step .step-body strong { color: var(--ink); display: block; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span>AUTO/CYBER</span>
+      <small>v.2026</small>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Overview</a>
+      <a href="attack-surfaces.html">Attack&nbsp;Surfaces</a>
+      <a href="case-studies.html" class="active">Case&nbsp;Studies</a>
+      <a href="defenses.html">Defenses</a>
+    </div>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Chapter 02 · Case studies</div>
+    <h1 class="display" style="margin-top: 24px;">
+      Six<br/>
+      <span class="accent">incidents</span><br/>
+      that taught<br/>
+      the field.
+    </h1>
+    <p class="lede" style="margin-top: 32px; max-width: 60ch;">
+      Theory tells you what could happen. The historical record tells you what did. These six episodes — most of them disclosed responsibly by academic researchers — shaped the way the industry now thinks about vehicle security.
+    </p>
+
+    <div class="timeline">
+      <a class="tl-item" href="#jeep">
+        <span class="year">'15</span>
+        <span class="name">Jeep Cherokee</span>
+        <span class="label">Remote takeover</span>
+      </a>
+      <a class="tl-item" href="#bmw">
+        <span class="year">'15</span>
+        <span class="name">BMW ConnectedDrive</span>
+        <span class="label">SMS unlock</span>
+      </a>
+      <a class="tl-item" href="#nissan">
+        <span class="year">'16</span>
+        <span class="name">Nissan Leaf</span>
+        <span class="label">VIN-only API</span>
+      </a>
+      <a class="tl-item" href="#tesla">
+        <span class="year">'18</span>
+        <span class="name">Tesla key fob</span>
+        <span class="label">DST40 clone</span>
+      </a>
+      <a class="tl-item" href="#toyota">
+        <span class="year">'21</span>
+        <span class="name">Honda &amp; Toyota</span>
+        <span class="label">Rolling-PWN</span>
+      </a>
+      <a class="tl-item" href="#kia">
+        <span class="year">'24</span>
+        <span class="name">Kia dealer portal</span>
+        <span class="label">Account takeover</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== JEEP ===== -->
+<section class="case" id="jeep">
+  <div class="wrap">
+    <div class="case-header">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Case 02.1</div>
+        <h2><span class="accent">Jeep</span> Cherokee<br/>2015.</h2>
+      </div>
+      <div class="num">01</div>
+    </div>
+
+    <div class="case-meta">
+      <div class="case-meta-cell"><div class="label">Disclosed</div><div class="val">July 2015</div></div>
+      <div class="case-meta-cell"><div class="label">Researchers</div><div class="val">Miller &amp; Valasek</div></div>
+      <div class="case-meta-cell"><div class="label">Fleet recall</div><div class="val">1.4M vehicles</div></div>
+      <div class="case-meta-cell"><div class="label">Reach</div><div class="val">Anywhere · cellular</div></div>
+    </div>
+
+    <div class="case-body-grid">
+      <div class="article-body">
+        <p>The Jeep Cherokee incident is the dividing line in the field's history. Before it, automotive cybersecurity was a niche academic interest. After it, every major manufacturer had a Chief Information Security Officer.</p>
+
+        <p>Charlie Miller and Chris Valasek had been publishing on car hacking for several years, but their earlier work required physical access. In 2015 they wanted to demonstrate the more interesting threat: <strong>compromise from the public internet, with no prior contact with the vehicle.</strong></p>
+
+        <p>The target was the Uconnect head unit fitted to the 2014 Jeep Cherokee and several siblings. Uconnect ran QNX, exposed a small set of network services, and — critically — was reachable on Sprint's cellular APN with effectively no firewall. A vehicle's IP could be discovered by scanning, and a service called <span class="inline-code">D-Bus</span> was listening on port <span class="inline-code">6667</span> with no authentication.</p>
+
+        <p class="pull">The researchers controlled the steering, brakes, and transmission of a Jeep on a St. Louis highway from a basement in Pittsburgh. The driver — a Wired journalist — was a willing participant. The car was real. The road was real.</p>
+
+        <h3>The chain</h3>
+        <p>The exploit was not a single bug. It was a chain of small, ordinary mistakes — each individually defensible, collectively catastrophic.</p>
+
+        <div class="chain">
+          <div class="chain-step">
+            <div class="step-num">1</div>
+            <div class="step-body"><strong>Cellular reachability.</strong> Uconnect head units were addressable on Sprint's femtocell APN; an attacker could scan and discover them by IP.</div>
+          </div>
+          <div class="chain-step">
+            <div class="step-num">2</div>
+            <div class="step-body"><strong>Open D-Bus.</strong> Port 6667 exposed an unauthenticated D-Bus interface. Any caller could invoke methods on system services.</div>
+          </div>
+          <div class="chain-step">
+            <div class="step-num">3</div>
+            <div class="step-body"><strong>Code execution as root.</strong> One of the methods allowed arbitrary command execution; the attacker now owned the head unit.</div>
+          </div>
+          <div class="chain-step">
+            <div class="step-num">4</div>
+            <div class="step-body"><strong>Reflashing the V850 chip.</strong> A separate Renesas microcontroller bridged the head unit to the high-speed CAN bus. Its firmware was unsigned. The attackers reflashed it with a malicious build.</div>
+          </div>
+          <div class="chain-step">
+            <div class="step-num">5</div>
+            <div class="step-body"><strong>CAN frame injection.</strong> From the V850 the attacker could now write directly to high-speed CAN, including frames that controlled steering, brakes, and transmission.</div>
+          </div>
+        </div>
+
+        <h3>Aftermath</h3>
+        <p>FCA recalled 1.4 million vehicles — the first cyber-driven automotive recall in US history. The carrier closed the open APN. Bug-bounty programs spread to nearly every major manufacturer in the following 18 months. Most importantly, the incident gave UNECE WP.29 the political weight to draft what would eventually become R155.</p>
+      </div>
+
+      <aside class="case-aside">
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · JEEP-WIRED-COVER.JPG</span>
+        </div>
+        <div class="aside-card">
+          <h5>// surfaces involved</h5>
+          <ul>
+            <li>Telematics · cellular APN</li>
+            <li>Infotainment · D-Bus, QNX</li>
+            <li>Gateway · V850 microcontroller</li>
+            <li>CAN · high-speed bus</li>
+          </ul>
+        </div>
+        <div class="aside-card">
+          <h5>// what changed afterwards</h5>
+          <ul>
+            <li>First cyber-driven OEM recall</li>
+            <li>Industry-wide bug bounties</li>
+            <li>Network-segmented gateways</li>
+            <li>WP.29 R155 momentum</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BMW ===== -->
+<section class="case" id="bmw">
+  <div class="wrap">
+    <div class="case-header">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Case 02.2</div>
+        <h2><span class="accent">BMW</span><br/>ConnectedDrive.</h2>
+      </div>
+      <div class="num">02</div>
+    </div>
+
+    <div class="case-meta">
+      <div class="case-meta-cell"><div class="label">Disclosed</div><div class="val">Jan 2015</div></div>
+      <div class="case-meta-cell"><div class="label">Disclosed by</div><div class="val">ADAC</div></div>
+      <div class="case-meta-cell"><div class="label">Fleet</div><div class="val">~2.2M vehicles</div></div>
+      <div class="case-meta-cell"><div class="label">Reach</div><div class="val">Anywhere · cellular SMS</div></div>
+    </div>
+
+    <div class="case-body-grid">
+      <div class="article-body">
+        <p>Six months before the Jeep disclosure, the German motoring association ADAC published findings on BMW's ConnectedDrive remote-services platform. ConnectedDrive offered things customers liked: remote door unlock, climate pre-conditioning, navigation updates. It used the cellular link to receive commands, encoded as SMS messages from BMW's backend.</p>
+
+        <p>The ADAC researchers found that the SMS channel was authenticated <em>partially</em>: the messages were not signed with a per-vehicle key but encrypted with a single symmetric key shared across the fleet. Worse, several configuration messages — including those that could enable diagnostic services and unlock doors — accepted commands with no authentication at all.</p>
+
+        <p>An attacker with a fake base station ("IMSI catcher") could send a crafted SMS to a target vehicle and have its doors unlock. The attacker did not need physical proximity beyond the base station's range; the cost of the equipment had fallen below €1,500 for hobbyists.</p>
+
+        <h3>What was striking</h3>
+        <p>The vulnerability was not a memory-corruption bug or a deep cryptographic break. It was the absence of basic transport-layer authentication — a design failure of the kind that web developers had stopped making a decade earlier. The fix BMW deployed was an over-the-air patch enabling HTTPS on the affected services, sent to all 2.2 million vehicles in the field. <strong>It was the first major OTA security patch shipped to passenger cars.</strong></p>
+
+        <div class="callout">
+          <div class="eyebrow"><span class="dot"></span>The lesson</div>
+          <p>OTA itself was the silver lining: the same connectivity that created the exposure made it possible to fix without recalling every car. Every modern automotive cybersecurity strategy now treats reliable, secure OTA as a precondition rather than a feature.</p>
+        </div>
+      </div>
+
+      <aside class="case-aside">
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · BMW-DASH-CONNECTED.JPG</span>
+        </div>
+        <div class="aside-card">
+          <h5>// surfaces involved</h5>
+          <ul>
+            <li>Telematics · cellular SMS channel</li>
+            <li>Backend · remote-services platform</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NISSAN ===== -->
+<section class="case" id="nissan">
+  <div class="wrap">
+    <div class="case-header">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Case 02.3</div>
+        <h2><span class="accent">Nissan</span><br/>Leaf API.</h2>
+      </div>
+      <div class="num">03</div>
+    </div>
+
+    <div class="case-meta">
+      <div class="case-meta-cell"><div class="label">Disclosed</div><div class="val">Feb 2016</div></div>
+      <div class="case-meta-cell"><div class="label">Researcher</div><div class="val">Troy Hunt</div></div>
+      <div class="case-meta-cell"><div class="label">Auth required</div><div class="val">VIN only</div></div>
+      <div class="case-meta-cell"><div class="label">Reach</div><div class="val">Public internet</div></div>
+    </div>
+
+    <div class="case-body-grid">
+      <div class="article-body">
+        <p>The Nissan Leaf incident is the cleanest example of a vehicle vulnerability that does not involve a vehicle at all.</p>
+
+        <p>The Leaf's NissanConnect EV mobile app let owners check battery state, set climate pre-conditioning, and pull telemetry. The mobile app spoke to a backend API. The backend API authenticated requests with… the vehicle's VIN. That is, a 17-character identifier visible through the windscreen of every car ever made, and shared across the entire industry as essentially a public asset.</p>
+
+        <p>Researcher Troy Hunt demonstrated, after responsible disclosure, that anyone with another Leaf owner's VIN — or with a VIN guessed from a public registry — could query the API and receive the target's battery state, telemetry, and trip history, and remotely turn the climate system on or off. Running the heater on a stationary EV from across the world could not move the car, but it could trivially drain the battery.</p>
+
+        <p class="pull">The car was secure. The app was secure. The API treated the world's least-secret 17-character string as a credential.</p>
+
+        <h3>Why it matters historically</h3>
+        <p>Hunt's Leaf finding helped move regulators away from thinking about cars as isolated objects. The relevant attack surface includes <strong>the entire backend</strong>: APIs, web portals, mobile apps, dealer-facing tools. UNECE R155 explicitly requires manufacturers to consider this whole estate as part of their cybersecurity management system.</p>
+      </div>
+
+      <aside class="case-aside">
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · NISSAN-LEAF-APP.JPG</span>
+        </div>
+        <div class="aside-card">
+          <h5>// surfaces involved</h5>
+          <ul>
+            <li>Backend · mobile-app API</li>
+            <li>Identity · VIN as credential</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESLA ===== -->
+<section class="case" id="tesla">
+  <div class="wrap">
+    <div class="case-header">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Case 02.4</div>
+        <h2><span class="accent">Tesla</span><br/>key fob clone.</h2>
+      </div>
+      <div class="num">04</div>
+    </div>
+
+    <div class="case-meta">
+      <div class="case-meta-cell"><div class="label">Disclosed</div><div class="val">Sep 2018</div></div>
+      <div class="case-meta-cell"><div class="label">Researchers</div><div class="val">KU Leuven COSIC</div></div>
+      <div class="case-meta-cell"><div class="label">Cipher</div><div class="val">DST40 (40-bit)</div></div>
+      <div class="case-meta-cell"><div class="label">Time to clone</div><div class="val">~2 seconds</div></div>
+    </div>
+
+    <div class="case-body-grid">
+      <div class="article-body">
+        <p>The COSIC group at KU Leuven has been the world's most consistent source of attacks on automotive immobilizer cryptography. In 2018 they turned their attention to the Tesla Model S key fob.</p>
+
+        <p>The fob used a cipher called <strong>DST40</strong> — a proprietary 40-bit block cipher designed by Texas Instruments in the late 1990s. Forty bits is short by any modern standard; it is short enough that a precomputed table maps every possible challenge-response pair an attacker can observe back to one of a small set of candidate keys.</p>
+
+        <p>The COSIC team built such a table — 5.4 terabytes — and a small radio rig. Walk past a Tesla owner with the rig, and within a few seconds it had observed enough handshakes to lookup the fob's secret key. Walk to the car, the cloned fob unlocks and starts it, and drive away. End-to-end the process took under two minutes.</p>
+
+        <h3>Why this kept happening</h3>
+        <p>DST40 was not unique to Tesla. The same cipher had appeared in Ford, Toyota, Lincoln, and several other vehicles since the 2000s. Manufacturers had stayed with it for inertia and supplier-relationship reasons long after academia had repeatedly broken it. The Tesla disclosure was the most public; it pushed the industry to upgrade fob silicon to AES-128 and accelerated the adoption of UWB ranging for relay-resistant entry.</p>
+      </div>
+
+      <aside class="case-aside">
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · TESLA-FOB-DISASSEMBLED.JPG</span>
+        </div>
+        <div class="aside-card">
+          <h5>// surfaces involved</h5>
+          <ul>
+            <li>RKE · 40-bit cipher</li>
+            <li>Immobilizer · key derivation</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HONDA / TOYOTA RollingPwn ===== -->
+<section class="case" id="toyota">
+  <div class="wrap">
+    <div class="case-header">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Case 02.5</div>
+        <h2><span class="accent">Rolling-PWN</span><br/>and replay.</h2>
+      </div>
+      <div class="num">05</div>
+    </div>
+
+    <div class="case-meta">
+      <div class="case-meta-cell"><div class="label">Disclosed</div><div class="val">2021–22</div></div>
+      <div class="case-meta-cell"><div class="label">Affected</div><div class="val">Several Honda models</div></div>
+      <div class="case-meta-cell"><div class="label">Mechanism</div><div class="val">Counter resync replay</div></div>
+      <div class="case-meta-cell"><div class="label">Reach</div><div class="val">RF range</div></div>
+    </div>
+
+    <div class="case-body-grid">
+      <div class="article-body">
+        <p>Rolling codes are the workhorse defense against fob replay. Each press transmits a counter; the car remembers the highest counter it has seen and refuses anything lower. Capture-and-replay is, in principle, defeated.</p>
+
+        <p>In 2021–22 a researcher publishing under the handle Kevin2600, with collaborators, demonstrated a flaw — dubbed <strong>Rolling-PWN</strong> — in several Honda models. The car would <em>resynchronize</em> its expected counter when it saw a small valid sequence of older codes, on the assumption that this represented out-of-range presses by the legitimate owner. By capturing a handful of fob signals during a normal pairing event, then replaying them in the right order, an attacker could roll the car's counter <strong>backwards</strong> — making a previously-used code valid again.</p>
+
+        <p>The same year, a separate disclosure against Toyota and Lexus models found that a Bluetooth pairing implementation in the entry system would, under specific conditions, allow an attacker within Bluetooth range to authenticate as a paired device.</p>
+
+        <p class="pull">Rolling codes are only as strong as the resynchronization logic. Every protocol with a "convenience" recovery path has a security designer staring at it.</p>
+
+        <h3>The pattern</h3>
+        <p>Both incidents are textbook examples of <strong>protocol-state confusion</strong>: a feature meant to handle real-world flakiness — out-of-range presses, dropped packets — opened a path the threat model did not contemplate. Both fixes were small firmware changes pushed to the affected vehicles via OTA.</p>
+      </div>
+
+      <aside class="case-aside">
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · SDR-CAPTURE-FOB.JPG</span>
+        </div>
+        <div class="aside-card">
+          <h5>// surfaces involved</h5>
+          <ul>
+            <li>RKE · rolling-code resync</li>
+            <li>BLE · pairing state machine</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KIA ===== -->
+<section class="case" id="kia" style="border-bottom: 0;">
+  <div class="wrap">
+    <div class="case-header">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Case 02.6</div>
+        <h2><span class="accent">Kia</span><br/>dealer portal.</h2>
+      </div>
+      <div class="num">06</div>
+    </div>
+
+    <div class="case-meta">
+      <div class="case-meta-cell"><div class="label">Disclosed</div><div class="val">Sep 2024</div></div>
+      <div class="case-meta-cell"><div class="label">Researcher</div><div class="val">Sam Curry et al.</div></div>
+      <div class="case-meta-cell"><div class="label">Affected</div><div class="val">Most '14+ Kias</div></div>
+      <div class="case-meta-cell"><div class="label">Reach</div><div class="val">Public internet</div></div>
+    </div>
+
+    <div class="case-body-grid">
+      <div class="article-body">
+        <p>By 2024 the OEMs had spent the better part of a decade hardening their cars. The cars themselves had become genuinely harder to attack. The web portals around them, in many cases, had not.</p>
+
+        <p>Sam Curry's team — building on the same playbook that produced earlier disclosures against Hyundai, Honda, and Toyota web stacks — found that Kia's <em>dealer-facing</em> portal accepted a fast self-registration that was insufficiently restricted. With dealer-level credentials they could query, and re-assign, vehicles by VIN. Re-assigning a VIN to an attacker-controlled mobile-app account gave the attacker every legitimate remote feature the real owner had: lock, unlock, locate, start.</p>
+
+        <p>End-to-end, the attacker needed only a VIN — visible through the windshield of any parked Kia — to gain remote control of that vehicle's connected features within about thirty seconds.</p>
+
+        <h3>What is novel</h3>
+        <p>Nothing inside the vehicle was bypassed. The car's firmware was up-to-date; the cryptography was modern; the CAN bus had a properly-segmented gateway. <strong>The compromise sat entirely in IT systems the security team probably did not consider part of the vehicle.</strong> This is the threat model the field is moving toward: the modern attacker is not Charlie Miller in a basement, but a web bug bounty hunter following a VIN.</p>
+
+        <div class="callout">
+          <div class="eyebrow"><span class="dot"></span>Closing the loop</div>
+          <p>Curry's team disclosed responsibly; Kia patched within roughly twelve hours. The episode is now widely cited in industry training as the canonical "the car was fine, the portal wasn't" example, and as a demonstration that bug-bounty programs — extended in scope to backends and dealer infrastructure — measurably work.</p>
+        </div>
+      </div>
+
+      <aside class="case-aside">
+        <div class="photo wide" role="img" aria-label="Photo placeholder">
+          <span class="ph-label">// IMG · KIA-WEB-PORTAL.JPG</span>
+        </div>
+        <div class="aside-card">
+          <h5>// surfaces involved</h5>
+          <ul>
+            <li>Backend · dealer portal</li>
+            <li>Identity · account-to-VIN binding</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Recap ===== -->
+<section style="padding-block: clamp(60px, 8vw, 120px);">
+  <div class="wrap">
+    <div class="grid-2" style="align-items: end;">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Reading the record</div>
+        <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 16ch;">
+          The pattern,<br/>
+          decade-on-decade.
+        </h2>
+      </div>
+      <p class="lede" style="max-width: 50ch;">
+        The bugs migrate. Cars themselves keep getting harder to attack. The clouds, apps, and portals around them are now where the field's attention is moving.
+      </p>
+    </div>
+
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 60px;">
+      <a class="btn" href="defenses.html">Continue to chapter 03 <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="attack-surfaces.html">Back to chapter 01</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 16px;">
+          <span class="brand-mark"></span><span>AUTO/CYBER</span>
+        </div>
+        <p style="color: var(--ink-soft); font-size: 14px; max-width: 36ch;">
+          An open educational primer on the cybersecurity of road vehicles.
+        </p>
+      </div>
+      <div>
+        <h4>Chapters</h4>
+        <ul>
+          <li><a href="index.html">00 — Overview</a></li>
+          <li><a href="attack-surfaces.html">01 — Attack Surfaces</a></li>
+          <li><a href="case-studies.html">02 — Case Studies</a></li>
+          <li><a href="defenses.html">03 — Defenses</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>This chapter</h4>
+        <ul>
+          <li><a href="#jeep">02.1 Jeep '15</a></li>
+          <li><a href="#bmw">02.2 BMW '15</a></li>
+          <li><a href="#nissan">02.3 Nissan '16</a></li>
+          <li><a href="#tesla">02.4 Tesla '18</a></li>
+          <li><a href="#toyota">02.5 Rolling-PWN</a></li>
+          <li><a href="#kia">02.6 Kia '24</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Color</h4>
+        <ul>
+          <li><a href="#" onclick="document.getElementById('tweaks-trigger').click();return false;">Switch palette →</a></li>
+          <li><a href="#" onclick="document.getElementById('theme-toggle').click();return false;">Toggle dark mode →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>// AUTO/CYBER · 2026</span>
+      <span>Set in Instrument Serif, Geist &amp; JetBrains Mono</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
