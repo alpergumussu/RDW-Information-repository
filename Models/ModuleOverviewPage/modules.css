@@ -11,6 +11,7 @@
   @media (max-width: 700px) { .modules-grid { grid-template-columns: 1fr; } }
 
   .module-card {
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -60,3 +61,4 @@
     transition: transform .2s;
     flex-shrink: 0;
   }
+  
