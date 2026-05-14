@@ -6,8 +6,7 @@
  .modules-grid {
    display: grid;
    grid-template-columns: repeat(2, 1fr);
-   gap: 24px;
-   padding-bottom: clamp(80px, 10vw, 140px);
+   gap: 40px 0px;
  }
 
  @media (max-width: 700px) {
