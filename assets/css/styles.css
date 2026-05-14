@@ -694,3 +694,7 @@ img[alt="MITC Flevoland"] {
   background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--highlight) 70%, transparent) 60%);
   padding: 0 2px;
 }
+
+[data-theme="dark"] .marker {
+  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, #2EE893 40%, transparent) 60%);
+}

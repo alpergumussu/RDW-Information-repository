@@ -58,14 +58,15 @@
   function buildNav() {
     const root = document.getElementById('site-nav');
     if (!root) return;
-    const page = window.location.pathname.split('/').pop() || '../../Models/HomePage/index.html';
+    const page = window.location.pathname.split('/').pop();
     const links = [
       { href: '../../Models/HomePage/index.html', label: 'Home' },
       { href: '../../Models/ModuleOverviewPage/modules.html', label: 'Modules' },
       { href: '../../Models/AboutPage/about.html', label: 'About' },
     ];
     const linksHTML = links.map(({ href, label }) => {
-      const active = page === href ? ' class="active"' : '';
+      const filename = href.split('/').pop();
+      const active = page === filename ? ' class="active"' : '';
       return `<a href="${href}"${active}>${label}</a>`;
     }).join('\n      ');
     root.outerHTML = `<nav class="nav">

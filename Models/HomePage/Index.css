@@ -221,6 +221,49 @@
   animation: scroll-x 50s linear infinite;
 }
 
+.StartReadingBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: #00A85A;
+  opacity: 90%;
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  transition: transform .15s ease, background .2s ease;
+}
+
+.StartReadingBtn:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.OpenModuleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: #00A85A;
+  opacity: 90%;
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  transition: transform .15s ease, background .2s ease;
+}
+
+.OpenModuleBtn:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+
 @keyframes scroll-x {
   from {
     transform: translateX(0);
