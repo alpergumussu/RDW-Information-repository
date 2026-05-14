@@ -39,34 +39,6 @@
     width: 4px; height: 4px; border-radius: 50%; background: var(--ink-mute);
   }
 
-  .stats {
-    margin-top: 80px;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding-block: 40px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-  }
-  @media (max-width: 900px) { .stats { grid-template-columns: 1fr 1fr; } }
-  .stat .num {
-    font-family: 'Instrument Serif', serif; font-style: italic;
-    font-size: clamp(56px, 6vw, 84px);
-    line-height: 1;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-  }
-  .stat .num .unit { color: var(--accent); font-style: italic; }
-  .stat .label {
-    margin-top: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--ink-soft);
-    max-width: 24ch;
-  }
-
   /* Concept section */
   .concept-grid {
     display: grid;
@@ -78,120 +50,6 @@
   .concept-grid .label { position: sticky; top: 100px; }
   .concept-grid .label h2 { margin-top: 14px; }
   .concept-prose .pull { font-size: clamp(28px, 3vw, 38px); }
-
-  /* Chapter cards */
-  .chapter-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-  }
-  @media (max-width: 900px) { .chapter-grid { grid-template-columns: 1fr; } }
-  .chapter {
-    padding: 32px 28px 36px;
-    border-right: 1px solid var(--rule);
-    display: flex; flex-direction: column; gap: 20px;
-    min-height: 360px;
-    transition: background .25s ease;
-  }
-  .chapter:last-child { border-right: 0; }
-  @media (max-width: 900px) {
-    .chapter { border-right: 0; border-bottom: 1px solid var(--rule); }
-    .chapter:last-child { border-bottom: 0; }
-  }
-  .chapter:hover { background: var(--bg-elev); }
-  .chapter:hover .chapter-num { color: var(--accent); }
-  .chapter-num {
-    font-family: 'Instrument Serif', serif; font-style: italic;
-    font-size: 80px; line-height: 1; color: var(--ink-mute);
-    transition: color .2s;
-  }
-  .chapter h3 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 36px; line-height: 1.05;
-    letter-spacing: -0.01em;
-  }
-  .chapter p { color: var(--ink-soft); font-size: 15px; }
-  .chapter .arrow-link {
-    margin-top: auto;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    display: inline-flex; gap: 10px; align-items: center;
-    color: var(--ink);
-  }
-  .chapter:hover .arrow-link { color: var(--accent); }
-
-  /* Visual: car schematic placeholder */
-  .car-schematic {
-    position: relative;
-    border: 1px solid var(--rule);
-    background:
-      repeating-linear-gradient(0deg, var(--rule) 0 1px, transparent 1px 60px),
-      repeating-linear-gradient(90deg, var(--rule) 0 1px, transparent 1px 60px),
-      var(--bg-elev);
-    padding: 40px;
-    border-radius: 18px;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-  }
-  .car-schematic-label {
-    position: absolute; top: 18px; left: 18px;
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.12em;
-  }
-  .car-schematic-corner {
-    position: absolute; bottom: 18px; right: 18px;
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    color: var(--ink-mute); letter-spacing: 0.06em;
-  }
-  /* Simple 'car' built from rectangles */
-  .car-shape {
-    position: absolute;
-    top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 70%; height: 35%;
-    background: var(--ink);
-    border-radius: 60px 60px 18px 18px / 110px 110px 18px 18px;
-  }
-  .car-shape::before, .car-shape::after {
-    content: ""; position: absolute; bottom: -16px;
-    width: 56px; height: 56px; border-radius: 50%;
-    background: var(--bg-elev); border: 4px solid var(--ink);
-  }
-  .car-shape::before { left: 12%; }
-  .car-shape::after { right: 12%; }
-  .car-windows {
-    position: absolute; top: 22%; left: 18%; right: 18%; bottom: 38%;
-    background: var(--accent);
-    border-radius: 30px 30px 4px 4px / 40px 40px 4px 4px;
-    opacity: 0.85;
-  }
-  .pin {
-    position: absolute;
-    width: 14px; height: 14px; border-radius: 50%;
-    background: var(--accent); border: 3px solid var(--bg-elev);
-    box-shadow: 0 0 0 1px var(--ink);
-  }
-  .pin::after {
-    content: attr(data-label);
-    position: absolute; top: 50%; left: 22px; transform: translateY(-50%);
-    white-space: nowrap;
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--ink); letter-spacing: 0.06em;
-    background: var(--bg);
-    padding: 3px 8px; border: 1px solid var(--ink); border-radius: 4px;
-    text-transform: uppercase;
-  }
-  .pin.left::after { left: auto; right: 22px; }
-
-  .pin.p1 { top: 22%; left: 28%; }
-  .pin.p2 { top: 22%; right: 28%; }
-  .pin.p3 { top: 50%; left: 12%; }
-  .pin.p4 { top: 50%; right: 12%; }
-  .pin.p5 { bottom: 22%; left: 38%; }
-  .pin.p6 { bottom: 22%; right: 38%; }
 
   /* Why it matters */
   .why-list {
@@ -227,13 +85,14 @@
   .why-item p { font-size: 15px; color: var(--ink-soft); }
 
   .quote-section { padding-block: clamp(80px, 10vw, 140px); }
+  .quote-section .wrap { display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
   .quote-section blockquote {
     font-family: 'Instrument Serif', serif; font-style: italic;
     font-size: clamp(36px, 5vw, 64px);
     line-height: 1.05;
     letter-spacing: -0.015em;
     color: var(--ink);
-    max-width: 22ch;
+    max-width: 30ch;
   }
   .quote-section blockquote .accent { color: var(--accent); }
   .quote-section .attribution {
@@ -294,8 +153,7 @@
           <span>For students &amp; the curious</span>
         </div>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a class="btn" href="#chapters">Start reading <span class="arrow">→</span></a>
-          <a class="btn btn-ghost" href="attack-surfaces.html">Skip to surfaces</a>
+          <a class="btn" href="modules.html">Start reading <span class="arrow">→</span></a>
         </div>
       </div>
     </div>
@@ -349,170 +207,15 @@
   </div>
 </section>
 
-<!-- ===== Schematic ===== -->
-<section style="padding-top:0;">
-  <div class="wrap">
-    <div class="car-schematic">
-      <span class="car-schematic-label">// vehicle topology · simplified</span>
-      <div class="car-shape">
-        <div class="car-windows"></div>
-      </div>
-      <span class="pin p1" data-label="Telematics"></span>
-      <span class="pin p2 left" data-label="Infotainment"></span>
-      <span class="pin p3" data-label="OBD-II"></span>
-      <span class="pin p4 left" data-label="Key fob (RKE)"></span>
-      <span class="pin p5" data-label="CAN bus"></span>
-      <span class="pin p6 left" data-label="TPMS"></span>
-      <span class="car-schematic-corner">SCALE 1 : SCHEMATIC · NOT TO SPEC</span>
-    </div>
-    <p class="eyebrow" style="margin-top: 16px; text-align: center;">FIG.&nbsp;01 — Six common attack surfaces on a passenger vehicle. Each is unpacked in chapter&nbsp;01.</p>
-  </div>
-</section>
-
-<!-- ===== Chapter cards ===== -->
-<section id="chapters">
-  <div class="wrap">
-    <div class="eyebrow" style="margin-bottom: 24px;"><span class="dot"></span>How it works</div>
-    <h2 class="section-title serif-i" style="margin-bottom: 60px; max-width: 14ch;">
-      Learning Structure:
-    </h2>
-
-    <div class="chapter-grid">
-      <a class="chapter" href="attack-surfaces.html">
-        <div class="chapter-num">01</div>
-        <div class="tag">Technical core</div>
-        <h3>Attack<br/>Surfaces</h3>
-        <p>Where vulnerabilities actually live. CAN bus, OBD-II, infotainment, telematics, key fobs, TPMS, ECU firmware — what each does, how it fails, and why.</p>
-        <span class="arrow-link">Read chapter 01 <span>→</span></span>
-      </a>
-      <a class="chapter" href="case-studies.html">
-        <div class="chapter-num">02</div>
-        <div class="tag">Case work</div>
-        <h3>Case<br/>Studies</h3>
-        <p>Six landmark incidents — from the 2015 Jeep Cherokee remote takeover to recent web-portal flaws — and what each one taught the industry.</p>
-        <span class="arrow-link">Read chapter 02 <span>→</span></span>
-      </a>
-      <a class="chapter" href="defenses.html">
-        <div class="chapter-num">03</div>
-        <div class="tag">Practice</div>
-        <h3>Defenses<br/>&amp; Regulation</h3>
-        <p>Defense in depth, secure boot, in-vehicle IDS, OTA updates, UNECE R155/R156, ISO/SAE 21434, bug bounties, and where the field is heading.</p>
-        <span class="arrow-link">Read chapter 03 <span>→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Why it matters ===== -->
-<section style="padding-top:0;">
-  <div class="wrap">
-    <div class="grid-2" style="align-items:start;">
-      <div>
-        <div class="eyebrow"><span class="dot"></span>Why it matters</div>
-        <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 14ch;">Six reasons<br/>this field exists.</h2>
-        <p class="lede" style="margin-top: 28px;">Vehicle security is not a niche of IT security. The threat model, the consequences of failure, and the regulatory environment are all distinct.</p>
-      </div>
-      <div class="why-list">
-        <div class="why-item">
-          <div class="num">01</div>
-          <div>
-            <h4>Safety, not just data</h4>
-            <p>A web breach loses passwords. A vehicle breach can move a steering rack. The blast radius includes the people in and around the car.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="num">02</div>
-          <div>
-            <h4>Long service life</h4>
-            <p>Cars stay on the road for 12–20 years. Threat models written in 2018 must hold up against attackers with 2030's tools.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="num">03</div>
-          <div>
-            <h4>Heterogeneous code</h4>
-            <p>Hundreds of suppliers. Code in C, Ada, Rust, Java, Linux user-space — every layer with its own vulnerability profile.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="num">04</div>
-          <div>
-            <h4>Always connected</h4>
-            <p>5G modems, V2X radios, cloud APIs and mobile apps mean a fleet-wide remote attack surface that simply did not exist 15 years ago.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="num">05</div>
-          <div>
-            <h4>Privacy at scale</h4>
-            <p>Telematics streams location, voice, biometrics, and behavior. The vehicle is one of the most data-rich devices a person owns.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="num">06</div>
-          <div>
-            <h4>Hard regulation</h4>
-            <p>UNECE R155 makes a cybersecurity management system a precondition for type approval in 60+ markets. Compliance is no longer optional.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== Quote ===== -->
 <section class="quote-section" style="background: var(--bg-elev); border-block: 1px solid var(--rule);">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>An old idea, restated</div>
     <blockquote style="margin-top: 28px;">
-      “The S in <span class="accent">IoT</span><br/>
-      stands for<br/>
-      security.”
+      “The S in <span class="accent">IoT</span> stands for security.”
     </blockquote>
     <div class="attribution">
-      // Anonymous — circa 2017, applied to cars ever since.
-    </div>
-  </div>
-</section>
-
-<!-- ===== Glossary teaser ===== -->
-<section>
-  <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>Vocabulary you'll meet</div>
-    <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 16ch;">A short<br/>field glossary.</h2>
-    <p class="lede" style="margin-top: 24px; max-width: 60ch;">Six terms used throughout the chapters. Hover any term in an article to see its definition again.</p>
-
-    <div class="grid-3" style="margin-top: 60px;">
-      <div class="card">
-        <span class="num">// term 01</span>
-        <h3>ECU</h3>
-        <p style="color: var(--ink-soft);">Electronic Control Unit. A small embedded computer dedicated to one subsystem — engine, brakes, body, infotainment. A modern car has 70+.</p>
-      </div>
-      <div class="card">
-        <span class="num">// term 02</span>
-        <h3>CAN bus</h3>
-        <p style="color: var(--ink-soft);">Controller Area Network. The shared 1980s broadcast bus most ECUs still talk over. No authentication built in. By design.</p>
-      </div>
-      <div class="card">
-        <span class="num">// term 03</span>
-        <h3>Telematics</h3>
-        <p style="color: var(--ink-soft);">The cellular-and-cloud module that talks to the manufacturer for OTA updates, navigation, eCall, remote services, and stolen-vehicle recovery.</p>
-      </div>
-      <div class="card">
-        <span class="num">// term 04</span>
-        <h3>OTA</h3>
-        <p style="color: var(--ink-soft);">Over-the-air update. Modern OTA pipelines push signed firmware to ECUs through the telematics module — for both features and security patches.</p>
-      </div>
-      <div class="card">
-        <span class="num">// term 05</span>
-        <h3>RKE / PKE</h3>
-        <p style="color: var(--ink-soft);">Remote / Passive Keyless Entry. The encrypted radio between key fob and car. Every generation has been broken; every generation gets stronger.</p>
-      </div>
-      <div class="card">
-        <span class="num">// term 06</span>
-        <h3>WP.29 R155</h3>
-        <p style="color: var(--ink-soft);">UN Regulation No. 155 from Working Party 29. Requires manufacturers to operate a cybersecurity management system across the entire vehicle lifecycle.</p>
-      </div>
+      Anonymous — circa 2017, applied to cars ever since.
     </div>
   </div>
 </section>
@@ -525,7 +228,8 @@
         <div class="eyebrow"><span class="dot"></span>Ready?</div>
         <h2 class="section-title serif-i" style="margin-top: 14px; max-width: 18ch;">
           Start with<br/>
-          <span class="serif-i accent">The Modern Connected Vehicle</span>
+          <span>The Modern Connected Vehicle</span>
+        </h2>
         <p class="lede" style="margin-top: 24px;">The technical core for this masterclass.</p>
       </div>
       <a class="btn" href="modules/module-1.html">Open Module 01 <span class="arrow">→</span></a>
