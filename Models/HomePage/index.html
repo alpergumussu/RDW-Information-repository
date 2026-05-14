@@ -4,130 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Automotive Cybersecurity — Home</title>
-<link rel="stylesheet" href="assets/css/styles.css" />
-<style>
-  /* Page-specific */
-  .hero {
-    padding-top: clamp(60px, 9vw, 120px);
-    padding-bottom: clamp(60px, 9vw, 120px);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: 60px;
-    align-items: end;
-  }
-  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
-  .hero h1 { color: var(--ink); }
-  .hero h1 .accent { color: var(--accent); font-style: italic; }
-  .hero h1 .strike { text-decoration: line-through; text-decoration-thickness: 4px; text-decoration-color: var(--accent); }
-  .hero-meta {
-    display: flex; flex-direction: column; gap: 24px;
-    padding-bottom: 8px;
-  }
-  .hero-meta .lede { color: var(--ink-soft); }
-  .hero-meta .meta-row {
-    display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--ink-mute);
-    letter-spacing: 0.04em;
-  }
-  .hero-meta .meta-row .dot {
-    width: 4px; height: 4px; border-radius: 50%; background: var(--ink-mute);
-  }
+<link rel="stylesheet" href="../../assets/css/styles.css" />
+<link rel="stylesheet" href="Index.css" />
 
-  /* Concept section */
-  .concept-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 60px;
-    align-items: start;
-  }
-  @media (max-width: 900px) { .concept-grid { grid-template-columns: 1fr; } }
-  .concept-grid .label { position: sticky; top: 100px; }
-  .concept-grid .label h2 { margin-top: 14px; }
-  .concept-prose .pull { font-size: clamp(28px, 3vw, 38px); }
-
-  /* Why it matters */
-  .why-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--rule);
-  }
-  @media (max-width: 900px) { .why-list { grid-template-columns: 1fr; } }
-  .why-item {
-    padding: 36px 32px 36px 0;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 24px;
-    align-items: start;
-  }
-  .why-item:nth-child(odd) { border-right: 1px solid var(--rule); padding-right: 32px; }
-  @media (max-width: 900px) {
-    .why-item:nth-child(odd) { border-right: 0; padding-right: 0; }
-    .why-item { padding: 24px 0; }
-  }
-  .why-item .num {
-    font-family: 'Instrument Serif', serif; font-style: italic;
-    font-size: 44px; line-height: 1;
-    color: var(--accent);
-  }
-  .why-item h4 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 26px; line-height: 1.1;
-    margin-bottom: 10px;
-  }
-  .why-item p { font-size: 15px; color: var(--ink-soft); }
-
-  .quote-section { padding-block: clamp(80px, 10vw, 140px); }
-  .quote-section .wrap { display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
-  .quote-section blockquote {
-    font-family: 'Instrument Serif', serif; font-style: italic;
-    font-size: clamp(36px, 5vw, 64px);
-    line-height: 1.05;
-    letter-spacing: -0.015em;
-    color: var(--ink);
-    max-width: 30ch;
-  }
-  .quote-section blockquote .accent { color: var(--accent); }
-  .quote-section .attribution {
-    margin-top: 36px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; color: var(--ink-mute);
-    letter-spacing: 0.06em; text-transform: uppercase;
-  }
-
-  /* Hero ticker */
-  .ticker {
-    margin-top: 32px;
-    padding: 14px 0;
-    border-top: 1px dashed var(--rule);
-    border-bottom: 1px dashed var(--rule);
-    display: flex; gap: 28px; align-items: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--ink-soft);
-    overflow: hidden;
-    white-space: nowrap;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  }
-  .ticker .item { display: inline-flex; gap: 14px; align-items: center; }
-  .ticker .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex: none; }
-  .ticker-track {
-    display: inline-flex; gap: 28px; align-items: center;
-    animation: scroll-x 50s linear infinite;
-  }
-  @keyframes scroll-x {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-</style>
 </head>
 <body>
 
@@ -153,7 +32,7 @@
           <span>For students &amp; the curious</span>
         </div>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a class="btn" href="modules.html">Start reading <span class="arrow">→</span></a>
+          <a class="btn" href="../ModuleOverviewPage/modules.html">Start reading <span class="arrow">→</span></a>
         </div>
       </div>
     </div>
@@ -232,7 +111,7 @@
         </h2>
         <p class="lede" style="margin-top: 24px;">The technical core for this masterclass.</p>
       </div>
-      <a class="btn" href="modules/module-1.html">Open Module 01 <span class="arrow">→</span></a>
+      <a class="btn" href="../ModuleContentPages/module-1.html">Open Module 01 <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -240,6 +119,6 @@
 <!-- ===== Footer ===== -->
 <div id="site-footer"></div>
 
-<script src="assets/js/site.js"></script>
+<script src="../../assets/js/site.js"></script>
 </body>
 </html>

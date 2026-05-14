@@ -1,0 +1,8 @@
+Dingen om op te letten:
+- Kleuren zijn overal consistent 
+- Op mobile is de navbar nog niet optimaal 
+- in de footer moeten de knoppen nog aangepast x
+- Placeholders vervangen
+- Alle extra code eruithalen (bijv. de extra kleuren opties)
+- Termen onderaan elke modules
+- Tiles voor vraag en antwoord

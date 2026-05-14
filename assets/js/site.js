@@ -41,13 +41,13 @@
       <span>// © 2026 Cybersecurity in the Automotive Industry</span>
       <div class="footer-partners">
         <a href="https://www.windesheim.nl/" target="_blank" rel="noopener" aria-label="Windesheim">
-          <img class="partner-logo" src="assets/img/windesheim-white.png" alt="Windesheim" />
+          <img class="partner-logo" src="../../assets/img/windesheim-white.png" alt="Windesheim" />
         </a>
         <a href="https://www.rdw.nl/" target="_blank" rel="noopener" aria-label="RDW">
-          <img class="partner-logo" src="assets/img/rdw-white.png" alt="RDW" />
+          <img class="partner-logo" src="../../assets/img/rdw-white.png" alt="RDW" />
         </a>
         <a href="https://mitc-flevoland.nl/" target="_blank" rel="noopener" aria-label="MITC Flevoland">
-          <img class="partner-logo" src="assets/img/mitc-white.png" alt="MITC Flevoland" />
+          <img class="partner-logo" src="../../assets/img/mitc-white.png" alt="MITC Flevoland" />
         </a>
       </div>
     </div>
@@ -58,11 +58,11 @@
   function buildNav() {
     const root = document.getElementById('site-nav');
     if (!root) return;
-    const page = window.location.pathname.split('/').pop() || 'index.html';
+    const page = window.location.pathname.split('/').pop() || '../../Models/HomePage/index.html';
     const links = [
-      { href: 'index.html',   label: 'Home' },
-      { href: 'modules.html', label: 'Modules' },
-      { href: 'about.html',   label: 'About' },
+      { href: '../../Models/HomePage/index.html', label: 'Home' },
+      { href: '../../Models/ModuleOverviewPage/modules.html', label: 'Modules' },
+      { href: '../../Models/AboutPage/about.html', label: 'About' },
     ];
     const linksHTML = links.map(({ href, label }) => {
       const active = page === href ? ' class="active"' : '';
@@ -70,7 +70,7 @@
     }).join('\n      ');
     root.outerHTML = `<nav class="nav">
   <div class="wrap nav-inner">
-    <a href="index.html" class="brand">
+    <a href="../../Models/HomePage/index.html" class="brand">
       <span class="brand-mark"></span>
       <span>AUTO/CYBER</span>
       <small>v.2026</small>
