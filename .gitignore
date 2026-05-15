@@ -8,3 +8,6 @@
 *.db-wal
 /.vs/slnx.sqlite
 *.sqlite-journal
+*.json
+/.vs/VSWorkspaceState.json
+*.wsuo
