@@ -224,7 +224,7 @@ section {
   place-items: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
   .brand,
   .brand-mark {
@@ -645,7 +645,7 @@ section {
     background: var(--rule);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     .footer-bottom span {
       display: none;
     }
