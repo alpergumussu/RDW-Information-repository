@@ -8,3 +8,5 @@
 *.db-wal
 /.vs/slnx.sqlite
 *.sqlite-journal
+*.json
+*.wsuo
