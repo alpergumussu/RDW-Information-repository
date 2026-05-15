@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs/RDW-Information-repository/FileContentIndex
+*.db
+*.db-shm
+*.db-wal
+/.vs/slnx.sqlite
+*.sqlite-journal
