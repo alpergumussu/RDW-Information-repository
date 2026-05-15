@@ -1,6 +1,6 @@
   .module-hero {
-    padding-top: clamp(60px, 9vw, 100px);
-    padding-bottom: clamp(60px, 9vw, 100px);
+    padding-top: clamp(20px, 9vw, 75px);
+    padding-bottom: clamp(60px, 9vw, 75px);
     border-bottom: 1px solid var(--rule);
   }
 
@@ -24,7 +24,7 @@
   }
 
   .module-body {
-    padding-block: clamp(80px, 10vw, 140px);
+    padding-block: clamp(80px, 10vw, 75px);
   }
 
   .NextModuleBtn {
@@ -71,6 +71,32 @@
 
   .NextModuleBtn:hover,
   .PreviousModuleBtn:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .AboutDokBtn {
+    width: 175px;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 10px;
+    padding: 20px 0px;
+    border-radius: 999px;
+    background: #00A85A;
+    color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    transition: transform .15s ease, background .2s ease;
+  }
+
+  [data-theme="dark"] .AboutDokBtn {
+    background: #2EE893;
+    color: #0B0D0A;
+  }
+
+  .AboutDokBtn:hover {
     background: var(--ink);
     color: var(--bg);
   }
