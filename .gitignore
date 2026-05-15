@@ -4,4 +4,11 @@
 
 /.vs/RDW-Information-repository/FileContentIndex
 *.db
+*.db-shm
+*.db-wal
 /.vs/slnx.sqlite
+*.sqlite-journal
+/.vs/RDW-Information-repository/v17/DocumentLayout.json
+/.vs/RDW-Information-repository/v17/DocumentLayout.backup.json
+/.vs/RDW-Information-repository/v17/.wsuo
+/.vs/VSWorkspaceState.json
