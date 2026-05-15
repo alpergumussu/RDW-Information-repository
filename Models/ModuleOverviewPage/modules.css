@@ -3,11 +3,11 @@
    padding-bottom: clamp(40px, 6vw, 72px);
  }
 
- .modules-grid {
-   display: grid;
-   grid-template-columns: repeat(2, 1fr);
-   gap: 40px 0px;
- }
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
 
  @media (max-width: 700px) {
    .modules-grid {

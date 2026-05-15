@@ -555,157 +555,163 @@ section {
   margin-top: auto;
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 40px;
-}
-
 @media (max-width: 900px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
+  .footer {
+    margin-top: 24px;
   }
 }
 
-.footer h4 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-bottom: 14px;
-}
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
 
-.footer ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 
-.footer a {
-  color: var(--ink-soft);
-  font-size: 14px;
-}
+  .footer h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 14px;
+  }
 
-.footer a:hover {
-  color: var(--accent);
-}
+  .footer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-.footer-bottom {
-  margin-top: 0px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: var(--ink-mute);
-  letter-spacing: 0.04em;
-}
+  .footer a {
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
 
-.footer-partners {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.footer-partners-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-
-.footer-partners a {
-  display: flex;
-  align-items: center;
-}
-
-.footer-partners a+a {
-  padding-left: 24px;
-  position: relative;
-}
-
-.footer-partners a+a::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 60px;
-  /* adjust to taste */
-  background: var(--rule);
-}
-
-@media (max-width: 600px) {
-  .footer-bottom span {
-    display: none;
+  .footer a:hover {
+    color: var(--accent);
   }
 
   .footer-bottom {
-    justify-content: center;
+    margin-top: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
   }
-}
 
-.partner-logo {
-  height: 30px;
-  width: auto;
-  filter: invert(1);
-  opacity: 0.6;
-  transition: opacity .2s;
-}
+  .footer-partners {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
 
-img[alt="Windesheim"] {
-  height: 60px;
-  width: auto;
-}
+  .footer-partners-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
 
-img[alt="RDW"] {
-  height: 60px;
-  width: auto;
-}
+  .footer-partners a {
+    display: flex;
+    align-items: center;
+  }
 
-img[alt="MITC Flevoland"] {
-  height: 26px;
-  width: auto;
-}
+  .footer-partners a+a {
+    padding-left: 24px;
+    position: relative;
+  }
 
-[data-theme="dark"] .partner-logo {
-  filter: invert(0);
-}
+  .footer-partners a+a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60px;
+    /* adjust to taste */
+    background: var(--rule);
+  }
 
-.footer-partners a:hover .partner-logo {
-  opacity: 1;
-}
+  @media (max-width: 600px) {
+    .footer-bottom span {
+      display: none;
+    }
 
-/* ---- Decorative ---- */
-.big-num {
-  font-family: 'Instrument Serif', serif;
-  font-style: italic;
-  font-size: clamp(80px, 12vw, 180px);
-  line-height: 0.9;
-  color: var(--accent);
-  letter-spacing: -0.03em;
-}
+    .footer-bottom {
+      justify-content: center;
+    }
+  }
 
-.kbd {
-  display: inline-block;
-  border: 1px solid var(--rule);
-  border-bottom-width: 2px;
-  border-radius: 6px;
-  padding: 2px 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  background: var(--bg-elev);
-}
+  .partner-logo {
+    height: 30px;
+    width: auto;
+    filter: invert(1);
+    opacity: 0.6;
+    transition: opacity .2s;
+  }
 
-.marker {
-  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--highlight) 70%, transparent) 60%);
-  padding: 0 2px;
-}
+  img[alt="Windesheim"] {
+    height: 60px;
+    width: auto;
+  }
 
-[data-theme="dark"] .marker {
-  background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, #2EE893 40%, transparent) 60%);
-}
+  img[alt="RDW"] {
+    height: 60px;
+    width: auto;
+  }
+
+  img[alt="MITC Flevoland"] {
+    height: 26px;
+    width: auto;
+  }
+
+  [data-theme="dark"] .partner-logo {
+    filter: invert(0);
+  }
+
+  .footer-partners a:hover .partner-logo {
+    opacity: 1;
+  }
+
+  /* ---- Decorative ---- */
+  .big-num {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(80px, 12vw, 180px);
+    line-height: 0.9;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+  }
+
+  .kbd {
+    display: inline-block;
+    border: 1px solid var(--rule);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--bg-elev);
+  }
+
+  .marker {
+    background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--highlight) 70%, transparent) 60%);
+    padding: 0 2px;
+  }
+
+  [data-theme="dark"] .marker {
+    background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, #2EE893 40%, transparent) 60%);
+  }
