@@ -52,6 +52,11 @@
    color: var(--ink-mute);
  }
 
+.module-card:hover .card-num {
+    transform: translateX(4px);
+    color: var(--ink);
+}
+
  .card-title {
    font-family: 'Instrument Serif', Georgia, serif;
    font-size: clamp(28px, 3vw, 38px);
