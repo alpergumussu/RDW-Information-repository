@@ -12,3 +12,5 @@
 /.vs/RDW-Information-repository/v17/DocumentLayout.backup.json
 /.vs/RDW-Information-repository/v17/.wsuo
 /.vs/VSWorkspaceState.json
+*.config
+*.vsidx
