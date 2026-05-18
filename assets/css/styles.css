@@ -32,6 +32,12 @@
   --tag-bg: #F2F1EA10;
 }
 
+/* Global dark mode transition */
+*, *::before, *::after {
+    transition: background-color 1.5s ease-out, border-color 1.5s ease-out, color 1.5s ease-out;
+}
+
+
 /* ---- Reset & base ---- */
 * {
   box-sizing: border-box;
@@ -56,7 +62,6 @@ body {
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  transition: background-color .25s ease, color .25s ease;
 }
 
 img {
@@ -189,12 +194,12 @@ section {
 
 /* ---- Top nav ---- */
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(14px);
-  background: color-mix(in oklab, var(--bg) 82%, transparent);
-  border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
+    background: color-mix(in oklab, var(--bg) 82%, transparent);
+    border-bottom: 1px solid var(--rule);
 }
 
 .nav-inner {
@@ -273,7 +278,6 @@ section {
   padding: 8px 14px;
   border-radius: 999px;
   color: var(--ink-soft);
-  transition: background .15s, color .15s;
 }
 
 .nav-links a:hover {
@@ -300,7 +304,6 @@ section {
   place-items: center;
   border: 1px solid var(--rule);
   color: var(--ink-soft);
-  transition: background .15s, color .15s, border-color .15s;
 }
 
 .icon-btn:hover {
@@ -326,7 +329,6 @@ section {
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   letter-spacing: 0.02em;
-  transition: transform .15s ease, background .2s ease;
 }
 
 .btn:hover {
@@ -348,7 +350,6 @@ section {
 
 .btn .arrow {
   display: inline-block;
-  transition: transform .2s;
 }
 
 .btn:hover .arrow {
@@ -526,7 +527,6 @@ section {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transition: transform .25s, border-color .25s, background .25s;
 }
 
 .card:hover {
