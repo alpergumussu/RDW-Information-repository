@@ -27,13 +27,13 @@
     padding-block: clamp(80px, 10vw, 75px);
   }
 
-  .NextModuleBtn {
+.NextModuleBtn {
     width: 175px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 20px 0px;
+    padding: 14px 22px;
     border-radius: 999px;
     background: #00A85A;
     color: var(--bg);
@@ -41,20 +41,20 @@
     font-size: 13px;
     letter-spacing: 0.02em;
     transition: transform .15s ease, background .2s ease;
-  }
+}
 
   [data-theme="dark"] .NextModuleBtn {
     background: #2EE893;
     color: #0B0D0A;
   }
 
-  .PreviousModuleBtn {
+.PreviousModuleBtn {
     width: 175px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 20px 0px;
+    padding: 14px 22px;
     border-radius: 999px;
     background: #00A85A;
     color: var(--bg);
@@ -62,7 +62,7 @@
     font-size: 13px;
     letter-spacing: 0.02em;
     transition: transform .15s ease, background .2s ease;
-  }
+}
 
   [data-theme="dark"] .PreviousModuleBtn {
     background: #2EE893;
@@ -75,13 +75,13 @@
     color: var(--bg);
   }
 
-  .AboutDokBtn {
+.AboutDokBtn {
     width: 175px;
     display: flex;
     justify-content: center;
     margin-top: 40px;
     gap: 10px;
-    padding: 20px 0px;
+    padding: 14px 22px;
     border-radius: 999px;
     background: #00A85A;
     color: var(--bg);
@@ -89,7 +89,7 @@
     font-size: 13px;
     letter-spacing: 0.02em;
     transition: transform .15s ease, background .2s ease;
-  }
+}
 
   [data-theme="dark"] .AboutDokBtn {
     background: #2EE893;
