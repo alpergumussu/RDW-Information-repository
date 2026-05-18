@@ -707,24 +707,10 @@ section {
   }
 
 .marker {
+    background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--highlight) 70%, transparent) 60%);
     padding: 0 2px;
-    position: relative;
-    display: inline;
-    isolation: isolate;
 }
 
-    .marker::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 1px;
-        height: 38%;
-        background-color: color-mix(in oklab, var(--highlight) 70%, transparent);
-        z-index: -1;
-        transition: background-color var(--theme-transition);
-    }
-
-[data-theme="dark"] .marker::after {
-    background-color: color-mix(in oklab, #2EE893 40%, transparent);
+[data-theme="dark"] .marker {
+    background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, #2EE893 40%, transparent) 60%);
 }
