@@ -655,13 +655,12 @@ section {
     }
   }
 
-  .partner-logo {
+.partner-logo {
     height: 30px;
     width: auto;
     filter: invert(1);
     opacity: 0.6;
-    transition: opacity .2s;
-  }
+}
 
   img[alt="Windesheim"] {
     height: 60px;
@@ -707,10 +706,10 @@ section {
     background: var(--bg-elev);
   }
 
-  .marker {
+.marker {
     background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--highlight) 70%, transparent) 60%);
     padding: 0 2px;
-  }
+}
 
   [data-theme="dark"] .marker {
     background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, #2EE893 40%, transparent) 60%);

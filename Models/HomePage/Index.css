@@ -233,7 +233,6 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   letter-spacing: 0.02em;
-  transition: transform .15s ease, background .2s ease;
 }
 
 .StartReadingBtn:hover,

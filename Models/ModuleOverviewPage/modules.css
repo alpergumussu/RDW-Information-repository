@@ -92,6 +92,5 @@
    font-family: 'JetBrains Mono', monospace;
    font-size: 16px;
    color: var(--accent);
-   transition: transform .2s;
    flex-shrink: 0;
  }
