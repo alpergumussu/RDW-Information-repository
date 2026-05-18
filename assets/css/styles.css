@@ -188,9 +188,10 @@ section {
 }
 
 .rule {
-  height: 1px;
-  background: var(--rule);
-  border: 0;
+    height: 1px;
+    background: var(--rule);
+    border: 0;
+    animation: fadeUp 0.6s ease-out both;
 }
 
 /* ---- Top nav ---- */
