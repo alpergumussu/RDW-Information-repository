@@ -1,31 +1,33 @@
-  .module-hero {
+.module-hero {
     padding-top: clamp(20px, 9vw, 75px);
     padding-bottom: clamp(60px, 9vw, 75px);
     border-bottom: 1px solid var(--rule);
-  }
+    animation: fadeUp 0.6s ease-out both;
+}
 
-  .module-hero .meta-row {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-    flex-wrap: wrap;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--ink-mute);
-    letter-spacing: 0.04em;
-    margin-top: 32px;
-  }
+    .module-hero .meta-row {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        color: var(--ink-mute);
+        letter-spacing: 0.04em;
+        margin-top: 32px;
+    }
 
-  .module-hero .meta-row .dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--ink-mute);
-  }
+        .module-hero .meta-row .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--ink-mute);
+        }
 
-  .module-body {
+.module-body {
     padding-block: clamp(80px, 10vw, 75px);
-  }
+    animation: fadeUp 0.6s ease-out 0.2s both;
+}
 
 .NextModuleBtn {
     width: 175px;
@@ -42,10 +44,10 @@
     letter-spacing: 0.02em;
 }
 
-  [data-theme="dark"] .NextModuleBtn {
+[data-theme="dark"] .NextModuleBtn {
     background: #2EE893;
     color: #0B0D0A;
-  }
+}
 
 .PreviousModuleBtn {
     width: 175px;
@@ -62,16 +64,16 @@
     letter-spacing: 0.02em;
 }
 
-  [data-theme="dark"] .PreviousModuleBtn {
+[data-theme="dark"] .PreviousModuleBtn {
     background: #2EE893;
     color: #0B0D0A;
-  }
+}
 
-  .NextModuleBtn:hover,
-  .PreviousModuleBtn:hover {
+.NextModuleBtn:hover,
+.PreviousModuleBtn:hover {
     background: var(--ink);
     color: var(--bg);
-  }
+}
 
 .AboutDokBtn {
     width: 175px;
@@ -88,12 +90,24 @@
     letter-spacing: 0.02em;
 }
 
-  [data-theme="dark"] .AboutDokBtn {
+[data-theme="dark"] .AboutDokBtn {
     background: #2EE893;
     color: #0B0D0A;
-  }
+}
 
-  .AboutDokBtn:hover {
+.AboutDokBtn:hover {
     background: var(--ink);
     color: var(--bg);
-  }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
