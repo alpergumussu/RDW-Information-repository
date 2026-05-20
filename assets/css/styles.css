@@ -725,6 +725,11 @@ section {
     border-radius: 0 8px 8px 0;
 }
 
+[data-theme="dark"] .article-body blockquote {
+    border-left: 3px solid #2EE893;
+}
+
+
     .article-body blockquote p {
         margin: 0;
         font-size: 14px;
