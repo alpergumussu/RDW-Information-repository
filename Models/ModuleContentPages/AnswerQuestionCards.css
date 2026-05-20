@@ -19,7 +19,7 @@
 
 .flip-card {
     perspective: 1000px;
-    height: 250px;
+    height: 300px;
     cursor: pointer
 }
 
@@ -143,8 +143,8 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
     .flip-card {
-        height: 300px;
+        height: 400px;
     }
 }

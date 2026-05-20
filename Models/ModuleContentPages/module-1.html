@@ -16,7 +16,7 @@
 
     <!-- Module intro -->
     <header class="module-hero">
-        <div class="wrap-narrow">
+        <div class="wrap-narrow article-body">
             <div class="eyebrow"><span class="dot"></span>Module 01</div>
             <h1 class="section-title" style="margin-top: 16px;">
                 The Modern Connected Vehicle
@@ -26,9 +26,9 @@
                 <span class="tag">ECUs</span>
                 <span class="tag">Interfaces</span>
             </div>
-            <p class="concept-prose" style="font-size: 22px; max-width: 820px; margin-top: 24px;">
+            <p class="concept-prose" style="font-size: 22px; max-width: 1280px; margin-top: 24px;">
                 This module introduces the architecture of the connected vehicle, including ECUs, in-vehicle networks, external interfaces, and the foundations of automotive cybersecurity.
-            <p class="concept-prose" style="font-size: 15px; max-width: 820px; margin-top: 10px;">
+            <p class="concept-prose" style="font-size: 15px; max-width: 1280px; margin-top: 10px;">
                 Do you have questions about the DOK levels?  <a class="PressHere" href="../AboutPage/about.html">Press here!</a>
             </p>
         </div>
@@ -61,10 +61,6 @@
             <!-- DOK 1 Section 2 content -->
             <h3>What "Connected" Means in Practice</h3>
             <p>When a vehicle is described as "connected," it means it can exchange data with systems and networks outside itself. This does not happen through a single channel — modern vehicles use multiple communication technologies simultaneously, each serving a different purpose.</p>
-
-            <figure class="img-placeholder">
-                <div class="placeholder-box">Image: vehicle at centre with labelled arrows pointing outward to smartphone (Bluetooth), mobile network tower (cellular/5G), road infrastructure (V2X), manufacturer backend (OTA), GPS satellite (navigation/telematics)</div>
-            </figure>
 
             <table class="content-table">
                 <thead>
@@ -122,9 +118,6 @@
 
             <p>This is enormously convenient: manufacturers can fix bugs, patch vulnerabilities, improve performance, or add features without issuing a recall or requiring a workshop visit. It also means the vehicle's software is permanently connected to a supply chain that stretches from the OEM's backend servers, through cloud infrastructure, through network operators, down to the vehicle itself. Each link in that chain is a point where something can go wrong — or be tampered with.</p>
 
-            <figure class="img-placeholder">
-                <div class="placeholder-box">Image: OTA delivery chain — OEM development → signing server → cloud distribution → cellular network → vehicle ECU, with each step labelled</div>
-            </figure>
             <!-- DOK 1 Section 4 content -->
             <h3>Benefits to the End User</h3>
 
@@ -146,9 +139,6 @@
 
             <p>Understanding who these stakeholders are matters for cybersecurity because an attack or a vulnerability does not affect just one party. A compromised OTA update pipeline, for example, affects the OEM who wrote the software, the supplier whose ECU runs it, the driver whose vehicle behaves unexpectedly, the regulator who must respond, and potentially thousands of fleet vehicles simultaneously.</p>
 
-            <figure class="img-placeholder">
-                <div class="placeholder-box">Image: stakeholder map — OEM at centre, surrounded by suppliers, drivers, fleet operators, regulators, and service providers with brief role labels</div>
-            </figure>
             <ul class="content-list">
                 <li><strong>OEMs (Original Equipment Manufacturers)</strong> — the vehicle brands (Volkswagen, Toyota, Ford, Stellantis). Responsible for overall vehicle design, software architecture, cybersecurity compliance, and the end product that reaches the consumer.</li>
                 <li><strong>Suppliers</strong> — the network of companies responsible for designing, building, and delivering the components and software that make up the vehicle. Direct suppliers deliver complete, ready-to-integrate systems and carry significant responsibility for the security of their components. Behind them sits a deeper layer producing the semiconductors, sensors, communication modules, and software libraries embedded inside those systems. Their code runs in your vehicle, but there is often no direct relationship between them and the OEM — making visibility into their security practices difficult to establish and even harder to enforce.</li>
@@ -165,9 +155,6 @@
 
             <p>This is not a theoretical concern. Researchers have demonstrated remote exploitation of vehicle systems in real-world conditions — most notably the 2015 Jeep Cherokee hack, in which security researchers remotely took control of steering and braking via the vehicle's cellular connection while it was being driven on a public highway.</p>
 
-            <figure class="img-placeholder">
-                <div class="placeholder-box">Image: attack surface overview — vehicle with labelled attack vectors: Bluetooth, OBD-II port, Wi-Fi, cellular/OTA, V2X, infotainment app store, USB, key fob/RKE</div>
-            </figure>
             <!-- DOK 1 QA cards/Questions section -->
             <div>
                 <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 1 DOK level 1. Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the card to see what matters. </span></p>
@@ -251,32 +238,579 @@
                     <!-- QA 4 end -->
                 </div>
             </div>
-            <!-- QA cards/Questions section end -->
+            <!-- DOK 1 QA cards/Questions section end -->
             <!-- DOK 1 content end -->
             <!-- DOK 2 content -->
             <h2>DOK Level 2 — Skills and Concepts</h2>
+            <p>At DOK 1, you learned what a connected vehicle is, who is involved, and why connectivity increases the attack surface. This module goes one level deeper. Rather than asking you to recall what these systems are, it asks you to understand how they are structured, how they relate to each other, and what those relationships mean from a security perspective.</p>
             <!-- DOK 2 Section 1 content -->
-            <h3>What "Connected" Means in Practice</h3>
+            <h3>The Connected Vehicle: Architecture and Internal Communication</h3>
+            <p>A modern vehicle contains between 70 and 150 ECUs. For the vehicle to function, these units must exchange data continuously — the engine management ECU needs to know what the brakes are doing; the body control module needs to know what the infotainment system is requesting. This communication happens over internal networks called buses.</p>
+
+            <p>Different buses were designed for different requirements: some prioritise speed, some prioritise reliability, some prioritise cost. Understanding which network is used where — and why — is the foundation for understanding where the internal attack surface sits.</p>
+            <h4>CAN (Controller Area Network)</h4>
+
+            <p>CAN is the oldest and most widespread in-vehicle network protocol, introduced in the 1980s by Bosch. It operates at speeds up to 1 Mbit/s and was designed for reliability in electrically noisy environments. CAN is a broadcast network — when one ECU sends a message, every other ECU on the same bus receives it. There is no native addressing and no built-in authentication. Any node on the bus can send any message, and other nodes will accept it.</p>
+
+            <p>This design made sense in the 1980s when vehicles were closed systems. In a connected vehicle, it is a significant security weakness: an attacker who gains access to the CAN bus — through the OBD-II port, a compromised ECU, or a connected gateway — can send arbitrary commands to safety-critical systems.</p>
+
+            <p>CAN is still used extensively in powertrain and body control domains where the data rates are modest and the hardware is mature.</p>
+
+            <h4>CAN-FD (CAN with Flexible Data-Rate)</h4>
+            <p>CAN-FD is an evolution of CAN introduced by Bosch in 2012. It increases the maximum data rate to 8 Mbit/s and expands the payload size per frame. It retains the same broadcast architecture and lacks native authentication, meaning it inherits the same fundamental security limitations as CAN while handling more data faster. CAN-FD is increasingly used in powertrain and ADAS domains where the volume of sensor data exceeds what standard CAN can handle.</p>
+
+            <h4>LIN (Local Interconnect Network)</h4>
+            <p>LIN is a low-cost, low-speed network (up to 20 kbit/s) used for simple, non-critical functions: seat adjustment motors, mirror controls, window regulators, interior lighting. It operates on a single master/multiple slave architecture, meaning one ECU controls the timing of all communication on the bus. LIN is not typically a primary attack target due to its limited access to critical systems, but it is worth understanding as part of the overall network topology.</p>
+
+            <h4>FlexRay</h4>
+            <p>FlexRay was developed in the early 2000s as a high-speed, deterministic alternative to CAN for safety-critical applications. It operates at up to 10 Mbit/s and guarantees time-triggered communication — meaning messages are sent at precisely defined intervals, which is essential for systems like active suspension, steer-by-wire, and brake-by-wire where timing is safety-critical. FlexRay is more expensive to implement than CAN and has largely been superseded in new designs by Automotive Ethernet, but it remains present in vehicles from the 2010s and early 2020s.</p>
+
+            <h4>Automotive Ethernet</h4>
+            <p>Automotive Ethernet is the newest in-vehicle network standard and is rapidly becoming dominant for high-bandwidth applications. It operates at 100 Mbit/s to 10 Gbit/s and is used wherever large volumes of data need to move quickly: camera feeds for ADAS, LiDAR data, OTA update delivery to the central gateway, and backbone connections between vehicle domains. Unlike traditional Ethernet, Automotive Ethernet uses a single unshielded twisted pair cable to reduce weight and cost. It supports standard IP networking protocols, which means it brings both the flexibility and the attack surface of IP-based networking into the vehicle.</p>
+
+            <h4>Comparing the Protocols</h4>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Protocol</th>
+                        <th>Max speed</th>
+                        <th>Primary use</th>
+                        <th>Authentication</th>
+                        <th>Key limitation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CAN</td>
+                        <td>1 Mbit/s</td>
+                        <td>Powertrain, body</td>
+                        <td>None</td>
+                        <td>Broadcast, no access control</td>
+                    </tr>
+                    <tr>
+                        <td>CAN-FD</td>
+                        <td>8 Mbit/s</td>
+                        <td>Powertrain, ADAS</td>
+                        <td>None</td>
+                        <td>Inherits CAN security weaknesses</td>
+                    </tr>
+                    <tr>
+                        <td>LIN</td>
+                        <td>20 kbit/s</td>
+                        <td>Non-critical body functions</td>
+                        <td>None</td>
+                        <td>Low speed, limited scope</td>
+                    </tr>
+                    <tr>
+                        <td>FlexRay</td>
+                        <td>10 Mbit/s</td>
+                        <td>Safety-critical real-time</td>
+                        <td>Limited</td>
+                        <td>High cost, declining adoption</td>
+                    </tr>
+                    <tr>
+                        <td>Automotive Ethernet</td>
+                        <td>Up to 10 Gbit/s</td>
+                        <td>ADAS, OTA, backbone</td>
+                        <td>IP-level options</td>
+                        <td>IP attack surface introduced</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Notice the pattern: the protocols that carry the most safety-critical traffic — CAN, CAN-FD, FlexRay — were all designed before connected vehicles existed. None of them include native message authentication. This is not an oversight in the original design; it is a consequence of designing closed systems that were later opened up.</p>
             <!-- DOK 2 Section 2 content -->
-            <h3>OTA Updates and the Software Supply Chain</h3>
+            <h3>External Interfaces: Where the Vehicle Meets the Outside World</h3>
+            <p>If in-vehicle networks are the internal nervous system, external interfaces are the points where that nervous system connects to the outside world. Each external interface is a boundary — a place where data crosses from an untrusted external environment into the vehicle's internal systems.</p>
+
+            <h4>TCU — Telematics Control Unit</h4>
+            <p>The TCU is the vehicle's primary cellular communication module. It manages the connection to the mobile network and is responsible for transmitting telematics data to the OEM backend, receiving OTA updates, enabling remote services (remote lock, remote start), and supporting emergency call (eCall) functionality. The TCU is one of the highest-risk external interfaces because it is permanently connected, operates continuously in the background, and has a direct pathway into the vehicle's internal networks. It is also one of the most difficult for the driver to monitor or control.</p>
+
+            <h4>IVI — In-Vehicle Infotainment System</h4>
+            <p>The IVI system is the primary human-machine interface for the driver and passengers — the touchscreen, audio system, navigation, and app platform. Modern IVI systems run full operating systems (often Android Automotive or Linux-based platforms) and support third-party applications, smartphone integration via Bluetooth and USB, and internet connectivity via the TCU. The IVI is a high-value attack target because it sits at the intersection of user-facing interaction, connectivity, and internal vehicle networks. A compromised IVI system can potentially be used as a pivot point to reach other vehicle domains — as demonstrated in the 2015 Jeep Cherokee attack, where the infotainment system was the initial entry point.</p>
+
+            <h4>OBD-II Port</h4>
+            <p>The OBD-II port is a standardised physical connector, typically located under the dashboard, that provides direct access to the vehicle's diagnostic data and internal networks. It was designed for use by mechanics and workshops to read fault codes and perform diagnostics. Any device plugged into the OBD-II port can send and receive CAN messages — including commands to safety-critical ECUs. Aftermarket dongles, insurance telematics devices, and fleet management hardware all connect via OBD-II, and each represents a persistent access point to the vehicle's internals.</p>
+
+            <h4>Charging Interfaces (EVs)</h4>
+            <p>Electric vehicles introduce an additional external interface: the charging port. Modern EV charging does not just transfer electricity — it involves a communication protocol (typically ISO 15118) between the vehicle and the charging station. This protocol handles authentication, billing, and in some implementations Vehicle-to-Grid (V2G) communication where the vehicle can push power back to the grid. The charging interface is an emerging attack surface. A compromised charging station could interact with the vehicle's communication stack, and V2G implementations extend the vehicle's network exposure further.</p>
             <!-- DOK 2 Section 3 content -->
-            <h3>Benefits to the End User</h3>
+            <h3>Gateways and Domain Segmentation</h3>
+            <p>With multiple internal networks and multiple external interfaces, the question becomes: how are these connected, and where are the boundaries enforced? The answer in modern vehicles is the central gateway ECU — a dedicated unit that sits at the intersection of the vehicle's network domains and controls which messages are allowed to pass between them.</p>
+            <p>A gateway performs several functions:</p>
+            <ul class="content-list">
+                <li><strong>Protocol translation</strong> — converting messages between different bus formats (e.g. CAN to Automotive Ethernet)</li>
+                <li><strong>Message routing</strong> — forwarding specific messages between domains based on routing tables</li>
+                <li><strong>Filtering</strong> — blocking messages that should not cross domain boundaries</li>
+                <li><strong>Firewall functionality</strong> — in modern implementations, applying rules about which ECUs may communicate with which</li>
+            </ul>
+            <p>Domain segmentation is the principle that different vehicle functions should be isolated from each other — the infotainment system should not be able to send commands to the powertrain ECU; the OBD-II port should not have unrestricted access to ADAS functions. In practice, segmentation is uneven. Older vehicle architectures used flat CAN networks with no segmentation. Modern architectures implement domain separation, but the quality of gateway filtering varies significantly between manufacturers and generations.</p>
+            <p>The critical question to ask of any vehicle architecture is: if an attacker compromises the infotainment system, what can they reach from there? The answer depends entirely on how the gateway is configured and what filtering rules are in place.</p>
+
+            <h3>Where Segmentation Works and Where It Doesn't</h3>
+            <p>
+                Domain segmentation is the principle that different vehicle functions should be isolated from each other — the infotainment system should not be able to send commands to the powertrain ECU; the OBD-II port should not have unrestricted access to ADAS functions.
+            </p>
+            <p>In practice, segmentation is uneven. Older vehicle architectures used flat CAN networks with no segmentation — every ECU on the bus could communicate with every other. Modern architectures implement domain separation, but the quality of gateway filtering varies significantly between manufacturers and generations.</p>
+
+            <p>
+                The critical question to ask of any vehicle architecture is: if an attacker compromises the infotainment system, what can they reach from there? The answer depends entirely on how the gateway is configured and what filtering rules are in place.
+            </p>
             <!-- DOK 2 Section 4 content -->
-            <h3>Who Is Involved: The Stakeholder Landscape</h3>
-            <!-- DOK 2 Section 5 content -->
-            <h3>Why This Matters for Cybersecurity</h3>
+            <h3>Mission-Critical Systems and Dependency Chains</h3>
+            <p>Not all vehicle systems carry the same risk if compromised. Understanding which systems are mission-critical — and how they depend on other systems — is essential for prioritising where security matters most. Mission-critical vehicle systems are those where a failure or compromise directly affects the physical safety of the vehicle and its occupants:</p>
+            <ul class="content-list">
+                <li>Braking systems (ABS, ESC, brake-by-wire)</li>
+                <li>Steering (electric power steering, steer-by-wire)</li>
+                <li>Engine and throttle control</li>
+                <li>ADAS functions (automatic emergency braking, lane keeping)</li>
+                <li>Battery management systems</li>
+            </ul>
+            <blockquote>
+                <p>
+                    The IVI system receives data over cellular via the TCU. The TCU connects to the central gateway. The gateway routes certain diagnostic messages to the CAN bus. The CAN bus is shared with the braking ECU. If each of those hops is insufficiently controlled, a chain exists from the public internet to the vehicle's brakes. This is not hypothetical — it is the architecture that made the 2015 Jeep Cherokee attack possible.
+                </p>
+            </blockquote>
+
+
+            <!-- DOK 2 QA cards/Questions section -->
+            <div>
+                <p style="font-weight: bold; max-width: 1280px;">You have reached the end of module 1 DOK level 2. The passages above covered a lot of ground. These questions ask you to work with that material — not just recall it, but connect it. If two answers feel like they belong together, they probably do. Flip the card to see what matters.  <span class="marker"> Flip the card to see what matters. </span></p>
+                <div class="cards-grid">
+                    <!-- QA 1 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-01</p>
+                                <p class="card-q">
+                                    CAN and Automotive Ethernet are both used in modern vehicles. What are the key differences between them, and why does each remain in use?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    CAN is slow (1 Mbit/s), cheap, and reliable in electrically noisy environments — it handles powertrain and body functions where data rates are modest and the hardware is mature. Automotive Ethernet is fast (up to 10 Gbit/s) and handles high-bandwidth applications like camera feeds and OTA delivery. Both coexist because the vehicle evolved incrementally rather than being redesigned from scratch.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 2 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-02</p>
+                                <p class="card-q">
+                                    The OBD-II port and the TCU are both external interfaces. How do they differ in terms of the access they provide and the risk they represent?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    OBD-II is physical, local, and intentional — it requires someone to be present at the vehicle and plug something in. It provides direct CAN bus access, meaning an attacker with physical access has an unrestricted internal interface. The TCU is remote, persistent, and always-on — it provides a narrower software interface but is reachable from anywhere with cellular coverage, at any time, without physical presence. OBD-II is a higher-privilege interface; TCU is a higher-exposure one.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 3 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-03</p>
+                                <p class="card-q">
+                                    A vehicle's gateway filters messages between the infotainment domain and the powertrain domain. What does this filtering achieve, and what happens if it is misconfigured?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    Filtering prevents messages from one domain reaching ECUs in another — stopping an IVI compromise from issuing commands to the powertrain. If misconfigured, domain separation becomes cosmetic: a message originating in the infotainment domain can cross into the CAN bus, and from there reach any ECU that does not implement its own authentication. Misconfiguration can be as simple as an overly permissive routing rule left over from a diagnostic session.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 4 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-04</p>
+                                <p class="card-q">
+                                    Why does increased connectivity increase the cybersecurity attack surface of a vehicle?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    In a closed vehicle, the only way to send a CAN message was to physically access the bus — the attack required presence and tools. In a connected vehicle, an attacker can potentially reach the CAN bus remotely through the TCU, IVI, or OBD-II via a connected dongle. The absence of authentication was an acceptable design decision when the bus was physically inaccessible. It becomes a critical weakness when multiple remote pathways lead to it.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 4 end -->
+                </div>
+            </div>
+            <!-- DOK 2 QA cards/Questions section end -->
             <!-- DOK 2 content end -->
             <!-- DOK 3 content -->
-            <h2>DOK Level 3 — Strategic Thinking</h2>
-            <!-- DOK 3 content end -->
-            <!-- DOK 4 content -->
-            <h2>DOK Level 4 — Extended Thinking</h2>
+            <h2>DOK Level 3 — Strategic Thinking </h2>
+            <p>At DOK 1 you built vocabulary. At DOK 2 you mapped the architecture — internal networks, external interfaces, gateways, and dependency chains. This module asks you to reason with that knowledge. The questions here do not have single correct answers. You are expected to analyse trade-offs, evaluate design decisions, and draw conclusions from incomplete information — the same cognitive work required in professional threat modelling.</p>
+            <!-- DOK 3 Section 1 content -->
+            <h3>SAE Levels: Automation, Criticality, and Consequence</h3>
+            <p>Before mapping attack surfaces in detail, it is worth establishing what is at stake. The SAE International J3016 standard defines six levels of driving automation, from level 0 (no automation) to level 5 (full automation). These levels matter for cybersecurity because they define how much the vehicle — rather than the human driver — is in control of safety-critical decisions.</p>
+            <p>
+                The security implications shift significantly at L3 and above. At L0–L2, a compromised ADAS function may cause an incident, but the human driver is still monitoring the environment and can intervene. At L3 and above, the human driver is no longer required to monitor continuously — the system is trusted to manage safety-critical decisions autonomously.
+                This means that the consequence of a successful attack scales with automation level. At L4, a compromised braking or steering system has no human fallback. The vehicle acts on whatever signals it receives.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>SAE Level</th>
+                        <th>Name</th>
+                        <th>Who monitors the environment</th>
+                        <th>Who performs driving task</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>L0</td>
+                        <td>No Automation</td>
+                        <td>Human</td>
+                        <td>Human</td>
+                    </tr>
+                    <tr>
+                        <td>L1</td>
+                        <td>Driver Assistance</td>
+                        <td>Human</td>
+                        <td>Shared (one function automated)</td>
+                    </tr>
+                    <tr>
+                        <td>L2</td>
+                        <td>Partial Automation</td>
+                        <td>Human</td>
+                        <td>Shared (multiple functions automated)</td>
+                    </tr>
+                    <tr>
+                        <td>L3</td>
+                        <td>Conditional Automation</td>
+                        <td>System</td>
+                        <td>System (human must be ready to intervene)</td>
+                    </tr>
+                    <tr>
+                        <td>L4</td>
+                        <td>High Automation</td>
+                        <td>System</td>
+                        <td>System (within defined conditions)</td>
+                    </tr>
+                    <tr>
+                        <td>L5</td>
+                        <td>Full Automation</td>
+                        <td>System</td>
+                        <td>System (all conditions)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <blockquote>
+                <p>
+                    The security implications shift significantly at L3 and above. At L0–L2, a compromised ADAS function may cause an incident, but the human driver is still monitoring the environment and can intervene. At L3 and above, the human driver is no longer required to monitor continuously — the system is trusted to manage safety-critical decisions autonomously.
+                    This means that the consequence of a successful attack scales with automation level. At L4, a compromised braking or steering system has no human fallback. The vehicle acts on whatever signals it receives.
+                </p>
+            </blockquote>
+
+            <!-- DOK 3 Section 2 content -->
+            <h3>Attack Surface Mapping in Depth</h3>
+            <p>With consequence in mind, we can map the attack surface more precisely. This is not a list of technologies — it is an exercise in identifying where an attacker can introduce malicious input, and what the pathway from that input to a safety or security impact looks like.</p>
+            <h4>Cellular Baseband and TCU Firmware</h4>
+            <p>The cellular modem in the TCU contains a baseband processor — a separate, dedicated chip that handles the radio communication stack. Baseband processors run their own firmware, independently of the vehicle's main software, and are often not updated as frequently as application-layer software.</p>
+            <p>Cellular baseband vulnerabilities are historically difficult to patch and have been exploited in smartphones for years. In a vehicle context, a baseband exploit could give an attacker persistent access to the TCU without touching the application layer — potentially surviving an OTA update that only patches higher-level software.</p>
+            <p>The TCU firmware itself is a target for supply chain attacks: if the firmware signing process is weak, a malicious firmware image could be pushed to vehicles at scale.</p>
+            <h4>Bluetooth and Wi-Fi Stacks</h4>
+            <p>Bluetooth and Wi-Fi connectivity in the IVI system is handled by protocol stacks — software libraries implementing the respective standards. These stacks have a long history of vulnerabilities: BlueBorne (2017), BIAS (2020), and BrakTooth (2021) are examples of Bluetooth stack vulnerabilities that allowed remote code execution or denial-of-service with no user interaction required.</p>
+            <p>The attack surface here is noteworthy because it requires no physical access and no user action. An attacker within wireless range with knowledge of a stack vulnerability can potentially execute code in the IVI system without the driver doing anything at all.</p>
+            <h4>IVI Browser Engines</h4>
+            <p>Modern infotainment systems include web browsers — either as standalone applications or embedded within the navigation or app platform. Browser engines (WebKit, Chromium-based) are among the most attack-prone software components that exist, given the enormous complexity of parsing and rendering untrusted web content.</p>
+            <p>A compromised IVI browser is a meaningful foothold because the IVI system is connected — to the internet via the TCU, to Bluetooth devices, and through the gateway to internal vehicle networks.</p>
+            <h4>Key Fob RF Protocols</h4>
+            <p>The Remote Keyless Entry (RKE) system uses radio frequency communication between the key fob and the vehicle's Body Control Module (BCM) to authenticate locking and unlocking commands. Most modern systems use rolling codes — a synchronised counter between the fob and the vehicle that prevents simple replay attacks.</p>
+            <p>Not all vehicle systems carry the same risk if compromised. Understanding which systems are mission-critical — and how they depend on other systems — is essential for prioritising where security matters most. Mission-critical vehicle systems are those where a failure or compromise directly affects the physical safety of the vehicle and its occupants:</p>
+            <ul class="content-list">
+                <li><strong>RollJam</strong> — a jammer/receiver device that captures a key fob signal while blocking it from reaching the vehicle, then an adversary uses it later</li>
+                <li><strong>RollBack</strong> — exploiting counter resynchronisation mechanisms to recover previously used codes</li>
+                <li><strong>Relay attacks</strong> — amplifying the key fob signal to trick the vehicle into thinking the fob is present when it is not</li>
+            </ul>
+            <h4>V2X (Vehicle to Everything) </h4>
+            <p>V2X communication introduces an attack surface that is qualitatively different from other interfaces: the vehicle receives messages from sources in its environment and may act on them — often automatically at higher SAE levels. The threats are not primarily about breaking the underlying cryptography. They are about abusing a system that is designed to be trusted:</p>
+            <ul class="content-list">
+                <li><strong>Misbehaviour</strong> — a vehicle or roadside unit with legitimate credentials broadcasting false information: phantom hazards, spoofed speed limits, fabricated emergency conditions</li>
+                <li><strong>Infrastructure compromise</strong> — a compromised roadside unit with valid credentials can broadcast malicious messages to every vehicle in range simultaneously</li>
+                <li><strong>Replay and timing attacks</strong> — replaying legitimate messages out of context to trigger unintended vehicle responses</li>
+            </ul>
+            <p>The deeper problem is scale: a single compromised infrastructure node does not affect one vehicle — it affects every vehicle in its broadcast range. The trust model assumes infrastructure integrity; when that assumption fails, it fails broadly.</p>
+            <h4>Charging Protocols: ISO 15118 and V2G</h4>
+            <p>ISO 15118 is the communication standard for EV charging. It defines a protocol stack for authentication, billing, and charge management between the vehicle and the charging station. In V2G (Vehicle-to-Grid a sub-domain of V2X) implementations, the vehicle can push power back to the grid, extending the communication relationship further.</p>
+            <p>ISO 15118 includes a PKI-based (Public Key Infrastructure) mutual authentication mechanism, which is a meaningful security improvement over earlier charging protocols. However, the security of this mechanism depends entirely on the integrity of the certificate infrastructure — and the charging station is an untrusted external device.  </p>
+            <p>A compromised charging station that passes ISO 15118 authentication could interact with the vehicle's communication stack in ways that a legitimate charging station would not.</p>
+            <!-- DOK 3 Section 3 content -->
+            <h3>Lateral Movement: From IVI to Safety-Critical Bus</h3>
+            <p>Lateral movement is the term for an attacker progressing from an initial foothold — typically a less-critical, more exposed system — toward a higher-value target. In automotive architecture, the canonical lateral movement path is from the infotainment domain toward the powertrain or chassis domain.</p>
+            <!-- DOK 3 Section 4 content -->
+            <h3>The Jeep Cherokee Attack Revisited</h3>
+            <p>The 2015 Jeep Cherokee remote exploitation by Miller and Valasek is the most documented real-world example of this path. The attack proceeded as follows:</p>
+            <ul class="content-list">
+                <li>The IVI system (Uconnect) exposed a network service reachable over cellular</li>
+                <li>The cellular network used by Chrysler did not isolate vehicles from each other — an attacker could discover and connect to any vehicle on the network.</li>
+                <li>The IVI system ran a modified QNX operating system with a vulnerable service that allowed remote code execution.</li>
+                <li>From the IVI, the attackers found a path to the CAN bus via the chip that bridged the infotainment and vehicle networks.</li>
+                <li>By reflashing this chip with modified firmware, they gained the ability to send arbitrary CAN messages.</li>
+                <li>CAN messages to the braking and steering ECUs executed without authentication.</li>
+            </ul>
+
+            <p>Each step represented a failure at a different layer: cellular network isolation, OS hardening, firmware signature verification, and gateway filtering all failed independently. This is what the absence of defense in depth looks like in practice.</p>
+            <!-- DOK 3 Section 5 content -->
+            <h3>What Gateway Designs Do — and Fail to Do</h3>
+            <p>A well-configured gateway should prevent this path at step 3 or 4. The critical design questions are:</p>
+            <ul class="content-list">
+                <li>Does the gateway enforce unidirectional rules? The IVI domain may legitimately receive vehicle speed data for the speedometer display — but should it ever be able to send messages to the powertrain domain? A unidirectional rule would allow the former and block the latter.</li>
+                <li>Is the filtering based on message content or just domain? A gateway that allows any CAN message to pass if it originates from an approved domain is weaker than one that validates message IDs and content ranges.</li>
+                <li>Can the gateway firmware itself be updated via OTA? If so, the gateway is part of the OTA attack surface.</li>
+            </ul>
+
+            <p>The honest answer across the vehicle fleet is that gateway quality varies enormously. Legacy architectures have minimal filtering; modern architectures are improving. The gap between them represents a significant portion of the vehicles currently on the road.</p>
+            <div>
+                <!-- DOK 3 QA cards/Questions section -->
+                <p style="font-weight: bold; max-width: 1280px;">You have reached the end of module 1 DOK level 3. There are no clean answers below. That is not a flaw in the questions — it is the point. These are the kinds of problems that professionals in this field sit with regularly. Your job is not to resolve them but to reason through them carefully enough that your position can be challenged and defended.  <span class="marker"> Flip the card to see what matters. </span></p>
+                <div class="cards-grid">
+                    <!-- QA 1 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-01</p>
+                                <p class="card-q">
+                                    The Jeep Cherokee attack succeeded across five distinct architectural failures. If you could address only two of them, which would you prioritise and why? What residual risk remains?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    Cellular network isolation and gateway filtering. Isolation because it was the entry point — without it the attack could not begin remotely at scale. Gateway filtering because it was the pivot point — without it the IVI compromise could not reach the CAN bus. Residual risk: OS hardening and firmware signature verification are still unaddressed, meaning a local attacker or a future exploit of a different entry point could still reach safety-critical systems.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 2 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-02</p>
+                                <p class="card-q">
+                                    A relay attack on a key fob gives an attacker physical access to a vehicle. Why does physical access matter beyond the obvious — and what internal attack surface does it unlock that was not available before?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    Physical access matters because it opens the OBD-II port — a direct connection to the CAN bus that bypasses every wireless defence. Before the relay attack, the attacker had no authenticated interface to the vehicle's internals. After it, they can plug in a device that reads and injects CAN messages, reflashes ECUs, or deploys persistent hardware implants. The relay attack is not the end of the attack — it is the beginning of a deeper one.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 3 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-03</p>
+                                <p class="card-q">
+                                    V2X threats are described as a scale problem rather than a cryptographic one. What does this mean in practice, and why does it make the threat fundamentally harder to address than a conventional network intrusion?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    A conventional network intrusion compromises one target. A compromised V2X infrastructure node broadcasts to every vehicle in range simultaneously — potentially thousands. You cannot patch a vehicle's trust in infrastructure the way you patch a software vulnerability; the trust is structural. Revoking a compromised certificate requires vehicles to receive and process revocation lists, which depends on connectivity.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 4 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-04</p>
+                                <p class="card-q">
+                                    A gateway enforces domain separation between the infotainment system and the powertrain. Under what conditions does this separation fail, and what design decisions determine whether it holds under attack?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    Separation fails when routing rules are misconfigured to allow IVI-originated messages into the powertrain domain, when the gateway firmware itself is compromised via OTA, or when a legitimate diagnostic mode creates a temporary bridge between domains that an attacker exploits. What determines whether it holds: whether filtering is based on message content/ ID ranges rather than just domain of origin, and whether the gateway can be updated independently of the systems it separates.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA 4 end -->
+                <!-- DOK 3 content end -->
+                <!-- DOK 4 content -->
+                <h2>DOK Level 4 — Extended Thinking</h2>
+                <p>At DOK 3 you analysed where attacks occur and why they succeed. This module asks a harder question: how do you build systems that resist those attacks — and where do even well-designed defences break down? There are no clean answers here. You are working at the level of architectural trade-offs, incomplete information, and real constraints: legacy hardware, supply chain dependencies, and the tension between security and operational requirements. This is the cognitive work of professional security engineering.</p>
+                <!-- DOK 4 section 1 content -->
+                <h3>OTA Update Mechanisms: Security in the Update Pipeline</h3>
+                <p>OTA updates are both a security asset and a security liability. They are an asset because they allow rapid patching of discovered vulnerabilities. They are a liability because the update pipeline itself is an attack surface — and a successful attack on it could push malicious code to millions of vehicles simultaneously.</p>
+                <h4>Code Signing</h4>
+                <p>Every software update should be cryptographically signed by the OEM before distribution. The vehicle verifies the signature before installing any update — an unsigned or invalidly signed package is rejected. Code signing prevents an attacker from distributing arbitrary software to vehicles, even if they gain access to the update delivery infrastructure.</p>
+                <p>The security of code signing depends entirely on the protection of the signing key. If the private signing key is compromised, an attacker can sign malicious firmware that the vehicle will accept as legitimate. Signing keys should be protected in Hardware Security Modules and never exposed in software.</p>
+                <h4>Secure Boot</h4>
+                <p>Secure boot verifies the integrity of software at every stage of the boot process — from the bootloader through the operating system to the application layer. Each stage is verified against a cryptographic signature before execution. If any stage fails verification, the boot process halts.</p>
+                <p>Secure boot ensures that even if an attacker modifies software on a vehicle — through a compromised OTA update, physical access, or exploitation — the modified software will not execute without a valid signature.</p>
+                <h4>A/B Partitions</h4>
+                <p>Modern OTA architectures use two storage partitions — an active partition running the current software, and an inactive partition where updates are staged and verified before activation. When an update is downloaded and verified, the vehicle switches to the new partition at the next restart. If the updated software fails to boot correctly, the system falls back to the previous partition automatically.</p>
+                <p>A/B partitions protect against updates that are technically signed and valid but introduce a fault — whether by mistake or by design. An attacker who pushes a valid but malicious update cannot guarantee that the vehicle will stay on the compromised partition if it causes instability.</p>
+                <h4>Rollback Protection</h4>
+                <p>Rollback protection prevents a vehicle from accepting a software version older than its current one. Without this, an attacker who finds a vulnerability in an older firmware version — even one that has been patched — could push the vehicle back to the vulnerable version using a legitimately signed package.</p>
+                <!-- DOK 4 section 2 content -->
+                <h3>Where Supply-Chain Risk Enters</h3>
+                <p>The OTA pipeline extends far beyond the OEM. Software libraries, middleware components, and operating system packages developed by third parties are integrated into vehicle firmware and distributed via OTA. A compromised dependency — a malicious library introduced into a commonly used open-source package — can affect every vehicle that receives an update containing it.</p>
+                <p>This is not hypothetical. The 2020 SolarWinds attack demonstrated that supply chain compromise via a software update pipeline is a viable and highly effective attack vector at scale. The automotive industry faces the same risk, with the added consequence that the affected systems control physical safety.</p>
+                <p>The deeper problem is that the mechanisms above — code signing, secure boot, A/B partitions, rollback protection — all operate at the OEM level. They verify that the update is what the OEM intended to ship. They do not verify that what the OEM intended to ship is clean. If a malicious library enters the build process before signing, all of those mechanisms will faithfully deliver and install it.</p>
+                <!-- DOK 4 section 3 content -->
+                <h3>HSMs and SecOC: Hardware-Level Security in AUTOSAR</h3>
+                <p>An HSM is a dedicated security chip embedded in an ECU that provides tamper-resistant storage and execution of cryptographic operations. Private keys stored in an HSM cannot be extracted by software — all cryptographic operations are performed inside the HSM itself. Even if the main processor of an ECU is compromised, the keys remain protected.</p>
+                <p>HSMs are used in modern ECUs for protecting OTA signing keys, supporting secure boot verification, and providing a root of trust for ECU identity. Their presence fundamentally changes the threat model: an attacker who compromises the software running on an ECU cannot extract the keys that ECU uses to authenticate itself or verify incoming messages.</p>
+                <p>SecOC is a module in the AUTOSAR standard that adds message authentication to CAN and other internal bus communication. It addresses the most fundamental weakness in vehicle internal networks: CAN has no native authentication, meaning any node on the bus can send any message.</p>
+                <p>SecOC works by appending a Message Authentication Code (MAC) to each CAN message. The MAC is computed using a shared secret key between the sender and the intended receiver. A receiver that cannot verify the MAC rejects the message. This directly counters the class of attack demonstrated in the Jeep Cherokee case: even if an attacker gains access to the CAN bus, they cannot send valid commands to ECUs that implement SecOC without knowing the shared keys — which are stored in HSMs and never exposed in software.</p>
+                <p><strong>The critical trade-off:</strong> SecOC requires that every ECU in the communication chain supports it. Legacy ECUs do not. Retrofitting SecOC to an existing vehicle architecture requires hardware upgrades across all relevant ECUs — significant cost for both development and production. A vehicle with partial SecOC coverage has a mixed trust environment: authenticated messages on some buses, unauthenticated messages on others. An attacker who maps which segments are unprotected can target those specifically. Whether 80% SecOC coverage is meaningfully better than 0% depends entirely on whether the unprotected 20% includes any safety-critical paths.</p>
+                <!-- DOK 4 section 4 content -->
+                <h3>V2X Trust Architecture and Its Limits</h3>
+                <p>In DOK 3 you analysed V2X threats — misbehaviour, infrastructure compromise, replay attacks. This section asks a harder question: how is the trust model designed to prevent those threats, and where does that model break down at scale?</p>
+                <h4>The PKI Foundation</h4>
+                <p>V2X communication depends on a Public Key Infrastructure (PKI) to establish trust between vehicles and infrastructure. Each vehicle is provisioned with cryptographic certificates that authenticate its messages to other road users. In Europe this operates under the ETSI C-ITS certificate framework; in the US under the Security Credential Management System (SCMS).</p>
+                <p>The architecture uses pseudonym certificates — short-lived certificates that vehicles rotate frequently to prevent long-term tracking. A vehicle may cycle through dozens of pseudonym certificates per day, each one unlinkable to the others from the outside. This protects driver privacy while still allowing message authentication.</p>
+                <h4>Where the Model Breaks Down</h4>
+                <p><strong>Misbehaviour detection</strong> is the mechanism designed to identify and revoke certificates from vehicles or infrastructure nodes that send false messages. If a vehicle reports phantom hazards consistently, the misbehaviour detection system should flag it and revoke its certificate. In practice this is difficult: a sophisticated attacker sends false messages infrequently enough to avoid detection thresholds, or coordinates across multiple compromised nodes to make false reports appear corroborated.</p>
+                <p><strong>The privacy-accountability tension </strong>is structural. Pseudonym certificates protect privacy precisely by making it hard to link messages to a specific vehicle. The same property that prevents tracking also makes it harder to attribute misbehaviour. Every improvement to misbehaviour detection requires more information about message history — information that, if collected, undermines the privacy model the certificates were designed to protect.</p>
+                <p>
+                    <strong>Scale and infrastructure trust </strong> — the PKI model assumes that certificate authorities are trustworthy and that the provisioning process is secure. At the scale of hundreds of millions of vehicles across multiple continents, the certificate infrastructure becomes a high-value target. A compromised intermediate CA could issue valid certificates to attackers. The consequences would be difficult to contain quickly — certificate revocation in a V2X context requires vehicles to receive and process revocation lists, which depends on connectivity that cannot be guaranteed in all conditions.
+                </p>
+                <p>The honest assessment is that V2X security is significantly better than no authentication at all, but the trust model has structural limits that cryptography alone cannot resolve. The threat is not breaking the math — it is abusing the ecosystem the math sits inside.</p>
+                <!-- DOK 4 section 5 content -->
+                <h3>The OSI Model as a Design Evaluation Tool</h3>
+                <p><strong>The gap analysis question is: </strong> for each layer, what defence exists, and what happens if it is bypassed? The uncomfortable answer for current production vehicles is that several layers have no meaningful defence:</p>
+                <p><strong>The legacy constraint </strong>is the deepest problem. defence in depth as a principle assumes you can add layers independently. In automotive architectures, you cannot: adding SecOC to one ECU without updating its communication partners breaks the system. Improving gateway filtering may break legitimate diagnostic tools. Patching a baseband firmware may introduce regressions in cellular reliability. Every security improvement must be validated against a vehicle system that was not designed with that improvement in mind.</p>
+                <ul class="content-list">
+                    <li><strong>Layer 1–2 (Physical/Data Link): </strong>CAN bus has no authentication. SecOC addresses this but is not universally deployed. Gap: partially open.</li>
+                    <li><strong>Layer 3–4 (Network/Transport): </strong>TLS protects OTA delivery and backend communication. V2X uses signed messages. Gap: depends on implementation quality and certificate hygiene.</li>
+                    <li><strong>Layer 7 (Application): </strong>IVI browser engines and app platforms are large attack surfaces with no automotive-specific hardening. Gap: significant.</li>
+                </ul>
+                <p>This is not an argument against defence in depth — it is an argument for being honest about which layers are actually defended in any given vehicle generation and designing threat models accordingly rather than assuming all layers hold.</p>
+            </div>
+            <!-- DOK 4 QA cards/Questions section -->
+            <p style="font-weight: bold; max-width: 1280px;">You have reached the end of this module. <span class="marker">Thanks for making it this far!</span> What follows are not really questions in the conventional sense — they do not have model answers, rubrics, or correct conclusions. They are the questions that remain after everything else has been answered. Take your time with them. <span class="marker">Flip the card to see what matters. </span></p>
+            <div class="cards-grid">
+                <!-- QA 1 -->
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <p class="card-num">Q-01</p>
+                            <p class="card-q">
+                                A manufacturer is deciding between deploying SecOC on new ECUs only or upgrading all ECUs in the vehicle to support it. Map out the security implications of partial deployment. Does a vehicle with 80% SecOC coverage offer meaningfully better security than one with 0%? What does the answer depend on?
+                            </p>
+                            <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                        </div>
+                        <div class="flip-back">
+                            <p class="card-back-label">Answer</p>
+                            <p class="card-a">
+                                80% coverage is only meaningful if you know which 20% is unprotected. If you do not, you have traded a known weakness for an unknown one.
+                            </p>
+                            <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA 2 -->
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <p class="card-num">Q-02</p>
+                            <p class="card-q">
+                                The V2X trust model uses pseudonym certificates to balance privacy and accountability. Evaluate this trade-off: at what point does the privacy protection become a liability for misbehaviour detection, and is there a design that resolves the tension rather than just managing it?
+                            </p>
+                            <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                        </div>
+                        <div class="flip-back">
+                            <p class="card-back-label">Answer</p>
+                            <p class="card-a">
+                                The tension does not resolve — it relocates. Notice where your proposed design moved it.
+                            </p>
+                            <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA 3 -->
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <p class="card-num">Q-03</p>
+                            <p class="card-q">
+                                Apply the OSI defence-in-depth framework to the following scenario: an attacker has successfully exploited a vulnerability in the IVI browser engine on a vehicle with a modern gateway architecture. Map which layers of defence still stand between the attacker and the powertrain CAN bus. For each layer, state whether it holds, fails, or is uncertain — and justify your assessment based on the architectural constraints described in this module.
+                            </p>
+                            <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                        </div>
+                        <div class="flip-back">
+                            <p class="card-back-label">Answer</p>
+                            <p class="card-a">
+                                A layer that holds in theory and a layer that holds under attack are not the same thing. Count only the ones you can justify.
+                            </p>
+                            <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA 4 -->
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <p class="card-num">Q-04</p>
+                            <p class="card-q">
+                                You are advising an OEM on the security architecture for a new L4 vehicle platform. Given everything covered across Module 1 — attack surfaces, lateral movement, OTA mechanisms, SecOC, V2X trust — identify the three highest-priority security investments and justify your prioritisation. What residual risks remain regardless of your choices?
+                            </p>
+                            <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                        </div>
+                        <div class="flip-back">
+                            <p class="card-back-label">Answer</p>
+                            <p class="card-a">
+                                The residual risks are the answer. The three priorities are just how you decided to spend the budget.
+                            </p>
+                            <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- QA 4 end -->
+            <!-- DOK 4 QA cards/Questions section end -->
             <!-- DOK 4 content end -->
             <!-- Module content end -->
             <!-- Previous/next module buttons -->
             <div style="display: flex; justify-content: flex-end; margin-top: 40px;">
                 <a class="NextModuleBtn" href="../ModuleContentPages/module-2.html">Next<span class="arrow">→</span></a>
             </div>
+
+
+
         </div>
     </section>
     <!-- Previous/next module buttons end-->
