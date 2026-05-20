@@ -30,30 +30,47 @@
     updateThemeIcon();
   }
 
-  function buildFooter() {
-    const root = document.getElementById('site-footer');
-    if (!root) return;
-    root.outerHTML = `<footer class="footer">
+    function buildFooter() {
+        const root = document.getElementById('site-footer');
+        if (!root) return;
+
+        root.outerHTML = `
+<footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
+      <!-- optional future content -->
     </div>
+
     <div class="footer-bottom">
-      <span>// © 2026 Cybersecurity in the Automotive Industry</span>
+
+      <div class="footer-left">
+<span>
+  // <i class="fa-regular fa-copyright"></i>
+  2026 Cybersecurity in the Automotive Industry
+</span>       <div class="footer-authors">
+  // <i class="fa-solid fa-pen-nib"></i>
+   Authors: Alper Gumussu &amp; Gerben Brouwer
+</div>
+      </div>
+
       <div class="footer-partners">
         <a href="https://www.windesheim.nl/" target="_blank" rel="noopener" aria-label="Windesheim">
           <img class="partner-logo" src="../../assets/img/windesheim-white.png" alt="Windesheim" />
         </a>
+
         <a href="https://www.rdw.nl/" target="_blank" rel="noopener" aria-label="RDW">
           <img class="partner-logo" src="../../assets/img/rdw-white.png" alt="RDW" />
         </a>
+
         <a href="https://mitc-flevoland.nl/" target="_blank" rel="noopener" aria-label="MITC Flevoland">
           <img class="partner-logo" src="../../assets/img/mitc-white.png" alt="MITC Flevoland" />
         </a>
       </div>
+
     </div>
   </div>
 </footer>`;
-  }
+    }
 
   function buildNav() {
     const root = document.getElementById('site-nav');

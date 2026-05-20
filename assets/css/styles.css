@@ -647,87 +647,93 @@ section {
     background: var(--rule);
   }
 
-  @media (max-width: 900px) {
-    .footer-bottom span {
-      display: none;
+@media (max-width: 900px) {
+    .footer-authors {
+        display: none;
+    }
+}
+    @media (max-width: 900px) {
+        .footer-bottom span {
+            display: none;
+        }
+
+        .footer-bottom {
+            justify-content: center;
+        }
     }
 
-    .footer-bottom {
-      justify-content: center;
+
+    .partner-logo {
+        height: 30px;
+        width: auto;
+        filter: invert(1);
+        opacity: 0.6;
     }
-  }
 
-.partner-logo {
-    height: 30px;
-    width: auto;
-    filter: invert(1);
-    opacity: 0.6;
-}
+    img[alt="Windesheim"] {
+        height: 60px;
+        width: auto;
+    }
 
-  img[alt="Windesheim"] {
-    height: 60px;
-    width: auto;
-  }
+    img[alt="RDW"] {
+        height: 60px;
+        width: auto;
+    }
 
-  img[alt="RDW"] {
-    height: 60px;
-    width: auto;
-  }
+    img[alt="MITC Flevoland"] {
+        height: 26px;
+        width: auto;
+    }
 
-  img[alt="MITC Flevoland"] {
-    height: 26px;
-    width: auto;
-  }
+    [data-theme="dark"] .partner-logo {
+        filter: invert(0);
+    }
 
-  [data-theme="dark"] .partner-logo {
-    filter: invert(0);
-  }
+    .footer-partners a:hover .partner-logo {
+        opacity: 1;
+    }
 
-  .footer-partners a:hover .partner-logo {
-    opacity: 1;
-  }
+    /* ---- Decorative ---- */
+    .big-num {
+        font-family: 'Instrument Serif', serif;
+        font-style: italic;
+        font-size: clamp(80px, 12vw, 180px);
+        line-height: 0.9;
+        color: var(--accent);
+        letter-spacing: -0.03em;
+    }
 
-  /* ---- Decorative ---- */
-  .big-num {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-size: clamp(80px, 12vw, 180px);
-    line-height: 0.9;
-    color: var(--accent);
-    letter-spacing: -0.03em;
-  }
+    .kbd {
+        display: inline-block;
+        border: 1px solid var(--rule);
+        border-bottom-width: 2px;
+        border-radius: 6px;
+        padding: 2px 8px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        background: var(--bg-elev);
+    }
 
-  .kbd {
-    display: inline-block;
-    border: 1px solid var(--rule);
-    border-bottom-width: 2px;
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    background: var(--bg-elev);
-  }
+    .marker {
+        background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--highlight) 70%, transparent) 60%);
+        padding: 0 2px;
+    }
 
-.marker {
-    background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--highlight) 70%, transparent) 60%);
-    padding: 0 2px;
-}
+    [data-theme="dark"] .marker {
+        background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, #2EE893 40%, transparent) 60%);
+    }
 
-[data-theme="dark"] .marker {
-    background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, #2EE893 40%, transparent) 60%);
-}
+    .article-body blockquote {
+        border-left: 3px solid #1D9E75;
+        margin: 1.5rem 0;
+        padding: 0.75rem 1.25rem;
+        background: var(--color-background-secondary);
+        border-radius: 0 8px 8px 0;
+    }
 
-.article-body blockquote {
-    border-left: 3px solid #1D9E75;
-    margin: 1.5rem 0;
-    padding: 0.75rem 1.25rem;
-    background: var(--color-background-secondary);
-    border-radius: 0 8px 8px 0;
-}
-
-[data-theme="dark"] .article-body blockquote {
-    border-left: 3px solid #2EE893;
-}
+    [data-theme="dark"] .article-body blockquote {
+        border-left: 3px solid #2EE893;
+    }
 
 
     .article-body blockquote p {
@@ -736,16 +742,16 @@ section {
         color: var(--color-text-secondary);
     }
 
-.article-body p {
-    margin-bottom: 0.5rem;
-}
+    .article-body p {
+        margin-bottom: 0.5rem;
+    }
 
-.article-body h2 {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
+    .article-body h2 {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
 
-.article-body h3 {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
+    .article-body h3 {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
