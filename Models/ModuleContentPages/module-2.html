@@ -40,19 +40,119 @@
     <section class="module-body">
         <div class="wrap-narrow article-body">
             <p style="max-width: 820px;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                <!-- DOK 1 content -->
+                <h2>DOK Level 1 — Recall and Recognition</h2>
+                <!-- DOK 1 Section 1 content -->
+                <h3>Why Regulation Arrived</h3>
+                In Module 1 you saw the Jeep Cherokee attack as a technical case study — five architectural failures stacked on top of each other. From a regulatory perspective, that same attack is something else: the moment when a set of long-standing gaps in automotive governance became undeniable. The gaps themselves had been visible for years before the Jeep, in academic work that the industry and regulators alike had largely absorbed without acting on.
+                <!-- DOK 1 Section 2 content -->
+                <h3>The pre-Jeep evidence</h3>
+            <p>The earliest demonstration came in 2010, when a team led by Karl Koscher at the University of Washington and Stefan Savage at UC San Diego published a paper showing that an attacker with access to a vehicle's internal network could compromise virtually every electronic component — disabling brakes, stopping the engine, manipulating the speedometer. The following year, the same group extended the work to show that the access did not require physical presence. Bluetooth, cellular, and even a malicious audio CD provided viable remote entry points. The research was peer-reviewed, publicly available, and unambiguous in its conclusion: production vehicles had exploitable cybersecurity weaknesses with safety-critical consequences.</p>
+            <p>The industry response was muted. No coordinated regulatory action followed. No mandatory standards emerged. Individual manufacturers made internal changes; the broader system did not.</p>
+            <p>What made 2015 different was not the technical novelty — Miller and Valasek's Jeep work built on the same foundations as the academic research — but the visibility. The attack was demonstrated against a vehicle being driven on a public highway, documented by a journalist, and published in a way that ordinary consumers could understand. The gap between what researchers had been warning about for five years and what regulators had been doing about it became publicly indefensible.</p>
+            <p>This time, the silence broke. But not, initially, from regulators.</p>
+
+            <!-- DOK 1 Section 3 content -->
+            <h3>The industry's attempt at self-regulation</h3>
+            <p>The first organised response came from the industry itself. Manufacturers had read the same research that regulators had, and the Jeep attack made the reputational and commercial risks of inaction concrete. Between 2015 and the late 2010s, several voluntary frameworks emerged:</p>
+            <ul class="content-list">
+                <li><strong>Auto-ISAC (Automotive Information Sharing and Analysis Center),</strong> founded in 2015, established a mechanism for manufacturers to share threat intelligence and best practices.</li>
+                <li><strong>SAE J3061</strong> ,published in 2016, provided a process framework for cybersecurity engineering — a precursor to ISO/SAE 21434.</li>
+                <li><strong>Internal cybersecurity teams at major OEMs</strong> expanded substantially. This is not a framework but is an initiative from the automotive industry.</li>
+            </ul> <p></p>
+            <p>These efforts were genuine and useful. They were also voluntary, uneven across the industry, and unable to make the underlying obligations binding. A manufacturer that chose to implement SAE J3061 rigorously was not competitively advantaged over one that did not, because consumers could not see the difference and regulators could not require it.</p>
+            <p>The conclusion that emerged at UNECE was that self-regulation had value as a complement but not as a substitute. To understand why regulators reached that conclusion, it helps to look at what self-regulation could not, by its nature, fix.</p>
+            <!-- DOK 1 Section 4 content -->
+            <h3>The gaps in automotive governance</h3>
+            <p>The post-2015 response was not a reaction to a single incident, nor a dismissal of the industry's voluntary work. It was a response to several broad gaps that the Jeep attack, the academic research, and the limits of self-regulation had together made visible. Three are worth naming.</p>
+            <p>The engineering gap. Cybersecurity was not a recognised discipline within automotive engineering. Security was treated as something added after functional design rather than built in from the start — there was no concept of security-by-design in the industry's mainstream practice. Vehicles were validated against functional safety standards that assumed failures were random and accidental, not deliberate and adversarial.</p>
+            <p>The accountability gap. No one was clearly responsible. Manufacturers treated cybersecurity as an internal matter. Type approval authorities had no mandate to assess it. Researchers who discovered vulnerabilities had no protected channel to report them, and manufacturers had no legal obligation to fix what was reported.</p>
+            <p>The lifecycle gap. Existing rules governed the vehicle at the moment of approval and at the moment of recall. Everything in between — the years of operation during which new vulnerabilities would emerge — was unregulated territory.</p>
+            <p>There were also gaps in scale. A cybersecurity vulnerability in a widely used component could affect millions of vehicles across multiple brands and markets simultaneously. National regulation alone could not address this — a vehicle approved in Germany but driven in France, containing a component from Korea and software from the United States, falls under jurisdictions that cannot effectively regulate each other.</p>
+            <!-- DOK 1 Section 5 content -->
+
+            <h3>Type Approval vs. Self-Certification</h3>
+            <p>One concept underlies everything else in this module: the difference between type approval and self-certification regimes. The bodies you will encounter in the next section, and the instruments you will encounter after that, only make sense once this distinction is in place.</p>
+            <ul class="content-list">
+                <li><strong>Type approval (EU/UNECE model): </strong>A vehicle type must be approved by an independent authority before it can be sold. The manufacturer submits documentation, the authority audits the manufacturer's processes and tests the vehicle, and only after approval can production begin. Cybersecurity is now part of this process under R155.</li>
+                <li><strong>Self-certification (US model): </strong> The manufacturer certifies that the vehicle meets applicable standards and is responsible for ensuring compliance. There is no pre-market approval by a government authority. Enforcement happens after the fact, typically through investigation following incidents or complaints.</li>
+            </ul> <p></p><p></p>
+            <p>This distinction shapes everything downstream. In a type approval regime, regulators inspect processes before vehicles reach the market. In a self-certification regime, regulators react to problems that emerge after vehicles are already on the road.</p>
+            <!-- DOK 1 Section 6 content -->
+
+            <h3>Who the Regulators Are</h3>
+            <p>Automotive cybersecurity regulation involves several layers of authority, each operating within — or in contrast to — the type approval system. These are the most common and widely recognized regulators:</p>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Body</th>
+                        <th>Scope</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>UNECE WP.29</td>
+                        <td>International (54+ contracting parties)</td>
+                        <td>Issues UN Regulations</td>
+                    </tr>
+                    <tr>
+                        <td>EU Commission</td>
+                        <td>EU-wide</td>
+                        <td>Makes UN Regulations binding EU law; adds EU-specific instruments</td>
+                    </tr>
+                    <tr>
+                        <td>National type approval authorities (RDW, KBA, UTAC)</td>
+                        <td>National</td>
+                        <td>Conduct the approval process for vehicles in their jurisdiction</td>
+                    </tr>
+                    <tr>
+                        <td>NHTSA (US)</td>
+                        <td>United States</td>
+                        <td>Sets safety standards under a self-certification model</td>
+                    </tr>
+                    <tr>
+                        <td>MIIT (China)</td>
+                        <td>China</td>
+                        <td>Sets national (GB) standards; enforces data localisation</td>
+                    </tr>
+                    <tr>
+                        <td>UK DfT / VCA</td>
+                        <td>United Kingdom</td>
+                        <td>Post-Brexit, broadly aligned with UNECE but diverging in some areas</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>The structural distinction worth remembering: UNECE issues regulations, but does not enforce them. Enforcement happens at the national level through type approval authorities. The EU sits in between — it makes UN Regulations binding across all member states and adds its own layer of legislation on top.</p>
+            <!-- DOK 1 Section 6 content -->
+
+            <h3>Key Regulatory Instruments</h3>
+            <p>These are the instruments that govern automotive cybersecurity in the EU and the wider UNECE region. The goal at this level is recognition: you should be able to encounter each name in a conversation, document, or news article and identify what it is and broadly what it does. The deeper mechanics of how the most important instruments work are covered at DOK 2.</p>
+            <p>They stack in three layers: the international UNECE layer, the EU automotive-specific layer that implements it, and the broader EU horizontal layer that touches automotive alongside other sectors.</p>
+            <ul class="content-list">
+                <li><strong>UN Regulation No. 155 (UN R155)</strong> — Requires vehicle manufacturers to establish a Cybersecurity Management System (CSMS) and obtain cybersecurity type approval for every vehicle type.</li>
+                <li><strong>UN Regulation No. 156 (UN R156)</strong> — Requires manufacturers to establish a Software Update Management System (SUMS) and governs how software updates (including OTA) are managed across the vehicle lifecycle.</li>
+                <li><strong>ISO/SAE 21434</strong> — An international standard (not a regulation) that defines processes for managing cybersecurity risk across the vehicle lifecycle. It is the technical reference used to demonstrate compliance with R155.</li>
+            </ul>
+            <p>
+                The EU automotive-specific layer
             </p>
-            <p style="max-width: 820px;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore
-                magna aliqua.
-            </p>
-            <!-- Module content end-->
-            <!-- QA cards/Questions section -->
-            <div class="module-body">
-                <p style="font-weight: bold; max-width: 820px;"> Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the card to see what matters. </span></p>
+            <ul class="content-list">
+                <li><strong>EU General Safety Regulation (GSR)</strong> — The EU instrument that makes UN R155 and R156 mandatory for new vehicle type approvals from July 2022, and for all new vehicles sold from July 2024.</li>
+            </ul>
+            <p>The EU horizontal layer</p>
+            <ul class="content-list">
+                <li><strong>EU Cyber Resilience Act (CRA)</strong> — Horizontal EU legislation covering cybersecurity of products with digital elements. Applies to vehicles indirectly through components and aftermarket products.</li>
+                <li><strong>EU Data Act</strong> — Governs access to data generated by connected products, including vehicles. Reshapes the relationship between OEMs, drivers, and third-party service providers.</li>
+                <li><strong>GDPR</strong> — General data protection law; applies to personal data processed by connected vehicles (location, driving behaviour, in-cabin data).</li>
+            </ul>
+            <!-- DOK 1 Section 7 content -->
+            <h3>Closing thoughts</h3>
+            <p>Regulation exists because someone decided a problem was serious enough to require it. Before moving on, check that you understand what problem each framework was designed to solve — and who decided it was a problem in the first place.</p>
+
+            <!-- DOK 1 QA cards/Questions section -->
+            <div>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 2 DOK level 1. Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the card to see what matters. </span></p>
                 <div class="cards-grid">
                     <!-- QA 1 -->
                     <div class="flip-card">
@@ -60,18 +160,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-01</p>
                                 <p class="card-q">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    What does UN R155 require of vehicle manufacturers?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    1UN R155 requires vehicle manufacturers to establish a Cybersecurity Management System (CSMS) — a documented, auditable process for identifying, mitigating, monitoring, and responding to cybersecurity risks across the vehicle lifecycle and supply chain — and to obtain cybersecurity type approval for every vehicle type they bring to market.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -83,18 +179,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-02</p>
                                 <p class="card-q">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    What is the role of a national type approval authority such as RDW or KBA?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    A national type approval authority (such as RDW in the Netherlands or KBA in Germany) conducts the approval process for vehicles sold in its jurisdiction. It audits the manufacturer's processes, oversees the testing of the vehicle against applicable rules (working through accredited Technical Services), and issues the approval that allows the vehicle to be placed on the market. It is the operational enforcer of UN Regulations within its country.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -106,18 +198,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-03</p>
                                 <p class="card-q">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    What were the main gaps in automotive governance that the post-2015 regulatory response was designed to address?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    The main gaps were: an engineering gap (cybersecurity was not a recognised discipline within automotive engineering, with no security-by-design and no required processes for threat modelling or risk assessment); an accountability gap (no actor was clearly responsible — manufacturers treated cybersecurity as internal, type approval authorities had no mandate, researchers had no protected reporting channel); a lifecycle gap (regulation governed the vehicle only at approval and recall, leaving the years in between unregulated); and a scale gap (vulnerabilities could affect millions of vehicles across multiple jurisdictions, which national regulation could not address).
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -129,18 +217,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-04</p>
                                 <p class="card-q">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    What is the core difference between type approval and self-certification?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    In a type approval regime (EU/UNECE), an independent authority must approve a vehicle type before it can be sold; pre-market inspection of process and product is the mechanism. In a self-certification regime (US), the manufacturer itself certifies compliance, and enforcement happens after the fact through investigation of defects, incidents, or complaints. The core difference is pre-market authority approval vs. post-market manufacturer accountability. 
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -149,7 +233,500 @@
                     <!-- QA 4 end -->
                 </div>
             </div>
-            <!-- QA cards/Questions section end -->
+            <!-- DOK 1 QA cards/Questions section end -->
+            <!-- DOK 1 content end -->
+            <!-- DOK 2 content -->
+            <h2>DOK Level 2 — Skills and Concepts</h2>
+            <p>At DOK 1 you learned the names of the instruments, the bodies that issue them, and the structural distinction between type approval and self-certification. This level asks you to understand how regulation actually operates — how a regulatory requirement translates into something a manufacturer must do, how the regulation interacts with the underlying engineering, and how different jurisdictions approach the same problem differently.</p>
+            <!-- DOK 2 Section 1 content -->
+            <h3>How UN R155 Actually Works: The CSMS</h3>
+            <p>UN R155 does not prescribe specific technical controls. It does not require any particular gateway design, encryption algorithm, or intrusion detection approach. It does something more structural: it requires the manufacturer to have a Cybersecurity Management System (CSMS) — a documented, auditable process for managing cybersecurity across the entire vehicle lifecycle.</p>
+            <p>This is a deliberate regulatory choice. Prescribing specific controls would have aged badly — the attack surface in 2020, when R155 was adopted, was already different from the attack surface in 2015 when the regulatory work began, and the regulators correctly assumed it would keep changing. Requiring a process that can adapt is more durable than requiring controls that cannot.</p>
+            <p>The CSMS must cover the following core functions:</p>
+            <ul class="content-list">
+                <li><strong>Organisational governance</strong> — processes within the manufacturer's organisation to manage cybersecurity</li>
+                <li><strong>Risk identification</strong> — systematic identification of cybersecurity risks across vehicle types, components, and the supply chain, considering a defined catalogue of known automotive threats</li>
+                <li><strong>Risk assessment, treatment, and currency</strong> — methodologies for evaluating, categorising, and treating risks, plus processes to keep the risk assessment current as the threat landscape changes</li>
+                <li><strong>Verification and testing</strong> — verification that identified risks are appropriately managed, plus cybersecurity testing of the vehicle type itself</li>
+                <li><strong>Monitoring, response, and forensics</strong> — continual monitoring for new threats and vulnerabilities (including for vehicles already in the field), a process for responding to discovered issues, and the data capability to support forensic analysis of attempted or successful attacks</li>
+                <li><strong>Supplier management</strong> — extending cybersecurity requirements down to contracted suppliers, service providers, and sub-organisations</li>
+            </ul><p></p>
+            <p>Two type approvals result from this. First, approval of the CSMS itself — the manufacturer's process is audited and certified, valid for a maximum of three years. Without a valid CSMS approval, the manufacturer cannot obtain any vehicle type approval. Second, per-vehicle-type cybersecurity approval — each new vehicle type must demonstrate that the certified CSMS was applied to it, producing evidence of the TARA conducted, the risks identified, the mitigations implemented, and the verification performed.</p>
+
+            <!-- DOK 2 Section 2 content -->
+            <h3>TARA: the engine of the CSMS</h3>
+            <p>The CSMS specifies that manufacturers must identify and assess risks. The methodology by which they do this is TARA — Threat Analysis and Risk Assessment. Although R155 does not strictly require any specific methodology, TARA as defined in ISO/SAE 21434 is the dominant approach in practice.</p>
+            <p>TARA is the formal, documented version of the dependency-chain reasoning you applied at DOK 3 of Module 1 — where you traced how a compromised infotainment system could propagate to safety-critical functions through specific architectural pathways. TARA structures that reasoning into auditable steps.</p>
+            <p>A TARA workflow generally proceeds as follows:</p>
+
+            <ul class="content-list">
+                <li><strong>Item definition</strong> — identify the system being analysed, its boundaries, interfaces, and operating context</li>
+                <li><strong>Asset identification</strong> — identify what within that system has value and could be a target: data assets, functional assets, safety-critical capabilities</li>
+                <li><strong>Threat scenario identification</strong> — identify ways those assets could be compromised, typically using the STRIDE framework (Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege)</li>
+                <li><strong>Impact rating</strong> — assess the consequences of each scenario across four categories: safety, financial, operational, and privacy</li>
+                <li><strong>Attack feasibility rating</strong> — assess how realistic each attack is, considering elapsed time, expertise, knowledge of the system, window of opportunity, and equipment required</li>
+                <li><strong>Risk determination</strong> — combine impact and feasibility to produce a risk value (e.g. negligible / low / medium / high / critical)</li>
+                <li><strong>Risk treatment decision</strong> — decide for each risk whether to mitigate, share, retain, or avoid — and document the rationale</li>
+            </ul>
+
+            <p>The output of a TARA is a structured record of risks, decisions, and justifications that becomes the evidence base for type approval. It is also the document that an auditor will read when assessing whether the CSMS was correctly applied.</p>
+
+            <!-- DOK 2 Section 3 content -->
+            <h3>How UN R156 actually works: the SUMS</h3>
+            <p>UN R156 is R155's counterpart for software updates. Where R155 governs how cybersecurity is managed across the vehicle's life, R156 governs how changes to that vehicle's software are managed across the same lifecycle. It requires a Software Update Management System (SUMS) that governs how updates are designed, validated, distributed, and tracked.</p>
+            <p>The SUMS exists because OTA fundamentally changed what a vehicle is from a regulatory standpoint. Before OTA, a vehicle's software was effectively frozen at the point of approval. After OTA, a vehicle's software can change repeatedly over its life — and regulators needed a framework for governing those changes.</p>
+            <p>R156 requires the manufacturer to:</p>
+            <ul class="content-list">
+                <li>Maintain accurate records of the software configuration of every vehicle, at every point in time</li>
+                <li>Document the impact assessment for every update — does it affect any aspect of the vehicle's type approval?</li>
+                <li>Notify the type approval authority of updates that affect approved characteristics, and obtain re-approval where necessary</li>
+                <li>Ensure technical capability to deliver updates safely</li>
+                <li>Inform vehicle owners about updates and their consequences</li>
+            </ul>
+            <p>Mapping this onto the OTA pipeline you saw in Module 1: every stage of that pipeline now has regulatory requirements attached.</p>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>OTA pipeline stage</th>
+                        <th>R156 / SUMS requirement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Code signing</td>
+                        <td>Documented signing process, key management procedures, audit trail</td>
+                    </tr>
+                    <tr>
+                        <td>Update server / delivery</td>
+                        <td>Records of which updates were delivered to which vehicles, when, and with what outcome</td>
+                    </tr>
+                    <tr>
+                        <td>Vehicle gateway verification</td>
+                        <td>Documented integrity verification mechanisms, evidence they were applied</td>
+                    </tr>
+                    <tr>
+                        <td>A/B partition switch</td>
+                        <td>Documented rollback procedures, evidence of safe failure handling</td>
+                    </tr>
+                    <tr>
+                        <td>Post-update vehicle state</td>
+                        <td>Updated software configuration record (RxSWIN); type approval impact assessment</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>The requirement that surprises people most: a software update that changes a vehicle's approved behaviour may require re-approval before it can be deployed. A bug fix typically does not. A change to how the adaptive cruise control behaves in specific edge cases might. The line is not always clear, and the practical implications — for both OEMs and regulators — are one of the genuinely difficult problems we return to at DOK 3.</p>
+
+            <!-- DOK 2 Section 5 content -->
+            <h3>ISO/SAE 21434: the standard behind the regulation</h3>
+            <p>UN R155 says what manufacturers must do. ISO/SAE 21434 says how to do it. The standard provides the detailed methodology — work products, processes, organisational requirements — that manufacturers use to demonstrate R155 compliance.</p>
+            <p>The relationship is conventional in regulated industries: the regulation sets the obligation, the standard provides the means. A manufacturer is not legally required to use ISO/SAE 21434 specifically. In principle, an alternative methodology could be used as long as it meets the regulatory requirements. In practice, ISO/SAE 21434 is the dominant route — it was developed by the same community that informed R155, it is recognised by type approval authorities, and using anything else means convincing an auditor that an alternative approach is equivalent.</p>
+            <p>The standard is structured around the vehicle lifecycle:</p>
+            <ul class="content-list">
+                <li><strong>Concept phase</strong> — early TARA, cybersecurity goals derivation</li>
+                <li><strong>Product development</strong> — design, implementation, verification, validation</li>
+                <li><strong>Cybersecurity validation</strong> — confirming the cybersecurity goals have been met</li>
+                <li><strong>Production</strong> — secure handling during manufacturing</li>
+                <li><strong>Operations and maintenance</strong> — vulnerability management, incident response, updates</li>
+                <li><strong>End of cybersecurity support and decommissioning</strong> — managing the wind-down of support</li>
+            </ul>
+            <p>This lifecycle structure is the operational mirror of the CSMS's five core functions. Where the CSMS specifies the management functions, 21434 specifies the lifecycle phases through which those functions operate.</p>
+            <p>One useful way to hold the relationship in mind: R155 is the law, 21434 is the engineering manual, the CSMS is the manufacturer's institutional implementation, and TARA is the daily working method.</p>
+
+            <!-- DOK 2 Section 6 content -->
+            <h3>Comparing Regulatory Regimes</h3>
+            <p>The same underlying technical risks are governed differently in different jurisdictions. Three approaches are worth understanding. From DOK 3 onward this module will focus on the EU, but recognising the alternatives clarifies what is distinctive about the EU approach and what trade-offs each model makes.</p>
+
+            <!-- DOK 2 Section 7 content -->
+            <h3>EU and UNECE: Process-based, pre-market, harmonised</h3>
+            <p>The EU/UNECE approach regulates the process by which cybersecurity is managed. The regulator does not prescribe specific controls; it requires the manufacturer to have a system that identifies, mitigates, and monitors cybersecurity risks, and audits whether that system is genuinely in place.</p>
+            <p>It is pre-market: no CSMS approval means no type approval means no sales. Compliance is assessed before vehicles reach consumers, by independent authorities working through accredited technical services.</p>
+            <p>It is harmonised across more than 50 countries through WP.29, which means a single CSMS approval has broad geographic effect. A manufacturer that has cleared R155 in one UNECE contracting party has substantially reduced the burden of clearing it in others. This is the EU/UNECE model's most distinctive feature — and one of the most consequential strategic advantages it confers on manufacturers operating across multiple markets.</p>
+            <p>What this approach catches well: structural weaknesses in how an organisation handles cybersecurity. What it can miss: specific technical failures that a process-based audit would not surface unless they happened to be examined in detail.</p>
+
+            <!-- DOK 2 Section 8 content -->
+            <h3>United States: Performance-based, post-market, sector-specific</h3>
+            <p>The US has no equivalent of R155. NHTSA has issued Cybersecurity Best Practices for the Safety of Modern Vehicles (updated periodically) but these are non-binding guidance, not regulation. Manufacturers are not required to obtain pre-market approval for cybersecurity, conduct any specific assessment, or maintain any defined management system.</p>
+            <p>Enforcement is performance-based and reactive. NHTSA's authority sits in the Motor Vehicle Safety Act, which empowers it to investigate safety defects and compel recalls. A cybersecurity vulnerability that creates an unreasonable risk to safety can trigger a defect investigation under this authority — and has, in past cases. The consequences can be substantial, but they apply after the fact.</p>
+            <p>The US has separate, more prescriptive cybersecurity regulation in some adjacent areas (the Cybersecurity and Infrastructure Security Agency's role, sector-specific rules for connected commercial vehicles via the FMCSA, FCC rules on radio-based vehicle communications), but the core vehicle cybersecurity regime is voluntary at the federal level.</p>
+            <p>What this approach catches well: actual harms that have materialised, with strong enforcement consequences. What it can miss: structural weaknesses that have not yet manifested as visible defects.</p>
+
+            <!-- DOK 2 Section 9 content -->
+            <h3>China: Data sovereignty centred, hybrid enforcement</h3>
+            <p>China's automotive cybersecurity regulation centres on data — specifically, ensuring that data generated by vehicles operating in China stays in China and is accessible to Chinese authorities.</p>
+            <p>The relevant instruments include the Personal Information Protection Law (PIPL), the Data Security Law (DSL), and automotive-specific provisions from MIIT and the Cyberspace Administration of China. The 2021 Several Provisions on Automobile Data Security Management explicitly designate certain categories of vehicle data as important data subject to localisation and security review.</p>
+            <p>A foreign OEM selling in China must therefore do more than meet technical cybersecurity requirements. It must localise vehicle data, undergo security reviews for data exports, and accept that aspects of the data environment are outside its control. The Chinese approach is hybrid: it has technical cybersecurity standards (the GB series), but the binding element of its regime is data sovereignty rather than technical specification.</p>
+            <p>What this approach catches well: data-related risks and foreign-actor access concerns. What it focuses less on: the technical engineering process risks that R155 targets.</p>
+            <p>The honest summary: EU regulation focuses on process, US regulation focuses on outcomes, Chinese regulation focuses on data control. Each reflects a different theory of how to govern an industry that is changing faster than regulators can — and each makes trade-offs the others reject.</p>
+
+            <!-- DOK 2 Section 10 content -->
+            <h3>The Stakeholder Map Under Regulation</h3>
+            <p>Module 1 introduced the stakeholder landscape — OEMs, Tier 1s, Tier 2s, researchers, drivers. Under regulation, that map does not get replaced; it gets layered. New regulatory actors enter, and existing actors take on formal obligations they did not previously have.</p>
+            <p>New actors entering the picture:</p>
+            <ul class="content-list">
+                <li><strong>Type approval authorities (RDW, KBA, UTAC)</strong> become formal gatekeepers. The OEM cannot sell vehicles in their jurisdiction without their sign-off.</li>
+                <li><strong>Technical Services</strong> are independent labs accredited by type approval authorities to perform testing and audit on their behalf. They are the operational hands of the type approval system — most of the actual cybersecurity audit work passes through them, not through the authority directly.</li>
+                <li><strong>National cybersecurity agencies (ENISA, BSI, ANSSI)</strong> become advisory actors — issuing guidance, contributing to standard-setting, and in some cases coordinating incident response.</li>
+            </ul>
+            <p>Existing actors gaining new obligations:</p>
+            <ul class="content-list">
+                <li><strong>OEMs</strong> are now accountable not only for vehicles they produce but for evidence that their processes were applied — including evidence about their supply chain.</li>
+                <li><strong>Tier 1 and Tier 2 suppliers</strong> are formally accountable to the OEM for cybersecurity evidence, not just functional performance. The contractual relationships now carry regulatory weight. These obligations extend further down the supply chain to Tier 3.</li>
+                <li><strong>Drivers</strong> gain new rights under GDPR (over personal data) and the Data Act (over vehicle-generated data more broadly) — though these rights are still being operationalised.</li>
+            </ul>
+            <p>The structural change is that information flows upward and downward differently than it did before. Audit evidence flows upward from suppliers to OEM to type approval authority. Vulnerability information flows downward from OEM to fleet, with regulatory deadlines attached. Both directions were informal in the pre-R155 world; both are formalised now.</p>
+
+            <!-- DOK 2 QA cards/Questions section -->
+            <div>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 2 DOK level 2. Before moving on, take a moment to check what you have taken in. Knowing what a regulation requires is one thing. Understanding why it requires it — and what happens when it does not — is another. These questions ask you to work at that second level. <span class="marker">Flip the card to see what matters. </span></p>
+                <div class="cards-grid">
+                    <!-- QA 1 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-01</p>
+                                <p class="card-q">
+                                    A manufacturer holds a valid CSMS approval but is launching a new vehicle type. What additional regulatory step is required before that vehicle can be sold in the EU?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    The manufacturer must obtain a per-vehicle-type cybersecurity type approval. The CSMS approval certifies that the manufacturer has the right processes in place at the organisational level. Each new vehicle type additionally requires evidence that the CSMS was correctly applied to that specific vehicle — TARA conducted, risks identified, mitigations implemented and verified. Both approvals are required; neither substitutes for the other.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 2 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-02</p>
+                                <p class="card-q">
+                                    UN R156 requires manufacturers to track which updates went to which vehicles. Why is this requirement structurally important rather than just administrative?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    The tracking requirement is structurally important because it is what makes the SUMS auditable across the vehicle lifecycle. Without per-vehicle records of which software is installed at any given time (RxSWIN), the type approval authority cannot verify that the approved software is what is actually deployed, cannot determine which vehicles are affected by a discovered vulnerability, and cannot assess whether a given update should have triggered re-approval. The administrative burden produces the regulatory traction.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 3 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-03</p>
+                                <p class="card-q">
+                                    ISO/SAE 21434 is a standard, not a regulation. Why does this distinction matter, and how does the standard relate to UN R155 in practice?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    The distinction matters because a regulation creates a legal obligation, whereas a standard is a technical reference that the regulation can be satisfied through but does not require by name. In practice, ISO/SAE 21434 is the dominant route to R155 compliance because it was developed by the community that informed R155, is recognised by type approval authorities, and presents the path of least resistance for audit. A manufacturer could in principle use a different methodology, but would need to demonstrate equivalence — adding burden rather than reducing it.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 4 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-04</p>
+                                <p class="card-q">
+                                    A Tier 2 supplier provides a software library used in an ECU produced by a Tier 1, which is integrated by the OEM. Under the EU regulatory regime, who is accountable for the cybersecurity of that library, and how is that accountability enforced?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    The OEM is accountable to the type approval authority. The OEM, through its CSMS, is contractually accountable to require cybersecurity evidence from its Tier 1 supplier; the Tier 1 in turn requires it from the Tier 2. Enforcement runs through the audit chain: the type approval authority audits the OEM's CSMS, which includes the OEM's supplier management process; the OEM audits the Tier 1; the Tier 1 audits the Tier 2. Regulatory accountability stops at the OEM (the type approval authority does not directly audit Tier 2s), but contractual accountability extends down the chain. This is the structural answer; whether it works adequately in practice is a DOK 3 question. 
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 4 end -->
+                </div>
+            </div>
+            <!-- DOK 2 QA cards/Questions section end -->
+            <!-- DOK 2 content end -->
+            <!-- DOK 3 content -->
+            <h2>DOK Level 3 — Strategic Thinking</h2>
+            <p>At DOK 2 you mapped how the regulatory machinery works. This level asks you to reason about its limits — the places where the framework reaches its edge, where rules collide, and where practitioners, regulators, and OEMs are actively negotiating answers that do not yet exist.</p>
+            <p>From this point forward, the focus is the EU. Strategic reasoning works better with depth in one jurisdiction than breadth across three.</p>
+            <!-- DOK 3 Section 1 content -->
+            <h3>The OTA Re-Approval Problem</h3>
+            <p>The deepest tension in the current framework sits inside UN R156. The regulation requires that software updates affecting a vehicle's approved characteristics be assessed for impact on type approval, and where necessary, re-approved. This sounds manageable until you confront what it means in practice.</p>
+
+            <!-- DOK 3 Section 2 content -->
+            <h3>What the framework assumed</h3>
+            <p>Type approval was designed for a world where the vehicle that left the factory was substantially the vehicle that operated for its lifetime. Updates happened — recalls, service campaigns — but they were discrete, periodic, and small in number relative to the vehicle's operating life. The regulatory machinery was sized accordingly: type approval is a heavyweight process involving documentation, audit, testing, and authority sign-off, and the assumption was that it would be invoked rarely after initial approval.</p>
+            <p>OTA breaks that assumption at every level. A modern vehicle may receive dozens of software updates per year. Some are bug fixes. Some are minor improvements. Some unlock features. Some materially change how the vehicle behaves. The regulatory framework was not built for a continuous-deployment vehicle.</p>
+            <!-- DOK 3 Section 3 content -->
+            <h3>What R156 actually says, and what it leaves open</h3>
+            <p>R156 does not require re-approval for every update. The manufacturer is required to assess every update for type approval impact, and re-approval is triggered only when an update affects approved characteristics. The assessment itself is part of the SUMS, and the OEM bears the responsibility for getting it right.</p>
+            <p>But "approved characteristics" is the load-bearing phrase, and it is not exhaustively defined. A clear bug fix does not change approved characteristics. A change to the maximum power output does. Most updates fall somewhere in between — and the "somewhere in between" is where the negotiation happens.</p>
+            <p>Consider an update that modifies how the adaptive cruise control behaves at low speeds in dense traffic. Is that an approved characteristic? Arguably yes — the ACC was approved on the basis of certain behavioural specifications, and the update changes them. Arguably no — the behaviour is still within the broad envelope of what was approved, and treating every behavioural refinement as triggering re-approval would make the regulation unworkable. Reasonable people disagree, and they disagree in the room with type approval authorities.</p>
+            <!-- DOK 3 Section 4 content -->
+            <h3>The Tesla FSD case</h3>
+            <p>The case practitioners most often reach for is Tesla's Full Self-Driving beta — a software capability pushed iteratively to a fleet of vehicles, each iteration changing driving behaviour in ways that have material implications for safety. EU regulators have not been comfortable with this model. The European Commission has expressed concerns, and Tesla's deployment of FSD in the EU has been more restricted than in the US precisely because the EU framework does not accommodate it cleanly.</p>
+            <p>What the case illustrates is structural rather than corporate. The EU framework was built for a world in which continuous, behaviour-changing OTA at this scale was not anticipated. When that model arrived, the framework had no settled response — and it still does not. Different parts of the regulatory system are responding differently: some by restricting deployment, some by negotiating case by case, some by drafting new rules. The Tesla case is interesting not as a judgment on one company but as a stress test of a framework that did not foresee what it would have to govern</p>
+            <!-- DOK 3 Section 5 content -->
+            <h3>Where the genuine ambiguity lies</h3>
+            <p>Three lines of reasoning are in tension:</p>
+            <ul class="content-list">
+                <li><strong>The type approval principle</strong> — a vehicle's behaviour was approved on the basis of evidence. If the behaviour changes materially, the basis no longer holds, and re-approval is the regulatory mechanism for restoring it. Allowing OTA to bypass this would hollow out type approval as an institution.</li>
+                <li><strong>The safety improvement argument</strong> — many OTA updates make vehicles safer. A framework that delays or discourages safety improvements because of regulatory friction is itself a safety problem. The framework should facilitate, not impede, behavioural improvements.</li>
+                <li><strong>The continuous deployment reality</strong> — if every behaviourally relevant update required re-approval, no OEM operating at the pace of modern software could comply. The framework, applied literally, would either be ignored in practice or would force OEMs to slow software development to a degree that is incompatible with the rest of the market.</li>
+            </ul>
+            <p>There is no clean way to honour all three because they pull in different directions on the same decisions. Where you place the line determines which principle you favour. This is what makes the OTA re-approval problem the cleanest example of a regulatory question the framework does not resolve.</p>
+
+            <!-- DOK 3 Section 6 content -->
+            <h3>The Supply Chain Attestation Problem</h3>
+            <p>The second deep tension sits inside R155's requirement that the OEM be accountable for cybersecurity across the supply chain — including parts of the supply chain the OEM cannot directly inspect.</p>
+
+            <!-- DOK 3 Section 7 content -->
+            <h3>The structural problem</h3>
+            <p>A modern vehicle contains components produced by Tier 1 suppliers that integrate sub-components from Tier 2 suppliers, which in turn rely on libraries, chips, and firmware from Tier 3 and beyond. The OEM has direct contractual visibility into its Tier 1s. Its visibility into Tier 2s runs through the Tier 1s. Its visibility into Tier 3s — semiconductor designers, open-source library maintainers, third-party software providers — is often functionally zero.</p>
+            <p>R155 nevertheless requires the OEM to provide evidence that cybersecurity has been managed across this chain. The CSMS must include supplier management. The TARA must consider supply chain risks. Vulnerability management must extend to components the OEM did not write.</p>
+
+            <!-- DOK 3 Section 8 content -->
+            <h3>Where attestation breaks down</h3>
+            <p>The contractual mechanism is straightforward in principle. The OEM requires cybersecurity evidence from its Tier 1s. The Tier 1s flow this requirement down to their Tier 2s. The Tier 2s do the same to their Tier 3s. Each layer attests to the cybersecurity of what it produces and what it sources.</p>
+            <p>In practice, the chain has well-known weak points:</p>
+            <ul class="content-list">
+                <li><strong>Tier 2s with no automotive incentive</strong> — a semiconductor vendor shipping millions of chips into consumer electronics, industrial control, and automotive may be unwilling to provide automotive-grade cybersecurity documentation for the small fraction of its output that ends up in vehicles. The Tier 1 cannot easily switch suppliers. The OEM cannot easily verify what was provided.</li>
+                <li><strong>Open source components</strong> — a vehicle may include hundreds of open source libraries, none of which has an owner who can be contractually compelled to attest to anything. Software Bill of Materials (SBOM) requirements partly address this by making the components visible, but visibility is not attestation.</li>
+                <li><strong>Legacy components</strong> — components designed before R155 existed may have no documentation that meets current expectations. The choice is between redesigning (expensive, slow) and producing post-hoc evidence (limited value).</li>
+                <li><strong>Attestation as paper exercise</strong> — at sufficient supply chain depth, attestation degrades into compliance theatre. A Tier 3 fills in a form. A Tier 2 gathers the forms. A Tier 1 compiles them. The OEM checks that they exist. Whether they correspond to anything meaningful in the actual security of the components is a separate question that nobody in the chain is positioned to answer.</li>
+            </ul>
+            <!-- DOK 3 Section 9 content -->
+            <h3>What the framework expects and what the audit produces</h3>
+            <p>The type approval authority does not directly audit Tier 2s, Tier 3s, or beyond. It audits the OEM's CSMS, which includes the OEM's supplier management process. The authority is therefore evaluating whether the OEM has a reasonable process — not whether that process actually delivers cybersecurity at the deep supply chain level.</p>
+            <p>This produces a particular kind of compliance gap. The OEM can be in full compliance with R155 (its CSMS is approved, its supplier management process is documented and applied) while the actual cybersecurity at Tier 3 remains unknown. The regulation reaches the OEM but does not reach into the supply chain.</p>
+            <p>The reasoning questions that follow are real, and they are negotiated in every R155 audit: How much depth must the OEM verify? What does "reasonable" mean in supplier management? Where does liability actually land when a Tier 3 component contains a vulnerability that propagates upward through the chain? These are areas where the practical answers are still developing, shaped by enforcement decisions that are being made as the regulation matures.</p>
+
+            <!-- DOK 3 Section 10 content -->
+            <h3>Cross-Border Data and the Connected Vehicle</h3>
+            <p>The third tension is the easiest to describe and the hardest to resolve.</p>
+            <h5>The scenario</h5>
+            <p>A vehicle registered in Germany drives across the French border, then the Belgian border, then back through the Netherlands. Throughout the journey, the vehicle is generating telemetry — location, driving behaviour, in-cabin sensor data — and transmitting it to the OEM's backend. The driver's phone is paired and contributes data. A third-party fleet management service has access to some data streams under a contract the driver signed. An insurance provider receives a separate stream under a different contract.</p>
+            <p>At any given moment, the data being generated by this vehicle is subject to multiple regulatory regimes:</p>
+            <ul class="content-list">
+                <li><strong>GDPR</strong> governs personal data processed in the EU — and almost all of the data is personal data, even if anonymised</li>
+                <li><strong>The EU Data Act</strong> governs the driver's rights of access to vehicle-generated data and the OEM's obligations to provide it to third parties the driver authorises</li>
+                <li><strong>National sectoral rules</strong> may apply if the data flows to insurance, fleet management, law enforcement, or road infrastructure operators</li>
+                <li><strong>Third-country rules</strong> apply when the data crosses into jurisdictions outside the EU — and many OEM backends are hosted in jurisdictions that include the US, Switzerland, the UK, or others</li>
+            </ul>
+            <!-- DOK 3 Section 11 content -->
+            <h3>Where the regulatory layers conflict</h3>
+            <p>The conflicts are not abstract. They are operational and ongoing:</p>
+            <ul class="content-list">
+                <li>GDPR requires data minimisation. The Data Act anticipates broad data access by third parties. These pull in opposite directions.</li>
+                <li>The Data Act gives the driver a right to direct data to third parties. GDPR may require that those third parties have their own lawful basis for processing. The driver's authorisation may not be enough.</li>
+                <li>National sectoral rules in one EU country may require data retention for purposes that another EU country's rules prohibit. The vehicle does not stop being subject to one regime when it crosses a border.</li>
+                <li>The OEM's commercial interest in the data — for product improvement, for new services, for monetisation — sits alongside, and sometimes against, the driver's interest in controlling it.</li>
+            </ul>
+            <p>No single regulatory framework currently resolves these flows. OEMs manage them through layered compliance — applying the strictest applicable rule at each point in the data lifecycle, designing systems that segregate data streams by lawful purpose, and accepting some residual legal uncertainty.</p>
+
+            <!-- DOK 3 Section 12 content -->
+            <h3>The structural point</h3>
+            <p>The honest assessment is that regulation is trying to govern something that is structurally cross-border in a regulatory environment that is structurally national. The vehicle is a moving generator of data; the data is generated continuously; the rules that apply to it change with location, but the data flow does not. The framework currently in place was designed for a less mobile data environment than the connected vehicle now produces, and bridging that gap is part of what current regulatory development is trying to do.</p>
+            <p>Cybersecurity sits inside this larger problem. A connected vehicle is a cybersecurity surface that extends across jurisdictions in real time. The mechanisms for vulnerability disclosure, for incident response, for cross-border investigation when something goes wrong — all of them have to operate inside a regulatory environment that has not yet decided who is in charge.</p>
+
+            <!-- DOK 3 Section 13 content -->
+            <h3>Regulation as a Moving Target</h3>
+            <p>The deeper strategic question is whether regulation can keep pace with the technology it governs.</p>
+            <p>UN R155 took roughly five years from initial proposal to entry into force. In that time, the underlying technology — AI-driven ADAS, V2X deployment, the shift to centralised E/E architectures — changed substantially. Regulators are aware of this gap and have begun building more flexible frameworks: the EU's approach to AI in vehicles, for instance, layers the AI Act on top of existing automotive regulation rather than creating fully bespoke rules.</p>
+            <p>But the structural problem remains: regulation is necessarily backward-looking. It codifies what the regulator can articulate and audit, which means it can only address risks that have been observed, understood, and translated into requirements. The risks that have not yet emerged remain ungoverned by definition.</p>
+            <p>This is not a criticism of regulators — it is a property of how regulation works. The strategic question is what other mechanisms (industry self-regulation, voluntary disclosure, insurance markets, liability law) should complement it.</p>
+
+            <!-- DOK 3 QA cards/Questions section -->
+            <div>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 2 DOK level 3. Regulatory frameworks are written for the world as it was when they were drafted. These questions ask you to test them against the world as it is now. There are no correct answers — only better and worse reasoned ones. <span class="marker"> Flip the card to see what matters. </span></p>
+                <div class="cards-grid">
+                    <!-- QA 1 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-01</p>
+                                <p class="card-q">
+                                    An OEM pushes an OTA update that significantly improves the vehicle's adaptive cruise control behaviour in edge cases. The change makes the vehicle measurably safer. Under R156, should this update require type approval re-assessment? Argue both sides and propose where you would draw the line.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    The line you draw reveals which of the three principles you think should yield. Name it — and then find the counterexample that breaks it.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 2 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-02</p>
+                                <p class="card-q">
+                                    The supply chain attestation problem includes "compliance theatre" — attestations produced and collected without corresponding to any meaningful security guarantee. Identify the structural conditions that make this likely, and propose what would have to change for attestation to produce real security information rather than paper.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    If your proposal requires more documentation, you have reproduced the problem rather than solved it.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 3 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-03</p>
+                                <p class="card-q">
+                                    The EU Data Act gives third parties access to vehicle-generated data with driver consent. From a cybersecurity perspective, what new risks does this create, and how should the regulatory framework evolve to address them?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    If your answer is about privacy, read the question again.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 4 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-04</p>
+                                <p class="card-q">
+                                    The Tesla FSD case was described as a stress test of a framework that did not foresee what it would have to govern. What does it mean for a regulatory framework to be stress-tested by a single product, and what does that reveal about how the framework was designed?
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    Being stress-tested is not a sign of failure. Notice what you assumed it was a sign of.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 4 end -->
+                </div>
+            </div>
+            <!-- DOK 3 QA cards/Questions section end -->
+            <!-- DOK 4 content -->
+            <h2>DOK Level 4 — Extended Thinking</h2>
+            <p>The rules change here.</p>
+            <p>At DOK 1 you absorbed the regulatory landscape. At DOK 2 you understood how the machinery operates. At DOK 3 you reasoned about the limits of the existing framework — where rules conflict, where the framework falls short, where practitioners are negotiating answers within the current structure.</p>
+            <p>At DOK 4 you stop reasoning about the existing framework and start designing what should replace, supplement, or extend it. The questions here are not chosen because they are difficult versions of DOK 3 questions; they are chosen because the framework was not designed to address them at all. There is no body of regulatory practice you can defer to. You are working at the intersection of incomplete information, real constraints, and competing legitimate interests — which is to say, you are working where regulators, industry working groups, and policy researchers actually work.</p>
+            <p>What follows is not a section of content followed by questions. It is the territory laid out clearly enough that you know what you are reasoning about, followed by work the masterclass asks you to do.[</p>
+            <!-- DOK 4 Section 1 content -->
+            <h3>Open Problem: AI-Driven ADAS and the Limits of Process-Based Regulation</h3>
+            <p>The R155/21434 framework is built around assumptions that work well for conventional software. Cybersecurity risks can be enumerated through structured analysis. Mitigations can be specified, implemented, and documented. Verification can be conducted through testing against defined criteria. The behaviour of the system is, in principle, knowable in advance — and the framework's job is to make sure that knowledge has been produced and acted on.</p>
+            <p>AI-driven advanced driver-assistance systems do not fit this model cleanly. The behaviour of a deep neural network is not specified in the same sense as conventional code. It emerges from training data, network architecture, and learned weights. The developer can characterise its behaviour statistically across a test set; the developer cannot guarantee its behaviour on inputs that are similar to but not identical to anything in training.</p>
+            <p>This creates regulatory problems at every step:</p>
+            <ul class="content-list">
+                <li><strong>Risk identification</strong> assumes the analyst can enumerate the system's possible failure modes. For a neural network, the failure modes are not enumerable in advance — they include the system producing wrong outputs on inputs that look unremarkable to a human reviewer.</li>
+                <li><strong>Mitigation</strong> assumes that once a risk is identified, controls can be specified to address it. For adversarial robustness, there is no general mitigation — only partial defences that adversaries can adapt around.</li>
+                <li><strong>Verification</strong> assumes that testing can characterise the system's behaviour. For neural networks, no finite test set can characterise behaviour on the infinite space of possible inputs.</li>
+            </ul>
+            <p>The framework's response is still developing. The EU AI Act provides one model: risk-based classification with stricter obligations for high-risk systems, including specific requirements for AI used in safety components of vehicles. ISO 21448 (SOTIF — Safety of the Intended Functionality) provides another, focused on the safety of systems whose behaviour cannot be fully specified in advance. Both are partial answers.</p>
+            <p>The deeper question is whether process-based regulation is the right paradigm at all for systems with this property — or whether something fundamentally different is needed: perhaps continuous monitoring as a substitute for pre-deployment verification, or operational design domains so narrowly defined that the AI's behaviour can be characterised within them, or hybrid architectures where AI components are bounded by conventional safety logic. None of this is settled (yet).</p>
+            <!-- DOK 4 Section 2 content -->
+            <h3>Open Problem: The L3+ Liability Shift</h3>
+            <p>At SAE Level 3 and above, the vehicle — not the human driver — is responsible for monitoring the environment and managing safety-critical decisions for at least some portion of the operating envelope. Module 1 explored what this means technically. The regulatory question is what it means for liability.</p>
+            <p>In the current framework, liability for a road incident is primarily attached to the driver, with manufacturer liability arising under specific defect or product liability conditions. At L3+, this allocation breaks down. The driver may not have been in control. The vehicle may have made decisions on the basis of software, sensors, and AI components from multiple sources. The incident may have a cause that no human in the chain directly produced.</p>
+            <p>The EU has begun addressing this through the revised Product Liability Directive (which expands strict product liability to cover software and AI) and through discussions of an AI Liability Directive. These are partial responses. The deeper architectural question remains open: what model should govern liability when the human driver is, by design, not the decision-maker?</p>
+            <p>Several legitimate models are in tension:</p>
+            <ul class="content-list">
+                <li><strong>OEM strict liability</strong> — the manufacturer bears liability for all incidents caused by the automated system. Concentrates safety investment incentive in the party best positioned to act on it, but may slow deployment and create existential exposure for individual incidents.</li>
+                <li><strong>Distributed liability</strong> — responsibility apportioned across the supply chain based on each component's contribution. Reflects technical reality but creates legal complexity, slow attribution, and potential gaps where no party can be clearly assigned.</li>
+                <li><strong>Driver retention with assistance qualifications</strong> — liability remains with the driver, but the standard of care is calibrated to what the automated system was supposed to handle. Hard to justify when the driver was not, and could not have been, in control.</li>
+                <li><strong>No-fault first-party insurance</strong> — compensation through the driver's own insurance regardless of attribution, with the industry pursuing recovery from manufacturers separately. Delivers prompt compensation but departs significantly from current liability principles.</li>
+                <li><strong>Public infrastructure model</strong> — treating automated transportation as a regulated public utility, with liability at system level rather than individual incident level. Closer to rail and aviation than current road transport.</li>
+            </ul>
+            <p>There is no consensus answer, and the choice between them is not technical. It is a choice about how a society allocates risk, what it expects from manufacturers, and what it wants the insurance and civil liability systems to do. The regulatory framework that emerges will reflect that choice — but the choice has not yet been made. </p>
+            <!-- DOK 4 Section 3 content -->
+            <h3>The Synthesis Prompt</h3>
+            <p>The synthesis prompt is a DOK 4 exercise. The two questions that come after it are shorter and more bounded; they ask for specific design work on individual problems rather than full-scope synthesis. Both matter, but this is where the heaviest reasoning happens.</p>
+            <p>The question is:</p>
+            <p><strong>Identify one gap in the current EU automotive cybersecurity regulatory framework that you believe is most consequential for the next five years. Propose how it should be addressed.</strong></p>
+            <p><strong>Your proposal should:</strong></p>
+            <ul class="content-list">
+                <li>Identify the specific risk or problem the gap creates — what is currently going wrong, or what will go wrong if the gap is not closed</li>
+                <li>Reference the relevant existing regulatory instruments — where does the gap sit in relation to R155, R156, ISO/SAE 21434, the CRA, the Data Act, the AI Act, or other instruments covered in this module</li>
+                <li>Specify what should change — new regulation, amended regulation, or complementary mechanisms such as industry standards, liability rules, insurance mechanisms, or voluntary disclosure regimes. Name the mechanism. "Better regulation" is not a proposal.</li>
+                <li>Acknowledge what stakeholder interests are in tension and how your proposal navigates them — every proposal helps some stakeholders and burdens others. A proposal that claims to be costless is either incomplete or untrue.</li>
+                <li>Identify the residual risks that remain even after your proposal is implemented — naming what your proposal does not solve is a sign of analytical maturity, not weakness</li>
+            </ul>
+            <p>The format is recognizable from policy submissions, industry working groups, and regulatory consultations. But the work should be original. There is no correct answer — only better and worse reasoning, and the test of your reasoning is whether someone with a different starting position could engage with it productively.</p>              
+            <!-- DOK 4 QA cards/Questions section -->
+            <div>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 2, and therefore have reached the edge of what regulation can tell you. What follows are the questions that sit underneath the frameworks — the ones that were never put to a vote, never written into a standard, and never asked of the people most affected. Sit with them. <span class="marker">Flip the card to see what matters. </span></p>
+                <div class="cards-grid">
+                    <!-- QA 1 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-01</p>
+                                <p class="card-q">
+                                    The R155 framework requires identification and mitigation of cybersecurity risks. For an AI-driven ADAS system whose behaviour is emergent rather than specified, what would adequate risk identification actually look like? Propose a methodology and identify where it would fall short of what the regulation appears to require.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                   Assess your reasoning, not your conclusions.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- QA 2 -->
+                    <div class="flip-card">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <p class="card-num">Q-02</p>
+                                <p class="card-q">
+                                    The supply chain attestation problem (DOK 3) is fundamentally about the limits of what OEMs can verify. Propose a regulatory mechanism — beyond requiring more documentation — that would meaningfully improve cybersecurity outcomes in the deep supply chain. Identify which stakeholders would resist your proposal and why.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
+                            </div>
+                            <div class="flip-back">
+                                <p class="card-back-label">Answer</p>
+                                <p class="card-a">
+                                    Assess your reasoning, not your conclusions.
+                                </p>
+                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
+                            </div>
+                        </div>
+                    </div>         
+                    <!-- QA 2 end -->
+                </div>
+            </div>
+            <!-- DOK 4 QA cards/Questions section end -->
             <!-- Previous/next module buttons end -->
             <div style="display: flex; justify-content: space-between; margin-top: 40px;">
                 <a class="PreviousModuleBtn" href="../ModuleContentPages/module-1.html">
