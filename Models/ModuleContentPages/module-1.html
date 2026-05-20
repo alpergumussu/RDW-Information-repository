@@ -249,7 +249,7 @@
             <p>A modern vehicle contains between 70 and 150 ECUs. For the vehicle to function, these units must exchange data continuously — the engine management ECU needs to know what the brakes are doing; the body control module needs to know what the infotainment system is requesting. This communication happens over internal networks called buses.</p>
 
             <p>Different buses were designed for different requirements: some prioritise speed, some prioritise reliability, some prioritise cost. Understanding which network is used where — and why — is the foundation for understanding where the internal attack surface sits.</p>
-            <h4>CAN (Controller Area Network)</h4>
+            <h3>CAN (Controller Area Network)</h3>
 
             <p>CAN is the oldest and most widespread in-vehicle network protocol, introduced in the 1980s by Bosch. It operates at speeds up to 1 Mbit/s and was designed for reliability in electrically noisy environments. CAN is a broadcast network — when one ECU sends a message, every other ECU on the same bus receives it. There is no native addressing and no built-in authentication. Any node on the bus can send any message, and other nodes will accept it.</p>
 
@@ -257,19 +257,19 @@
 
             <p>CAN is still used extensively in powertrain and body control domains where the data rates are modest and the hardware is mature.</p>
 
-            <h4>CAN-FD (CAN with Flexible Data-Rate)</h4>
+            <h3>CAN-FD (CAN with Flexible Data-Rate)</h3>
             <p>CAN-FD is an evolution of CAN introduced by Bosch in 2012. It increases the maximum data rate to 8 Mbit/s and expands the payload size per frame. It retains the same broadcast architecture and lacks native authentication, meaning it inherits the same fundamental security limitations as CAN while handling more data faster. CAN-FD is increasingly used in powertrain and ADAS domains where the volume of sensor data exceeds what standard CAN can handle.</p>
 
-            <h4>LIN (Local Interconnect Network)</h4>
+            <h3>LIN (Local Interconnect Network)</h3>
             <p>LIN is a low-cost, low-speed network (up to 20 kbit/s) used for simple, non-critical functions: seat adjustment motors, mirror controls, window regulators, interior lighting. It operates on a single master/multiple slave architecture, meaning one ECU controls the timing of all communication on the bus. LIN is not typically a primary attack target due to its limited access to critical systems, but it is worth understanding as part of the overall network topology.</p>
 
-            <h4>FlexRay</h4>
+            <h3>FlexRay</h3>
             <p>FlexRay was developed in the early 2000s as a high-speed, deterministic alternative to CAN for safety-critical applications. It operates at up to 10 Mbit/s and guarantees time-triggered communication — meaning messages are sent at precisely defined intervals, which is essential for systems like active suspension, steer-by-wire, and brake-by-wire where timing is safety-critical. FlexRay is more expensive to implement than CAN and has largely been superseded in new designs by Automotive Ethernet, but it remains present in vehicles from the 2010s and early 2020s.</p>
 
-            <h4>Automotive Ethernet</h4>
+            <h3>Automotive Ethernet</h3>
             <p>Automotive Ethernet is the newest in-vehicle network standard and is rapidly becoming dominant for high-bandwidth applications. It operates at 100 Mbit/s to 10 Gbit/s and is used wherever large volumes of data need to move quickly: camera feeds for ADAS, LiDAR data, OTA update delivery to the central gateway, and backbone connections between vehicle domains. Unlike traditional Ethernet, Automotive Ethernet uses a single unshielded twisted pair cable to reduce weight and cost. It supports standard IP networking protocols, which means it brings both the flexibility and the attack surface of IP-based networking into the vehicle.</p>
 
-            <h4>Comparing the Protocols</h4>
+            <h3>Comparing the Protocols</h3>
             <table class="content-table">
                 <thead>
                     <tr>
@@ -324,16 +324,16 @@
             <h3>External Interfaces: Where the Vehicle Meets the Outside World</h3>
             <p>If in-vehicle networks are the internal nervous system, external interfaces are the points where that nervous system connects to the outside world. Each external interface is a boundary — a place where data crosses from an untrusted external environment into the vehicle's internal systems.</p>
 
-            <h4>TCU — Telematics Control Unit</h4>
+            <h3>TCU — Telematics Control Unit</h3>
             <p>The TCU is the vehicle's primary cellular communication module. It manages the connection to the mobile network and is responsible for transmitting telematics data to the OEM backend, receiving OTA updates, enabling remote services (remote lock, remote start), and supporting emergency call (eCall) functionality. The TCU is one of the highest-risk external interfaces because it is permanently connected, operates continuously in the background, and has a direct pathway into the vehicle's internal networks. It is also one of the most difficult for the driver to monitor or control.</p>
 
-            <h4>IVI — In-Vehicle Infotainment System</h4>
+            <h3>IVI — In-Vehicle Infotainment System</h3>
             <p>The IVI system is the primary human-machine interface for the driver and passengers — the touchscreen, audio system, navigation, and app platform. Modern IVI systems run full operating systems (often Android Automotive or Linux-based platforms) and support third-party applications, smartphone integration via Bluetooth and USB, and internet connectivity via the TCU. The IVI is a high-value attack target because it sits at the intersection of user-facing interaction, connectivity, and internal vehicle networks. A compromised IVI system can potentially be used as a pivot point to reach other vehicle domains — as demonstrated in the 2015 Jeep Cherokee attack, where the infotainment system was the initial entry point.</p>
 
-            <h4>OBD-II Port</h4>
+            <h3>OBD-II Port</h3>
             <p>The OBD-II port is a standardised physical connector, typically located under the dashboard, that provides direct access to the vehicle's diagnostic data and internal networks. It was designed for use by mechanics and workshops to read fault codes and perform diagnostics. Any device plugged into the OBD-II port can send and receive CAN messages — including commands to safety-critical ECUs. Aftermarket dongles, insurance telematics devices, and fleet management hardware all connect via OBD-II, and each represents a persistent access point to the vehicle's internals.</p>
 
-            <h4>Charging Interfaces (EVs)</h4>
+            <h3>Charging Interfaces (EVs)</h3>
             <p>Electric vehicles introduce an additional external interface: the charging port. Modern EV charging does not just transfer electricity — it involves a communication protocol (typically ISO 15118) between the vehicle and the charging station. This protocol handles authentication, billing, and in some implementations Vehicle-to-Grid (V2G) communication where the vehicle can push power back to the grid. The charging interface is an emerging attack surface. A compromised charging station could interact with the vehicle's communication stack, and V2G implementations extend the vehicle's network exposure further.</p>
             <!-- DOK 2 Section 3 content -->
             <h3>Gateways and Domain Segmentation</h3>
@@ -529,17 +529,17 @@
             <!-- DOK 3 Section 2 content -->
             <h3>Attack Surface Mapping in Depth</h3>
             <p>With consequence in mind, we can map the attack surface more precisely. This is not a list of technologies — it is an exercise in identifying where an attacker can introduce malicious input, and what the pathway from that input to a safety or security impact looks like.</p>
-            <h4>Cellular Baseband and TCU Firmware</h4>
+            <h3>Cellular Baseband and TCU Firmware</h3>
             <p>The cellular modem in the TCU contains a baseband processor — a separate, dedicated chip that handles the radio communication stack. Baseband processors run their own firmware, independently of the vehicle's main software, and are often not updated as frequently as application-layer software.</p>
             <p>Cellular baseband vulnerabilities are historically difficult to patch and have been exploited in smartphones for years. In a vehicle context, a baseband exploit could give an attacker persistent access to the TCU without touching the application layer — potentially surviving an OTA update that only patches higher-level software.</p>
             <p>The TCU firmware itself is a target for supply chain attacks: if the firmware signing process is weak, a malicious firmware image could be pushed to vehicles at scale.</p>
-            <h4>Bluetooth and Wi-Fi Stacks</h4>
+            <h3>Bluetooth and Wi-Fi Stacks</h3>
             <p>Bluetooth and Wi-Fi connectivity in the IVI system is handled by protocol stacks — software libraries implementing the respective standards. These stacks have a long history of vulnerabilities: BlueBorne (2017), BIAS (2020), and BrakTooth (2021) are examples of Bluetooth stack vulnerabilities that allowed remote code execution or denial-of-service with no user interaction required.</p>
             <p>The attack surface here is noteworthy because it requires no physical access and no user action. An attacker within wireless range with knowledge of a stack vulnerability can potentially execute code in the IVI system without the driver doing anything at all.</p>
-            <h4>IVI Browser Engines</h4>
+            <h3>IVI Browser Engines</h3>
             <p>Modern infotainment systems include web browsers — either as standalone applications or embedded within the navigation or app platform. Browser engines (WebKit, Chromium-based) are among the most attack-prone software components that exist, given the enormous complexity of parsing and rendering untrusted web content.</p>
             <p>A compromised IVI browser is a meaningful foothold because the IVI system is connected — to the internet via the TCU, to Bluetooth devices, and through the gateway to internal vehicle networks.</p>
-            <h4>Key Fob RF Protocols</h4>
+            <h3>Key Fob RF Protocols</h3>
             <p>The Remote Keyless Entry (RKE) system uses radio frequency communication between the key fob and the vehicle's Body Control Module (BCM) to authenticate locking and unlocking commands. Most modern systems use rolling codes — a synchronised counter between the fob and the vehicle that prevents simple replay attacks.</p>
             <p>Not all vehicle systems carry the same risk if compromised. Understanding which systems are mission-critical — and how they depend on other systems — is essential for prioritising where security matters most. Mission-critical vehicle systems are those where a failure or compromise directly affects the physical safety of the vehicle and its occupants:</p>
             <ul class="content-list">
@@ -548,7 +548,7 @@
                 <li><strong>Relay attacks</strong> — amplifying the key fob signal to trick the vehicle into thinking the fob is present when it is not</li>
             </ul>
             <p>These attacks do not require sophisticated equipment and have been demonstrated against production vehicles. The BCM that processes RKE commands sits on the internal CAN bus — meaning unauthorised entry via a relay attack is a physical precursor to potential network access via the OBD-II port.</p>
-            <h4>V2X (Vehicle to Everything) </h4>
+            <h3>V2X (Vehicle to Everything) </h3>
             <p>V2X communication introduces an attack surface that is qualitatively different from other interfaces: the vehicle receives messages from sources in its environment and may act on them — often automatically at higher SAE levels. The threats are not primarily about breaking the underlying cryptography. They are about abusing a system that is designed to be trusted:</p>
             <ul class="content-list">
                 <li><strong>Misbehaviour</strong> — a vehicle or roadside unit with legitimate credentials broadcasting false information: phantom hazards, spoofed speed limits, fabricated emergency conditions</li>
@@ -556,7 +556,7 @@
                 <li><strong>Replay and timing attacks</strong> — replaying legitimate messages out of context to trigger unintended vehicle responses</li>
             </ul>
             <p>The deeper problem is scale: a single compromised infrastructure node does not affect one vehicle — it affects every vehicle in its broadcast range. The trust model assumes infrastructure integrity; when that assumption fails, it fails broadly.</p>
-            <h4>Charging Protocols: ISO 15118 and V2G</h4>
+            <h3>Charging Protocols: ISO 15118 and V2G</h3>
             <p>ISO 15118 is the communication standard for EV charging. It defines a protocol stack for authentication, billing, and charge management between the vehicle and the charging station. In V2G (Vehicle-to-Grid a sub-domain of V2X) implementations, the vehicle can push power back to the grid, extending the communication relationship further.</p>
             <p>ISO 15118 includes a mutual authentication mechanism, which is a meaningful security improvement over earlier charging protocols. However, the security of this mechanism depends entirely on the integrity of the certificate infrastructure — and the charging station is an untrusted external device.  </p>
             <p>A compromised charging station that passes ISO 15118 authentication could interact with the vehicle's communication stack in ways that a legitimate charging station would not.</p>
@@ -674,16 +674,16 @@
                 <!-- DOK 4 section 1 content -->
                 <h3>OTA Update Mechanisms: Security in the Update Pipeline</h3>
                 <p>OTA updates are both a security asset and a security liability. They are an asset because they allow rapid patching of discovered vulnerabilities. They are a liability because the update pipeline itself is an attack surface — and a successful attack on it could push malicious code to millions of vehicles simultaneously.</p>
-                <h4>Code Signing</h4>
+                <h3>Code Signing</h3>
                 <p>Every software update should be cryptographically signed by the OEM before distribution. The vehicle verifies the signature before installing any update — an unsigned or invalidly signed package is rejected. Code signing prevents an attacker from distributing arbitrary software to vehicles, even if they gain access to the update delivery infrastructure.</p>
                 <p>The security of code signing depends entirely on the protection of the signing key. If the private signing key is compromised, an attacker can sign malicious firmware that the vehicle will accept as legitimate. Signing keys should be protected in Hardware Security Modules and never exposed in software.</p>
-                <h4>Secure Boot</h4>
+                <h3>Secure Boot</h3>
                 <p>Secure boot verifies the integrity of software at every stage of the boot process — from the bootloader through the operating system to the application layer. Each stage is verified against a cryptographic signature before execution. If any stage fails verification, the boot process halts.</p>
                 <p>Secure boot ensures that even if an attacker modifies software on a vehicle — through a compromised OTA update, physical access, or exploitation — the modified software will not execute without a valid signature.</p>
-                <h4>A/B Partitions</h4>
+                <h3>A/B Partitions</h3>
                 <p>Modern OTA architectures use two storage partitions — an active partition running the current software, and an inactive partition where updates are staged and verified before activation. When an update is downloaded and verified, the vehicle switches to the new partition at the next restart. If the updated software fails to boot correctly, the system falls back to the previous partition automatically.</p>
                 <p>A/B partitions protect against updates that are technically signed and valid but introduce a fault — whether by mistake or by design. An attacker who pushes a valid but malicious update cannot guarantee that the vehicle will stay on the compromised partition if it causes instability.</p>
-                <h4>Rollback Protection</h4>
+                <h3>Rollback Protection</h3>
                 <p>Rollback protection prevents a vehicle from accepting a software version older than its current one. Without this, an attacker who finds a vulnerability in an older firmware version — even one that has been patched — could push the vehicle back to the vulnerable version using a legitimately signed package.</p>
                 <!-- DOK 4 section 2 content -->
                 <h3>Where Supply-Chain Risk Enters</h3>
@@ -700,10 +700,10 @@
                 <!-- DOK 4 section 4 content -->
                 <h3>V2X Trust Architecture and Its Limits</h3>
                 <p>In DOK 3 you analysed V2X threats — misbehaviour, infrastructure compromise, replay attacks. This section asks a harder question: how is the trust model designed to prevent those threats, and where does that model break down at scale?</p>
-                <h4>The PKI Foundation</h4>
+                <h3>The PKI Foundation</h3>
                 <p>V2X communication depends on a Public Key Infrastructure (PKI) to establish trust between vehicles and infrastructure. Each vehicle is provisioned with cryptographic certificates that authenticate its messages to other road users. In Europe this operates under the ETSI C-ITS certificate framework; in the US under the Security Credential Management System (SCMS).</p>
                 <p>The architecture uses pseudonym certificates — short-lived certificates that vehicles rotate frequently to prevent long-term tracking. A vehicle may cycle through dozens of pseudonym certificates per day, each one unlinkable to the others from the outside. This protects driver privacy while still allowing message authentication.</p>
-                <h4>Where the Model Breaks Down</h4>
+                <h3>Where the Model Breaks Down</h3>
                 <p><strong>Misbehaviour detection</strong> is the mechanism designed to identify and revoke certificates from vehicles or infrastructure nodes that send false messages. If a vehicle reports phantom hazards consistently, the misbehaviour detection system should flag it and revoke its certificate. In practice this is difficult: a sophisticated attacker sends false messages infrequently enough to avoid detection thresholds, or coordinates across multiple compromised nodes to make false reports appear corroborated.</p>
                 <p><strong>The privacy-accountability tension </strong>is structural. Pseudonym certificates protect privacy precisely by making it hard to link messages to a specific vehicle. The same property that prevents tracking also makes it harder to attribute misbehaviour. Every improvement to misbehaviour detection requires more information about message history — information that, if collected, undermines the privacy model the certificates were designed to protect.</p>
                 <p>
