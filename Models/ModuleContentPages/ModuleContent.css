@@ -96,8 +96,8 @@
 
 .content-table {
     width: 100%;
-    border-collapse: collapse;
     font-size: 14px;
+    border-bottom: 1px solid #00A85A;
     margin: 1.5rem 0;
 }
 
