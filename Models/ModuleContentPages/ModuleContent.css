@@ -4,6 +4,10 @@
     text-underline-offset: 3px;
 }
 
+[data-theme="dark"] .PressHere {
+    color: #2EE893;
+}
+
 .PressHere:hover {
     color: black;
 }
@@ -88,6 +92,12 @@
 .PreviousModuleBtn:hover {
     background: var(--ink);
     color: var(--bg);
+}
+
+@media (max-width: 400px) {
+    .NextModuleBtn, .PreviousModuleBtn {
+        max-width: 125px;
+    }
 }
 
 @keyframes fadeUp {

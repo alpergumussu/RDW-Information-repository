@@ -1,0 +1,150 @@
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 12px;
+    margin-top: 32px;
+    margin-bottom: 32px
+}
+
+.flip-card {
+    perspective: 1000px;
+    height: 250px;
+    cursor: pointer
+}
+
+    .flip-card.tall {
+        height: 240px
+    }
+
+    .flip-card.short {
+        height: 140px
+    }
+
+.flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    transform-style: preserve-3d
+}
+
+.flip-card.flipped .flip-inner {
+    transform: rotateY(180deg)
+}
+
+.flip-front, .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 12px;
+    border: 0.5px solid #00A85A;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--color-background-primary)
+}
+
+[Data-theme="dark"] .flip-front, [Data-theme="dark"] .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 12px;
+    border: 0.5px solid #2EE893;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flip-back {
+    transform: rotateY(180deg);
+}
+
+.card-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: #1D9E75;
+    letter-spacing: 0.05em;
+    margin: 0 0 8px
+}
+
+.card-q {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    line-height: 1.55;
+    margin: 0;
+    flex: 1
+}
+
+.card-hint {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px
+}
+
+.card-a {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1
+}
+
+    .card-a.italic {
+        font-style: italic;
+        color: var(--color-text-secondary)
+    }
+
+.card-back-label {
+    font-size: 11px;
+    color: #1D9E75;
+    font-weight: 500;
+    margin-bottom: 8px
+}
+
+.flip-card:hover .flip-front {
+    background-color: color-mix(in oklab, #00A85A 30%, var(--bg-elev));
+}
+
+.flip-card:hover .flip-back {
+    background-color: color-mix(in oklab, #00A85A 30%, var(--bg-elev));
+}
+
+.divider {
+    border: none;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin: 8px 0 28px
+}
+
+@media (max-width: 800px) {
+    .cards-grid {
+        grid-template-columns: 1fr
+    }
+}
+
+@media (max-width: 400px) {
+    .flip-card {
+        height: 300px;
+    }
+}
