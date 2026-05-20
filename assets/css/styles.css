@@ -716,3 +716,31 @@ section {
 [data-theme="dark"] .marker {
     background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, #2EE893 40%, transparent) 60%);
 }
+
+.article-body blockquote {
+    border-left: 3px solid #1D9E75;
+    margin: 1.5rem 0;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-background-secondary);
+    border-radius: 0 8px 8px 0;
+}
+
+    .article-body blockquote p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--color-text-secondary);
+    }
+
+.article-body p {
+    margin-bottom: 0.5rem;
+}
+
+.article-body h2 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.article-body h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}

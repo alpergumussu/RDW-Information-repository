@@ -38,19 +38,139 @@
     <section class="module-body">
         <div class="wrap-narrow article-body">
             <p style="max-width: 820px;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-            </p>
-            <p style="max-width: 820px;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore
-                magna aliqua.
-            </p>
-            <!-- Module content end -->
-            <!-- QA cards/Questions section -->
-            <div class="module-body">
-                <p style="font-weight: bold; max-width: 820px;"> Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the card to see what matters. </span></p>
+                <!-- DOK 1 content -->
+                <h2>DOK Level 1 — Recall and Recognition</h2>
+            <p>At DOK 1 you are building the context needed for everything that follows: what capabilities already exist, who holds them, and what questions they raise. No analysis is required yet — read to recognise and remember.</p>
+            <!-- DOK 1 Section 1 content -->
+            <h3>From mechanical to software-defined</h3>
+
+            <p>Modern vehicles look like those from fifty years ago — but under the surface they are almost unrecognisable.</p>
+
+            <p>Until the 1970s, cars were primarily mechanical and hydraulic systems. Steering, braking, and engine control relied on physical linkages and fluid pressure. Electronics played a minimal role. A mechanic with hand tools could diagnose and fix nearly everything.</p>
+
+            <p>From the 1980s onwards, Electronic Control Units (ECUs) began replacing mechanical systems. An ECU is a small, embedded computer dedicated to controlling one specific function in the vehicle. There is typically one ECU for engine management, one for the anti-lock braking system (ABS), one for the airbags, one for the transmission, and so on. In a modern vehicle, there can be 70 to 150 of these units. They do not operate in isolation — they communicate constantly over shared internal networks called buses. The most common of these is the CAN bus (Controller Area Network), which acts as the vehicle's internal nervous system, passing messages between ECUs in real time.</p>
+
+            <blockquote>
+                <p>When you press the brake pedal, the brake pedal sensor sends a signal over the CAN bus to the ABS ECU, which then coordinates with the engine management ECU to reduce torque. That entire exchange happens in milliseconds and involves multiple ECUs communicating over a shared network.</p>
+            </blockquote>
+
+            <p>By the 2000s, vehicles had evolved into complex distributed computing systems on wheels. By the 2020s, a modern vehicle can run over 100 million lines of software code. Functions that were once purely mechanical are now software-defined: throttle response, suspension behaviour, steering feel, and safety systems are all controlled, calibrated, and increasingly updated through software.</p>
+
+            <p>This shift has one important consequence: software can be connected, and connected software can be attacked.</p>
+
+            <!-- DOK 1 Section 2 content -->
+            <h3>What "Connected" Means in Practice</h3>
+            <p>When a vehicle is described as "connected," it means it can exchange data with systems and networks outside itself. This does not happen through a single channel — modern vehicles use multiple communication technologies simultaneously, each serving a different purpose.</p>
+
+            <figure class="img-placeholder">
+                <div class="placeholder-box">Image: vehicle at centre with labelled arrows pointing outward to smartphone (Bluetooth), mobile network tower (cellular/5G), road infrastructure (V2X), manufacturer backend (OTA), GPS satellite (navigation/telematics)</div>
+            </figure>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Technology</th>
+                        <th>What it does</th>
+                        <th>Real-world example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cellular (4G/5G)</td>
+                        <td>Provides internet connectivity to the vehicle</td>
+                        <td>Enables real-time traffic updates and remote vehicle access via manufacturer app</td>
+                    </tr>
+                    <tr>
+                        <td>Wi-Fi</td>
+                        <td>Short-range data exchange</td>
+                        <td>Used in dealerships for diagnostics; used at home for large OTA update downloads</td>
+                    </tr>
+                    <tr>
+                        <td>Bluetooth</td>
+                        <td>Links personal devices to the vehicle</td>
+                        <td>Connects your phone to the infotainment system for calls, music, and contacts</td>
+                    </tr>
+                    <tr>
+                        <td>V2X (Vehicle-to-Everything)</td>
+                        <td>Communicates with other vehicles, infrastructure, and networks</td>
+                        <td>Before a charging session begins, the vehicle and charging station exchange cryptographic credentials to mutually authenticate each other</td>
+                    </tr>
+                    <tr>
+                        <td>OTA (Over-the-Air) Updates</td>
+                        <td>Delivers software updates remotely, without a workshop visit</td>
+                        <td>A manufacturer pushing a firmware update overnight that improves regenerative braking behaviour</td>
+                    </tr>
+                    <tr>
+                        <td>Telematics</td>
+                        <td>Collects and transmits vehicle data to external systems</td>
+                        <td>Your insurer's black box recording speed, braking force, and location to calculate your premium</td>
+                    </tr>
+                    <tr>
+                        <td>Infotainment systems</td>
+                        <td>In-vehicle platform integrating navigation, media, apps, and phone functions</td>
+                        <td>Android Auto or Apple CarPlay displayed on the centre console</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Each of these technologies is a communication channel — and each channel is a potential entry point into the vehicle's systems.</p>
+            <!-- DOK 1 Section 3 content -->
+            <h3>OTA Updates and the Software Supply Chain</h3>
+            <p>OTA updates deserve particular attention because they represent a direct, remote pathway into vehicle software. Unlike traditional software updates that require a physical connection at a dealership, OTA updates are delivered over cellular or Wi-Fi networks — and they do not require the vehicle to be in active use. Modern vehicles maintain a persistent low-power connection to the mobile network even when parked and switched off. The TCU remains active in the background, listening for incoming update packages, remote service commands, and telematics requests.</p>
+
+            <p>This means the vehicle's attack surface does not disappear when the driver walks away. A vehicle parked overnight in a driveway is still a networked device — reachable, addressable, and potentially patchable or exploitable — at any hour.</p>
+
+            <p>This is enormously convenient: manufacturers can fix bugs, patch vulnerabilities, improve performance, or add features without issuing a recall or requiring a workshop visit. It also means the vehicle's software is permanently connected to a supply chain that stretches from the OEM's backend servers, through cloud infrastructure, through network operators, down to the vehicle itself. Each link in that chain is a point where something can go wrong — or be tampered with.</p>
+
+            <figure class="img-placeholder">
+                <div class="placeholder-box">Image: OTA delivery chain — OEM development → signing server → cloud distribution → cellular network → vehicle ECU, with each step labelled</div>
+            </figure>
+            <!-- DOK 1 Section 4 content -->
+            <h3>Benefits to the End User</h3>
+
+            <p>Connectivity exists because it creates genuine value. Understanding these benefits is important context — it explains why manufacturers and consumers have accepted the trade-offs that come with connecting a vehicle to external networks.</p>
+
+            <ul class="content-list">
+                <li><strong>Navigation</strong> — real-time traffic data, dynamic rerouting, and points of interest updated continuously</li>
+                <li><strong>Remote diagnostics</strong> — the vehicle reports fault codes to the manufacturer or dealer before the driver notices a problem, enabling proactive maintenance</li>
+                <li><strong>Emergency call (eCall)</strong> — in the event of a collision, the vehicle automatically contacts emergency services and transmits location data; mandatory in new EU vehicles since 2018</li>
+                <li><strong>Autonomous and driver-assistance features (ADAS)</strong> — lane keeping assistance, automatic emergency braking, adaptive cruise control, and parking assistance all rely on software and increasingly on connectivity for map and sensor data</li>
+                <li><strong>App integration</strong> — remote locking and unlocking, climate pre-conditioning, charge monitoring, and vehicle location tracking via smartphone</li>
+                <li><strong>OTA software updates</strong> — manufacturers can improve the vehicle after purchase, fixing issues and adding features without a recall or dealership appointment</li>
+            </ul>
+
+            <p>These are the reasons connected vehicles exist. They represent real improvements in safety, convenience, and efficiency for end users.</p>
+            <!-- DOK 1 Section 5 content -->
+            <h3>Who Is Involved: The Stakeholder Landscape</h3>
+            <p>A connected vehicle does not exist in isolation. Producing, operating, regulating, and using one involves a wide network of organisations and individuals — each with their own role, their own access to vehicle data, and their own responsibilities.</p>
+
+            <p>Understanding who these stakeholders are matters for cybersecurity because an attack or a vulnerability does not affect just one party. A compromised OTA update pipeline, for example, affects the OEM who wrote the software, the supplier whose ECU runs it, the driver whose vehicle behaves unexpectedly, the regulator who must respond, and potentially thousands of fleet vehicles simultaneously.</p>
+
+            <figure class="img-placeholder">
+                <div class="placeholder-box">Image: stakeholder map — OEM at centre, surrounded by suppliers, drivers, fleet operators, regulators, and service providers with brief role labels</div>
+            </figure>
+            <ul class="content-list">
+                <li><strong>OEMs (Original Equipment Manufacturers)</strong> — the vehicle brands (Volkswagen, Toyota, Ford, Stellantis). Responsible for overall vehicle design, software architecture, cybersecurity compliance, and the end product that reaches the consumer.</li>
+                <li><strong>Suppliers</strong> — the network of companies responsible for designing, building, and delivering the components and software that make up the vehicle. Direct suppliers deliver complete, ready-to-integrate systems and carry significant responsibility for the security of their components. Behind them sits a deeper layer producing the semiconductors, sensors, communication modules, and software libraries embedded inside those systems. Their code runs in your vehicle, but there is often no direct relationship between them and the OEM — making visibility into their security practices difficult to establish and even harder to enforce.</li>
+                <li><strong>Drivers and end users</strong> — the people who operate the vehicle and whose safety, privacy, and data are directly at stake. They typically have no visibility into the software running in their vehicle.</li>
+                <li><strong>Fleet operators</strong> — organisations managing large numbers of vehicles: logistics companies, leasing firms, taxi platforms, and public transport operators. They rely heavily on telematics and remote management, making connectivity essential to their operations.</li>
+                <li><strong>Regulators</strong> — government bodies and standards organisations that define the legal and technical requirements vehicles must meet. In Europe, this includes UNECE, which produced WP.29 and operates on the principle of type approval and reciprocal recognition — once a vehicle or component is approved by one contracting party, all other participating countries must recognise that approval. National type approval authorities such as the Dutch RDW and the EU more broadly also play key roles.</li>
+                <li><strong>Service providers</strong> — third parties offering connected services built on top of vehicle data: navigation providers, insurance telematics companies, roadside assistance platforms, and charging network operators.</li>
+            </ul>
+            <!-- DOK 1 Section 6 content -->
+            <h3>Why This Matters for Cybersecurity</h3>
+            <p>Every connection is a potential attack surface. A vehicle that communicates via cellular, Bluetooth, Wi-Fi, and V2X simultaneously has multiple active entry points that did not exist when vehicles were purely mechanical. Unlike a laptop or a smartphone — where a security breach affects data — a compromised vehicle system can affect physical safety. Brakes, steering, and acceleration are software controlled. The consequences of a successful attack are not limited to data loss.</p>
+
+            <p>The scale of the problem compounds this. A vulnerability in a widely used ECU component from a Tier 2 supplier may be present in millions of vehicles across multiple brands and markets simultaneously. A single OTA infrastructure breach could, in theory, push malicious code to an entire vehicle fleet overnight.</p>
+
+            <p>This is not a theoretical concern. Researchers have demonstrated remote exploitation of vehicle systems in real-world conditions — most notably the 2015 Jeep Cherokee hack, in which security researchers remotely took control of steering and braking via the vehicle's cellular connection while it was being driven on a public highway.</p>
+
+            <figure class="img-placeholder">
+                <div class="placeholder-box">Image: attack surface overview — vehicle with labelled attack vectors: Bluetooth, OBD-II port, Wi-Fi, cellular/OTA, V2X, infotainment app store, USB, key fob/RKE</div>
+            </figure>
+            <!-- DOK 1 QA cards/Questions section -->
+            <div>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 1 DOK level 1. Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the card to see what matters. </span></p>
                 <div class="cards-grid">
                     <!-- QA 1 -->
                     <div class="flip-card">
@@ -58,18 +178,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-01</p>
                                 <p class="card-q">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    What is an ECU, and approximately how many does a modern vehicle contain?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    An Electronic Control Unit is a small, embedded computer that controls a specific function in the vehicle. A modern vehicle contains between 70 and 150 of them.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -81,18 +197,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-02</p>
                                 <p class="card-q">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Name three wireless communication technologies found in connected vehicles.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Bluetooth, Wi-Fi, and cellular (4G/5G). V2X and the key fob RF also count.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -104,18 +216,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-03</p>
                                 <p class="card-q">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    What does OTA stand for, and what does it allow a manufacturer to do?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Over-the-Air. It allows a manufacturer to deliver software updates to the vehicle remotely, without a physical connection at a dealership.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -127,18 +235,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-04</p>
                                 <p class="card-q">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Why does increased connectivity increase the cybersecurity attack surface of a vehicle?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    Every communication channel is a potential entry point. A vehicle that communicates over cellular, Bluetooth, Wi-Fi, and V2X simultaneously has multiple interfaces that did not exist in purely mechanical vehicles — each one a path through which malicious input could be introduced.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -148,6 +252,27 @@
                 </div>
             </div>
             <!-- QA cards/Questions section end -->
+            <!-- DOK 1 content end -->
+            <!-- DOK 2 content -->
+            <h2>DOK Level 2 — Skills and Concepts</h2>
+            <!-- DOK 2 Section 1 content -->
+            <h3>What "Connected" Means in Practice</h3>
+            <!-- DOK 2 Section 2 content -->
+            <h3>OTA Updates and the Software Supply Chain</h3>
+            <!-- DOK 2 Section 3 content -->
+            <h3>Benefits to the End User</h3>
+            <!-- DOK 2 Section 4 content -->
+            <h3>Who Is Involved: The Stakeholder Landscape</h3>
+            <!-- DOK 2 Section 5 content -->
+            <h3>Why This Matters for Cybersecurity</h3>
+            <!-- DOK 2 content end -->
+            <!-- DOK 3 content -->
+            <h2>DOK Level 3 — Strategic Thinking</h2>
+            <!-- DOK 3 content end -->
+            <!-- DOK 4 content -->
+            <h2>DOK Level 4 — Extended Thinking</h2>
+            <!-- DOK 4 content end -->
+            <!-- Module content end -->
             <!-- Previous/next module buttons -->
             <div style="display: flex; justify-content: flex-end; margin-top: 40px;">
                 <a class="NextModuleBtn" href="../ModuleContentPages/module-2.html">Next<span class="arrow">→</span></a>
