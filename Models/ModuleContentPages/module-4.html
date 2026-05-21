@@ -86,7 +86,7 @@
             <p>Individual sovereignty — the principle that a person is the primary authority over themselves and their property — requires meaningful alternatives. When the regulatory and commercial environment systematically eliminates those alternatives, the formal existence of choice does not constitute meaningful consent.</p>
             <p>The shopping cart dilemma assumes you could have left the cart where it stood. In the connected vehicle, that option has already been removed. The question is not whether you return it. The question is who decided you had to take it in the first place — and whether anyone thought to ask you.</p>
             <!-- DOK 1 QA cards/Questions section -->
-            <p style="font-weight: bold; max-width: 820px;"> You have reached the end of module 4 DOK level 1. This module covered territory that moves fast. These questions anchor what you have just read before the ground shifts again. <span class="marker"> Flip the card to see what matters. </span></p>
+            <p style="font-weight: bold; max-width: 820px;"> You have reached the end of module 4 DOK level 1. This module covered territory that moves fast. These questions anchor what you have just read before the ground shifts again. <span class="marker"> Flip the cards to see what matters. </span></p>
             <div class="cards-grid">
                 <!-- QA 1 -->
                 <div class="flip-card">
@@ -198,7 +198,7 @@
             <p><a class="PressHere" href="https://www.imdb.com/title/tt12747748" target="_blank">The 2023 film Leave the World Behind</a> depicted a version of this scenario: autonomous vehicles receiving corrupted instructions and converging on a highway simultaneously, blocking roads across a region and rendering highways inaccessible. It was fiction but the architectural conditions that would make it possible are not.</p>
             <p></p>
             <!-- DOK 2 QA cards/Questions section -->
-            <p style="font-weight: bold; max-width: 820px;"> You have reached the end of module 4 DOK level 2. The systems described above interact in ways that are not always obvious until something goes wrong. These questions ask you to trace those interactions before they become incidents. <span class="marker"> Flip the card to see what matters. </span></p>
+            <p style="font-weight: bold; max-width: 820px;"> You have reached the end of module 4 DOK level 2. The systems described above interact in ways that are not always obvious until something goes wrong. These questions ask you to trace those interactions before they become incidents. <span class="marker"> Flip the cards to see what matters. </span></p>
             <div class="cards-grid">
                 <!-- QA 1 -->
                 <div class="flip-card">
@@ -244,14 +244,14 @@
                         <div class="flip-front">
                             <p class="card-num">Q-03</p>
                             <p class="card-q">
-                                The Colonial Pipeline attack caused fuel shortages across the US east coast from a single compromised network. What is the automotive equivalent of that single point of failure, and what would a comparable attack look like in practice?
+                               A vehicle's ADAS system relies on cloud-based processing for object classification. The cloud backend becomes unavailable due to a DDoS attack. At the same time, the vehicle's V2X module starts receiving anomalous messages from a compromised roadside unit. What does graceful degradation require in this scenario, and what happens if the system was not designed with these two simultaneous failures in mind?
                             </p>
                             <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                         </div>
                         <div class="flip-back">
                             <p class="card-back-label">Answer</p>
                             <p class="card-a">
-                                The automotive equivalent of a single point of failure is the OTA update infrastructure — a central signing and distribution system that pushes software to vehicles across an entire fleet. A comparable attack would compromise the update pipeline, sign a malicious firmware package with a stolen or forged key, and distribute it to vehicles via their normal update channel. Unlike the pipeline, which had one physical chokepoint, the automotive attack surface is distributed across millions of endpoints — each one executing the malicious update independently, with no central point at which the spread can be stopped once distribution begins.
+                                Single-point failure analysis is the easy version. The question is what happens when two degraded inputs arrive at the same time and the system has to decide which one to trust.
                             </p>
                             <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                         </div>
@@ -312,7 +312,7 @@
             <p>The question is the same one as before: will the coordination happen deliberately, or will it be forced by an incident that made the gap impossible to ignore?</p>
             <!-- DOK 3 Section 3 content -->
             <!-- DOK 3 QA cards/Questions section -->
-            <p style="font-weight: bold; max-width: 820px;"> You have reached the end of module 4 DOK level 2. The systems described above interact in ways that are not always obvious until something goes wrong. These questions ask you to trace those interactions before they become incidents. <span class="marker"> Flip the card to see what matters. </span></p>
+            <p style="font-weight: bold; max-width: 820px;"> You have reached the end of module 4 DOK level 3. The systems described above interact in ways that are not always obvious until something goes wrong. These questions ask you to trace those interactions before they become incidents. <span class="marker"> Flip the cards to see what matters. </span></p>
             <div class="cards-grid">
                 <!-- QA 1 -->
                 <div class="flip-card">
@@ -327,7 +327,7 @@
                         <div class="flip-back">
                             <p class="card-back-label">Answer</p>
                             <p class="card-a">
-                                No. The vehicle is not safe in the sense that its braking ECU is running compromised firmware — but it passed every inspection check because PTI tests mechanical function, not software integrity. The scenario reveals that PTI was designed for a vehicle whose safety was determined by hardware. In a software-defined vehicle, a mechanically perfect car can be functionally compromised in ways that no physical inspection will detect.
+                                The modem passed type approval — meaning it does what it is specified to do. But type approval does not check whether a supplier's home government can legally compel that supplier to add undisclosed capabilities or hand over data. A Chinese supplier subject to Chinese national security law is a different risk than a German supplier subject to German law, even if both produce identical modems. The supply chain is not secure in any meaningful sense if the assessment stops at functionality.
                             </p>
                             <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                         </div>
@@ -346,7 +346,7 @@
                         <div class="flip-back">
                             <p class="card-back-label">Answer</p>
                             <p class="card-a">
-                                The vehicle should continue operating — stopping on a motorway because V2X went offline would itself be unsafe. Graceful degradation requires that safety-critical functions fall back to sensor-only operation when external inputs are unavailable, that the system detects the loss of V2X and adjusts its confidence accordingly, and that it does not treat the absence of a hazard signal as confirmation that no hazard exists. The V2X input is augmentative, not foundational. If the system was designed with V2X as a dependency rather than an enhancement, graceful degradation has already failed at the design stage.
+                                RDW certified the vehicle. The French authority runs the infrastructure. Neither has full jurisdiction over the incident. The OEM built a vehicle that trusts messages from infrastructure it has no control over. In practice this means no single body has both the authority and the information to investigate properly. The vehicle owner has no clear recourse. This is not an edge case — it is the normal operating condition of a cross-border connected vehicle ecosystem with no shared incident response framework.
                             </p>
                             <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                         </div>
@@ -365,7 +365,7 @@
                         <div class="flip-back">
                             <p class="card-back-label">Answer</p>
                             <p class="card-a">
-                                The automotive equivalent of a single point of failure is the OTA update infrastructure — a central signing and distribution system that pushes software to vehicles across an entire fleet. A comparable attack would compromise the update pipeline, sign a malicious firmware package with a stolen or forged key, and distribute it to vehicles via their normal update channel. Unlike the pipeline, which had one physical chokepoint, the automotive attack surface is distributed across millions of endpoints — each one executing the malicious update independently, with no central point at which the spread can be stopped once distribution begins.
+                                RDW, MITC, and NLR each have a defined mandate and a defined budget. Joint operations require doing things outside that mandate using money that was not allocated for it. That requires either a new legal basis, new funding, or a senior political decision that this is a priority. None of those currently exist. The most likely path to coordination is an incident serious enough that the cost of not coordinating becomes politically impossible to ignore.
                             </p>
                             <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                         </div>
@@ -384,7 +384,7 @@
                         <div class="flip-back">
                             <p class="card-back-label">Answer</p>
                             <p class="card-a">
-                                The scenario requires: vehicles that receive and act on external commands without requiring driver confirmation; a shared communication channel that reaches multiple vehicles simultaneously; insufficient authentication of command sources; and no safe fallback when commands are inconsistent with sensor data. All four of these conditions exist in current connected vehicle architectures. The V2X broadcast model, the absence of robust misbehaviour detection at scale, and the increasing automation of vehicle responses to external inputs are the architectural properties that make the scenario technically plausible — not hypothetically, but as a consequence of design decisions already in production.
+                                If the automotive frameworks are built carefully with their assumptions made explicit, adjacent industries — drones, robots, autonomous logistics — can adopt them as a starting point and adapt where needed. If the frameworks are built without acknowledging their assumptions, those industries will inherit the assumptions invisibly and build compliance systems around them without realising they were never designed for their context.
                             </p>
                             <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                         </div>
@@ -444,7 +444,7 @@
 
             <p><span style="color: orange">E</span>ventually, thirty years later, that question has arrived in the vehicle in your driveway. <span class="marker">And unlike the shopping cart dilemma, opting out is becoming increasingly difficult.</span></p>
             <!-- DOK 4 QA cards/Questions section -->
-            <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 4 and therefore the end of this masterclass. If you started at module 1, we want to congratulate you on your ironclad perseverance and attention span. What follows are not really questions about vehicles. Take them seriously anyway. <span class="marker"> Flip the card to see what matters. </span></p>
+            <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 4 and therefore the end of this masterclass. If you started at module 1, we want to congratulate you on your ironclad perseverance and attention span. What follows are not really questions about vehicles. Take them seriously anyway. <span class="marker"> Flip the cards to see what matters. </span></p>
             <div class="cards-grid">
                 <!-- QA 1 -->
                 <div class="flip-card">

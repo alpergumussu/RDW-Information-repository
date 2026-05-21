@@ -154,12 +154,12 @@
 
             <p>The scale of the problem compounds this. A vulnerability in a widely used ECU component from a Tier 2 supplier may be present in millions of vehicles across multiple brands and markets simultaneously. A single OTA infrastructure breach could, in theory, push malicious code to an entire vehicle fleet overnight.</p>
 
-            <p>This is not a theoretical concern. Researchers have demonstrated remote exploitation of vehicle systems in real-world conditions — most notably the 2015 Jeep Cherokee hack, in which security researchers remotely took control of steering and braking via the vehicle's cellular connection while it was being driven on a public highway.</p>
+            <p>This is not a theoretical concern. Researchers have demonstrated remote exploitation of vehicle systems in real-world conditions — most notably the 2015 <a class="PressHere" href="https://www.wired.com/2015/07/hackers-remotely-kill-jeep-highway/" target="_blank">Jeep Cherokee hack</a>, in which security researchers remotely took control of steering and braking via the vehicle's cellular connection while it was being driven on a public highway.</p>
 
             <blockquote><p>The core principle: more connectivity equals more attack surface. This is the foundational idea that the rest of this masterclass is built on. </p></blockquote>
             <!-- DOK 1 QA cards/Questions section -->
             <div>
-                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 1 DOK level 1. Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the card to see what matters. </span></p>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 1 DOK level 1. Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the cards to see what matters. </span></p>
                 <div class="cards-grid">
                     <!-- QA 1 -->
                     <div class="flip-card">
@@ -329,7 +329,7 @@
             <p>The TCU is the vehicle's primary cellular communication module. It manages the connection to the mobile network and is responsible for transmitting telematics data to the OEM backend, receiving OTA updates, enabling remote services (remote lock, remote start), and supporting emergency call (eCall) functionality. The TCU is one of the highest-risk external interfaces because it is permanently connected, operates continuously in the background, and has a direct pathway into the vehicle's internal networks. It is also one of the most difficult for the driver to monitor or control.</p>
 
             <h3>IVI — In-Vehicle Infotainment System</h3>
-            <p>The IVI system is the primary human-machine interface for the driver and passengers — the touchscreen, audio system, navigation, and app platform. Modern IVI systems run full operating systems (often Android Automotive or Linux-based platforms) and support third-party applications, smartphone integration via Bluetooth and USB, and internet connectivity via the TCU. The IVI is a high-value attack target because it sits at the intersection of user-facing interaction, connectivity, and internal vehicle networks. A compromised IVI system can potentially be used as a pivot point to reach other vehicle domains — as demonstrated in the 2015 Jeep Cherokee attack, where the infotainment system was the initial entry point.</p>
+            <p>The IVI system is the primary human-machine interface for the driver and passengers — the touchscreen, audio system, navigation, and app platform. Modern IVI systems run full operating systems (often Android Automotive or Linux-based platforms) and support third-party applications, smartphone integration via Bluetooth and USB, and internet connectivity via the TCU. The IVI is a high-value attack target because it sits at the intersection of user-facing interaction, connectivity, and internal vehicle networks. A compromised IVI system can potentially be used as a pivot point to reach other vehicle domains — as demonstrated in the 2015 <a class="PressHere" href="https://www.wired.com/2015/07/hackers-remotely-kill-jeep-highway/" target="_blank">Jeep Cherokee attack</a>, where the infotainment system was the initial entry point.</p>
 
             <h3>OBD-II Port</h3>
             <p>The OBD-II port is a standardised physical connector, typically located under the dashboard, that provides direct access to the vehicle's diagnostic data and internal networks. It was designed for use by mechanics and workshops to read fault codes and perform diagnostics. Any device plugged into the OBD-II port can send and receive CAN messages — including commands to safety-critical ECUs. Aftermarket dongles, insurance telematics devices, and fleet management hardware all connect via OBD-II, and each represents a persistent access point to the vehicle's internals.</p>
@@ -377,7 +377,7 @@
 
             <!-- DOK 2 QA cards/Questions section -->
             <div>
-                <p style="font-weight: bold; max-width: 1280px;">You have reached the end of module 1 DOK level 2. The passages above covered a lot of ground. These questions ask you to work with that material — not just recall it, but connect it. If two answers feel like they belong together, they probably do. Flip the card to see what matters.  <span class="marker"> Flip the card to see what matters. </span></p>
+                <p style="font-weight: bold; max-width: 1280px;">You have reached the end of module 1 DOK level 2. The passages above covered a lot of ground. These questions ask you to work with that material — not just recall it, but connect it. If two answers feel like they belong together, they probably do. <span class="marker">Flip the cards to see what matters. </span></p>
                 <div class="cards-grid">
                     <!-- QA 1 -->
                     <div class="flip-card">
@@ -522,7 +522,7 @@
 
           
                 <p>
-                    The security implications shift significantly at L3 and above. At L0–L2, a compromised ADAS function may cause an incident, but the human driver is still monitoring the environment and can intervene. At L3 and above, the human driver is no longer required to monitor continuously — the system is trusted to manage safety-critical decisions autonomously.
+                    At L3 and above, the human driver is no longer required to monitor continuously — the system is trusted to manage safety-critical decisions autonomously.
                     This means that the consequence of a successful attack scales with automation level. At L4, a compromised braking or steering system has no human fallback. The vehicle acts on whatever signals it receives.
                 </p>
        
@@ -535,7 +535,7 @@
             <p>Cellular baseband vulnerabilities are historically difficult to patch and have been exploited in smartphones for years. In a vehicle context, a baseband exploit could give an attacker persistent access to the TCU without touching the application layer — potentially surviving an OTA update that only patches higher-level software.</p>
             <p>The TCU firmware itself is a target for supply chain attacks: if the firmware signing process is weak, a malicious firmware image could be pushed to vehicles at scale.</p>
             <h3>Bluetooth and Wi-Fi Stacks</h3>
-            <p>Bluetooth and Wi-Fi connectivity in the IVI system is handled by protocol stacks — software libraries implementing the respective standards. These stacks have a long history of vulnerabilities: BlueBorne (2017), BIAS (2020), and BrakTooth (2021) are examples of Bluetooth stack vulnerabilities that allowed remote code execution or denial-of-service with no user interaction required.</p>
+            <p>Bluetooth and Wi-Fi connectivity in the IVI system is handled by protocol stacks — software libraries implementing the respective standards. These stacks have a long history of vulnerabilities: <a class="PressHere" href="https://en.wikipedia.org/wiki/BlueBorne_(security_vulnerability)" target="_blank">BlueBorne</a> (2017), <a class="PressHere" href="https://health-isac.org/bluetooth-impersonation-attacks-bias/" target="_blank">BIAS</a> (2020), and <a class="PressHere" href="https://www.cisa.gov/news-events/alerts/2021/11/04/braktooth-proof-concept-tool-demonstrates-bluetooth-vulnerabilities" target="_blank">BrakTooth</a> (2021) are examples of Bluetooth stack vulnerabilities that allowed remote code execution or denial-of-service with no user interaction required.</p>
             <p>The attack surface here is noteworthy because it requires no physical access and no user action. An attacker within wireless range with knowledge of a stack vulnerability can potentially execute code in the IVI system without the driver doing anything at all.</p>
             <h3>IVI Browser Engines</h3>
             <p>Modern infotainment systems include web browsers — either as standalone applications or embedded within the navigation or app platform. Browser engines (WebKit, Chromium-based) are among the most attack-prone software components that exist, given the enormous complexity of parsing and rendering untrusted web content.</p>
@@ -548,13 +548,13 @@
                 <li><strong>RollBack</strong> — exploiting counter resynchronisation mechanisms to recover previously used codes</li>
                 <li><strong>Relay attacks</strong> — amplifying the key fob signal to trick the vehicle into thinking the fob is present when it is not</li>
             </ul>
-            <p>These attacks do not require sophisticated equipment and have been demonstrated against production vehicles. The BCM that processes RKE commands sits on the internal CAN bus — meaning unauthorised entry via a relay attack is a physical precursor to potential network access via the OBD-II port.</p>
+            <p>These attacks do not require sophisticated equipment and have been demonstrated against production vehicles.</p>
             <h3>V2X (Vehicle to Everything) </h3>
             <p>V2X communication introduces an attack surface that is qualitatively different from other interfaces: the vehicle receives messages from sources in its environment and may act on them — often automatically at higher SAE levels. The threats are not primarily about breaking the underlying cryptography. They are about abusing a system that is designed to be trusted:</p>
             <ul class="content-list">
-                <li><strong>Misbehaviour</strong> — a vehicle or roadside unit with legitimate credentials broadcasting false information: phantom hazards, spoofed speed limits, fabricated emergency conditions</li>
-                <li><strong>Infrastructure compromise</strong> — a compromised roadside unit with valid credentials can broadcast malicious messages to every vehicle in range simultaneously</li>
-                <li><strong>Replay and timing attacks</strong> — replaying legitimate messages out of context to trigger unintended vehicle responses</li>
+                <li><strong>Misbehaviour</strong> — a vehicle or roadside unit with legitimate credentials broadcasting false information: phantom hazards, spoofed speed limits, fabricated emergency conditions.</li>
+                <li><strong>Infrastructure compromise</strong> — a compromised roadside unit with valid credentials can broadcast malicious messages to every vehicle in range simultaneously.</li>
+                <li><strong>Replay and timing attacks</strong> — replaying legitimate messages out of context to trigger unintended vehicle responses.</li>
             </ul>
             <p>The deeper problem is scale: a single compromised infrastructure node does not affect one vehicle — it affects every vehicle in its broadcast range. The trust model assumes infrastructure integrity; when that assumption fails, it fails broadly.</p>
             <h3>Charging Protocols: ISO 15118 and V2G</h3>
@@ -566,9 +566,9 @@
             <p>Lateral movement is the term for an attacker progressing from an initial foothold — typically a less-critical, more exposed system — toward a higher-value target. In automotive architecture, the canonical lateral movement path is from the infotainment domain toward the powertrain or chassis domain.</p>
             <!-- DOK 3 Section 4 content -->
             <h3>The Jeep Cherokee Attack Revisited</h3>
-            <p>The 2015 Jeep Cherokee remote exploitation by Miller and Valasek is the most documented real-world example of this path. The attack proceeded as follows:</p>
+            <p>The 2015 <a class="PressHere" href="https://www.wired.com/2015/07/hackers-remotely-kill-jeep-highway/" target="_blank">Jeep Cherokee remote exploitation</a> by Miller and Valasek is the most documented real-world example of this path. The attack proceeded as follows:</p>
             <ul class="content-list">
-                <li>The IVI system (Uconnect) exposed a network service reachable over cellular</li>
+                <li>The IVI system (Uconnect) exposed a network service reachable over cellular.</li>
                 <li>The cellular network used by Chrysler did not isolate vehicles from each other — an attacker could discover and connect to any vehicle on the network.</li>
                 <li>The IVI system ran a modified QNX operating system with a vulnerable service that allowed remote code execution.</li>
                 <li>From the IVI, the attackers found a path to the CAN bus via the chip that bridged the infotainment and vehicle networks.</li>
@@ -588,7 +588,7 @@
 
             <p>The honest answer across the vehicle fleet is that gateway quality varies enormously. Legacy architectures have minimal filtering; modern architectures are improving. The gap between them represents a significant portion of the vehicles currently on the road.</p>
                 <!-- DOK 3 QA cards/Questions section -->
-                <p style="font-weight: bold; max-width: 1280px;">You have reached the end of module 1 DOK level 3. There are no clean answers below. That is not a flaw in the questions — it is the point. These are the kinds of problems that professionals in this field sit with regularly. Your job is not to resolve them but to reason through them carefully enough that your position can be challenged and defended.  <span class="marker"> Flip the card to see what matters. </span></p>
+                <p style="font-weight: bold; max-width: 1280px;">You have reached the end of module 1 DOK level 3. There are no clean answers below. That is not a flaw in the questions — it is the point. These are the kinds of problems that professionals in this field sit with regularly. Your job is not to resolve them but to reason through them carefully enough that your position can be challenged and defended.  <span class="marker"> Flip the cards to see what matters. </span></p>
                 <div class="cards-grid">
                     <!-- QA 1 -->
                     <div class="flip-card">
@@ -689,7 +689,7 @@
                 <!-- DOK 4 section 2 content -->
                 <h3>Where Supply-Chain Risk Enters</h3>
                 <p>The OTA pipeline extends far beyond the OEM. Software libraries, middleware components, and operating system packages developed by third parties are integrated into vehicle firmware and distributed via OTA. A compromised dependency — a malicious library introduced into a commonly used open-source package — can affect every vehicle that receives an update containing it.</p>
-                <p>This is not hypothetical. The 2020 SolarWinds attack demonstrated that supply chain compromise via a software update pipeline is a viable and highly effective attack vector at scale. The automotive industry faces the same risk, with the added consequence that the affected systems control physical safety.</p>
+                <p>This is not hypothetical. The 2020 <a class="PressHere" href="https://www.fortinet.com/resources/cyberglossary/solarwinds-cyber-attack" target="_blank">SolarWinds</a> attack demonstrated that supply chain compromise via a software update pipeline is a viable and highly effective attack vector at scale. The automotive industry faces the same risk, with the added consequence that the affected systems control physical safety.</p>
                 <p>The deeper problem is that the mechanisms above — code signing, secure boot, A/B partitions, rollback protection — all operate at the OEM level. They verify that the update is what the OEM intended to ship. They do not verify that what the OEM intended to ship is clean. If a malicious library enters the build process before signing, all of those mechanisms will faithfully deliver and install it.</p>
                 <!-- DOK 4 section 3 content -->
                 <h3>HSMs and SecOC: Hardware-Level Security in AUTOSAR</h3>
@@ -722,7 +722,7 @@
                 </ul>
                 <p>This is not an argument against defence in depth — it is an argument for being honest about which layers are actually defended in any given vehicle generation and designing threat models accordingly rather than assuming all layers hold.</p>
             <!-- DOK 4 QA cards/Questions section -->
-            <p style="font-weight: bold; max-width: 1280px;">You have reached the end of this module. <span class="marker">Thanks for making it this far!</span> What follows are not really questions in the conventional sense — they do not have model answers, rubrics, or correct conclusions. They are the questions that remain after everything else has been answered. Take your time with them. <span class="marker">Flip the card to see what matters. </span></p>
+            <p style="font-weight: bold; max-width: 1280px;">You have reached the end of this module. <span class="marker">Thanks for making it this far!</span> What follows are not really questions in the conventional sense — they do not have model answers, rubrics, or correct conclusions. They are the questions that remain after everything else has been answered. Take your time with them. <span class="marker">Flip the cards to see what matters. </span></p>
             <div class="cards-grid">
                 <!-- QA 1 -->
                 <div class="flip-card">
