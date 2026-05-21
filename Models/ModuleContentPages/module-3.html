@@ -34,189 +34,59 @@
             </p>
         </div>
         <!-- Module intro end-->
-
     </header>
 
     <!-- Module content -->
     <section class="module-body">
         <div class="wrap-narrow article-body">
             <p style="max-width: 820px;">
-                <!-- DOK 1 content -->
-                <h2>DOK Level 1 — Recall and Recognition</h2>
-                <!-- DOK 1 Section 1 content -->
-                <h1>test</h1>
-
-                <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-
+                <!-- Intro -->
+                <h2>Introduction</h2>
+            <p>In Module 1 you saw how connected vehicles became attackable. In Module 2 you saw how regulators responded. This module asks a different question: once a vehicle has been designed, approved, and sold, what happens to its security across the fifteen to twenty years that follow?</p>
+            <p>The short answer is that security cannot be a state — it has to be a process. A vehicle that was secure at launch is not secure at year ten unless someone has done deliberate, continuous work in the meantime. The frameworks that govern that work — ISO/SAE 21434, UN R155, UN R156, and increasingly the EU Cyber Resilience Act — are the subject of this module. They describe a lifecycle. The lifecycle, in practice, has gaps.</p>
+            <!-- DOK 1 content -->
+            <!-- DOK 1 Section 1 content -->
+            <h2>DOK Level 1 — Recall and Recognition</h2>
+            <p>Security is not a feature you add at the end. At DOK 1 you are building the vocabulary of the lifecycle: the phases it contains, the frameworks that structure it, and the basic reasons why a vehicle's cybersecurity story does not begin or end at type approval. </p>
+            <h3>Why a lifecycle approach is needed</h3>
+            <p>A modern vehicle is sold once but operated for far longer than most consumer products. The average age of passenger cars on EU roads is currently around 12.5 years and has been rising for two decades — from 8.4 years in 2007 to 10.9 in 2013 to 12.5 in 2025. Typical lifespans vary by region: research cited by the European Environment Agency puts the average Western European car at around 18 years and the average Eastern European car at around 28 years. A vehicle bought in 2026 will, in many cases, still be operational in 2044.</p>
+            <p>Compare that with the typical lifespan of consumer software. A smartphone is supported for five to seven years; a laptop operating system for around ten. A vehicle's connected systems must remain secure for two to four times longer than that — against threats that have not been invented yet, using cryptographic algorithms that may no longer be considered safe, integrated with backend services that may no longer exist.</p>
+            <p>This timescale alone makes a one-off security assessment insufficient. A vehicle approved as secure in 2026 is not, by virtue of that approval, secure in 2036. The threat landscape will have changed. New vulnerabilities will have been discovered in components that were considered safe. Cryptographic primitives that were standard at design time may have been deprecated. The vehicle has not changed — but the environment around it has.</p>
             <!-- DOK 1 Section 2 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>Why "secure at launch" is not enough</h3>
+            <p>Three structural reasons drive the lifecycle approach.</p>
+            <p>Vulnerabilities are discovered, not designed. Every piece of non-trivial software contains vulnerabilities that nobody — not the developer, not the auditor, not the type approval authority — knew about at the time of release. They are found later, sometimes years later, by researchers, attackers, or accident. The CVE database lists tens of thousands of vulnerabilities discovered each year in software that was, at the time it shipped, considered to be in good order. A vehicle's software is no exception.</p>
+            <p>The attack surface keeps growing. Even if the vehicle's own software did not change, its environment does. New attack techniques are developed. New external interfaces (Wi-Fi standards, V2X protocols, charging networks) get added to the world the vehicle operates in. A vehicle designed before a particular attack class existed may be vulnerable to it in retrospect.</p>
+            <p>Software changes over time. OTA updates, app store extensions, navigation map updates, and even some hardware refreshes happen across a vehicle's life. Each change is a potential entry point for a new vulnerability and a potential break of a previously valid security assumption.</p>
+            <p>The combined effect is that the gap between a vehicle's actual security state and its security state at type approval grows over time. The lifecycle approach exists to close that gap continuously or, from a different perspective, to keep it from widening unmanageably.</p>
             <!-- DOK 1 Section 3 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>How ISO/SAE 21434 and R155 structure the lifecycle</h3>
+            <p>Module 2 introduced UN R155 (the regulation) and ISO/SAE 21434 (the engineering standard). Here we look at how they structure the vehicle lifecycle into phases, each with its own cybersecurity obligations.</p>
+            <p>ISO/SAE 21434 organises the lifecycle into five broad phases, with a set of continuous activities that run across all of them:</p>
+            <ul class="content-list">
+                <li><strong>Concept phase —</strong> initial item definition, early TARA, derivation of cybersecurity goals and high-level requirements.</li>
+                <li><strong>Product development —</strong> design, implementation, integration, verification, and validation of cybersecurity controls. Cybersecurity validation — the formal confirmation that the cybersecurity goals derived in concept have been achieved — sits at the end of this phase rather than as a phase of its own. This is where the V-model (covered at DOK 2) operates.</li>
+                <li><strong>Production —</strong> secure handling of keys, firmware, and configuration during manufacturing. A vehicle assembled with the wrong keys, or with debug interfaces left enabled, is not secure regardless of what its design specified.</li>
+                <li><strong>Operations and maintenance —</strong> the longest phase by far, containing two distinguishable activity sets. Operations covers what the manufacturer does to keep cybersecurity active in the field: monitoring threat intelligence, running anomaly detection, tracking new vulnerabilities, responding to incidents. Maintenance covers the corrective actions: OTA updates, patches, configuration changes, re-running TARAs against changed conditions. The two are related but not the same — and at DOK 2 you will see why the distinction matters.</li>
+                <li><strong>End of cybersecurity support and decommissioning —</strong> the deliberate wind-down of security activity, communication to vehicle owners, and the question of what happens to data and credentials at the very end.</li>
+            </ul>
+            <p>UN R155 maps onto these phases through the CSMS (Cybersecurity Management System), which the manufacturer must apply across all of them. R155 does not invent a different lifecycle — it requires the manufacturer to operate ISO/SAE 21434's lifecycle (or an equivalent) under a certified management system, with evidence at each phase that the work was done.</p>
+            <p>UN R156 sits alongside R155 and covers one specific lifecycle activity in detail: software updates. The Software Update Management System (SUMS) governs how changes to a vehicle's software are designed, validated, distributed, and tracked from initial release through end-of-life.</p>
+
             <!-- DOK 1 Section 4 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 1 Section 5 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 1 Section 6 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 1 Section 7 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 1 Section 8 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 1 Section 9 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 1 Section 10 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 1 Section 11 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 1 Section 12 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>A vehicle outlives the moment of approval — and sometimes outlives more</h3>
+            <p>Type approval certifies a vehicle at a moment in time. The lifecycle is everything that happens after that moment. Several things can happen across those decades that the moment-of-approval framing does not capture:</p>
+            <ul class="content-list">
+                <li>The OEM may discontinue the model line. Spare parts and software support may end before the vehicles themselves do.</li>
+                <li>Tier 1 or Tier 2 suppliers may go out of business, be acquired, or exit the automotive market. Components that the OEM does not own outright may become unsupportable.</li>
+                <li>Cellular networks supporting the vehicle's TCU may be decommissioned. The 2G and 3G shutdowns across Europe between 2020 and 2025 left a meaningful number of older connected vehicles without their original connectivity.</li>
+                <li>Ownership may change multiple times. The original buyer's relationship with the OEM is not necessarily inherited by the eighth owner buying a 14-year-old car from a small dealership.</li>
+                <li>Cryptographic standards may be deprecated. A vehicle that relies on SHA-1 or short RSA keys for any meaningful authentication step has a built-in expiry date that nobody put on the windscreen.</li>
+            </ul>
+            <p>Each of these is part of the lifecycle picture. None of them are addressed by type approval. The lifecycle frameworks attempt to address some of them. Others remain genuinely unresolved, and we return to them at DOK 3.</p>
             <!-- DOK 1 QA cards/Questions section -->
             <div>
-                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 1 DOK level 1. Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the cards to see what matters. </span></p>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 3 DOK level 1. If you finish this section knowing what the lifecycle phases are, why a vehicle's security cannot be settled at launch, and what frameworks govern the long middle of a vehicle's life, you have what DOK 1 is meant to give you.Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the cards to see what matters. </span></p>
                 <div class="cards-grid">
                     <!-- QA 1 -->
                     <div class="flip-card">
@@ -224,14 +94,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-01</p>
                                 <p class="card-q">
-                                    What is an ECU, and approximately how many does a modern vehicle contain?
+                                    What is the approximate operational lifespan of a passenger vehicle in Europe, and why does that figure matter for cybersecurity?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    An Electronic Control Unit is a small, embedded computer that controls a specific function in the vehicle. A modern vehicle contains between 70 and 150 of them.
+                                    Operational lifespan. A passenger vehicle in Europe is typically operated for 15 to 20 years, with the average age of the fleet at around 12. This matters for cybersecurity because the vehicle must remain defensible for two to four times longer than the typical support window of consumer software, against threats and cryptographic developments that did not exist when it was designed.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -243,14 +113,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-02</p>
                                 <p class="card-q">
-                                    Name three wireless communication technologies found in connected vehicles.
+                                    Name the five lifecycle phases defined by ISO/SAE 21434, and explain what "continuous activities" refers to in this context.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Bluetooth, Wi-Fi, and cellular (4G/5G). V2X and the key fob RF also count.
+                                    The five lifecycle phases and continuous activities. Concept; product development (which includes cybersecurity validation as its closing activity); production; operations and maintenance; end of cybersecurity support and decommissioning. Continuous activities — vulnerability management, monitoring, and risk reassessment — are not tied to any single phase but run across all of them; TARA is the most visible example, initiated in concept and re-run whenever conditions change.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -262,14 +132,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-03</p>
                                 <p class="card-q">
-                                    What does OTA stand for, and what does it allow a manufacturer to do?
+                                    What is the relationship between UN R155 and ISO/SAE 21434 across the lifecycle?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Over-the-Air. It allows a manufacturer to deliver software updates to the vehicle remotely, without a physical connection at a dealership.
+                                    R155 and 21434. ISO/SAE 21434 defines the engineering lifecycle and the work products at each phase. UN R155 is the regulation that requires the manufacturer to operate that lifecycle (or an equivalent) under a certified Cybersecurity Management System, with evidence produced at each phase. R155 is the obligation; 21434 is the most common way of meeting it.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -281,14 +151,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-04</p>
                                 <p class="card-q">
-                                    Why does increased connectivity increase the cybersecurity attack surface of a vehicle?
+                                    Why is "secure at launch" not sufficient as a cybersecurity standard for a vehicle?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Every communication channel is a potential entry point. A vehicle that communicates over cellular, Bluetooth, Wi-Fi, and V2X simultaneously has multiple interfaces that did not exist in purely mechanical vehicles — each one a path through which malicious input could be introduced.
+                                    Why "secure at launch" is not enough. Vulnerabilities are discovered after release rather than designed in at the start; the external attack surface keeps changing as new technologies and attack classes appear; and the vehicle's own software changes through OTA updates and reconfiguration over its operational life. A static assessment at launch becomes outdated almost immediately.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -301,178 +171,136 @@
             <!-- DOK 1 content end -->
             <!-- DOK 2 content -->
             <h2>DOK Level 2 — Skills and Concepts</h2>
+            <p>At DOK 1 you learned what the phases are. At DOK 2 you learn what happens inside them — how the V-model structures verification work, how the CSMS, SUMS, and Cyber Resilience Act operate as a framework across the whole lifecycle, why TARA is a recurring rather than a one-off activity, and how responsibility is divided between the OEM, Tier 1, and Tier 2. The goal is not just to know that these activities exist but to understand how they connect.</p>
             <!-- DOK 2 Section 1 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-
+            <h3>The lifecycle phases in detail</h3>
+            <p>The five phases introduced at DOK 1 are not equal in duration or in cybersecurity intensity. Concept and product development together may last two to four years for a new vehicle platform. Production may last another five to ten years across model years. Operations and maintenance is the dominant phase by time — fifteen years or more — and is where the lifecycle's most difficult cybersecurity work is done. Sitting alongside the phases, a set of continuous activities — vulnerability management, monitoring, and risk reassessment — runs across all of them and does not reduce to any single one.</p>
+            <p>Each phase has characteristic work products. The CSMS auditor and the type approval authority both look for evidence at the right phase, in the right form.</p>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Primary cybersecurity activity</th>
+                        <th>Key work products</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Concept</td>
+                        <td>Item definition; initial TARA; derivation of cybersecurity goals and high-level requirements.</td>
+                        <td>Item definition document; concept-phase TARA; cybersecurity goals; cybersecurity claims.</td>
+                    </tr>
+                    <tr>
+                        <td>Product development</td>
+                        <td>Detailed design; implementation; integration; verification and validation against requirements. The V-model operates here. Cybersecurity validation — formal confirmation that the cybersecurity goals have been met — sits at the close of this phase.</td>
+                        <td>Cybersecurity requirements at each level; design specifications; verification reports; integration test results; validation report and cybersecurity case.</td>
+                    </tr>
+                    <tr>
+                        <td>Production</td>
+                        <td>Secure key provisioning; controlled firmware loading; debug interface lockdown; supply chain integrity for manufacturing.</td>
+                        <td>Production cybersecurity controls; key management records; audit trail of firmware loaded per vehicle.</td>
+                    </tr>
+                    <tr>
+                        <td>Operations and maintenance (operations side)</td>
+                        <td>Threat intelligence monitoring; anomaly detection on field telemetry; vulnerability tracking; incident response; coordination with researchers and CERTs.</td>
+                        <td>Monitoring infrastructure; incident reports; threat intelligence integration records; vulnerability tracking system.</td>
+                    </tr>
+                    <tr>
+                        <td>Operations and maintenance (maintenance side)</td>
+                        <td>OTA updates; patches; configuration changes; re-running TARA against changed conditions; coordination of supplier-delivered fixes.</td>
+                        <td>Update records (RxSWIN); change-management documentation; reassessed TARAs; SUMS evidence.</td>
+                    </tr>
+                    <tr>
+                        <td>End of support and decommissioning</td>
+                        <td>Communication to owners; secure handling of cryptographic keys and personal data; defined cut-off of monitoring and updates.</td>
+                        <td>End-of-support policy; key destruction records; owner notifications.</td>
+                    </tr>
+                    <tr>
+                        <td>Continuous activities (across all phases)</td>
+                        <td>Vulnerability management; risk reassessment; monitoring of the threat landscape; governance review.</td>
+                        <td>Updated TARAs; vulnerability registers; CSMS audit evidence; governance records.</td>
+                    </tr>
+                </tbody>
+            </table>            <p>Reading this table (It's hidden on mobile phones) from left to right tells you what the manufacturer must do. Reading it from top to bottom shows you something else: the work compounds. A failure in concept-phase TARA produces vulnerabilities that show up in operations and maintenance years later. A failure in production key management may invalidate cryptographic protections that the design phase carefully specified. </p>
             <!-- DOK 2 Section 2 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>The V-model</h3>
+            <p>The V-model is a development framework borrowed from systems engineering and adapted for cybersecurity. It describes the relationship between phases of design (going down the left side of the V) and phases of verification (going up the right side). Each design phase has a corresponding verification phase that tests whether the design actually achieved what it claimed.</p>
+            <p>Reading the V from top-left, down, and back up the right:</p>
+            <ul class="content-list">
+                <li><strong>Stakeholder requirements</strong> are defined at the top of the left arm. They are validated at the top of the right arm through acceptance testing — does the finished vehicle meet what stakeholders actually needed?</li>
+                <li><strong>System cybersecurity requirements</strong> are derived next. They are verified by system-level cybersecurity testing — penetration testing, fuzzing, and red-team exercises against the integrated vehicle.</li>
+                <li><strong>Architecture and component requirements</strong> follow. They are verified by integration testing — do the components, when assembled, behave securely as a system?</li>
+                <li><strong>Detailed design and implementation</strong> sit at the bottom of the V. They are verified by unit-level testing — does each component meet its own cybersecurity specification?</li>
+            </ul>
+            <p>The V-model exists because verification is most reliable when it directly targets a specification that was made at a comparable level of abstraction. Unit tests cannot tell you whether your stakeholder requirements were correct; acceptance testing cannot efficiently diagnose individual code bugs. Each level of design needs its own level of verification, and the V makes that relationship explicit.</p>
+            <p>For cybersecurity specifically, the V-model has one important consequence: the right-arm activities (testing, validation, acceptance) catch problems whose root causes are on the left arm (specification, design, requirements). A vulnerability discovered in penetration testing may originate in a system architecture decision made years earlier. Fixing it cleanly means going back up the left arm, not patching at the right. This is one reason why late-stage cybersecurity fixes are expensive: they often unravel design decisions whose costs were paid upstream and whose corrections must be re-paid downstream.</p>
             <!-- DOK 2 Section 3 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>CSMS, SUMS, and Cyber Resilience as a lifecycle framework</h3>
+            <p>Three regulatory instruments operate across the lifecycle simultaneously. They are not alternatives — they are layered.</p>
             <!-- DOK 2 Section 4 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>The CSMS (UN R155)</h3>
+            <p>The Cybersecurity Management System governs the manufacturer's organisational approach to cybersecurity across all phases. It is the meta-framework: the system that ensures the other systems exist and operate.</p>
+            <p>In lifecycle terms, the CSMS requires the manufacturer to demonstrate that:</p>
+            <ul class="content-list">
+                <li>Cybersecurity is integrated into governance at the organisational level, not delegated to a single team.</li>
+                <li>Risks are identified, assessed, treated, and reassessed across all phases — not just at concept.</li>
+                <li>Verification and testing happen at the right phases with the right evidence.</li>
+                <li>Monitoring continues into operations and maintenance, with response processes for issues discovered after release.</li>
+                <li>Supplier management extends cybersecurity requirements down the supply chain.</li>
+            </ul>
+            <p>The CSMS certificate is valid for a maximum of three years and must be renewed. This forced periodic re-audit is itself a lifecycle mechanism: it means the manufacturer's processes are re-examined while the vehicles produced under previous certificates are still on the road.</p>
             <!-- DOK 2 Section 5 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>The SUMS (UN R156)</h3>
+            <p>The Software Update Management System governs how changes to vehicle software are managed across the lifecycle. It is the operational arm of the lifecycle for everything that happens after a vehicle leaves the factory and receives software updates.</p>
+            <p>Where the CSMS asks "do you have a system for managing cybersecurity?", the SUMS asks "do you have a system for managing change?". The two are deeply linked. An OTA update that fixes a vulnerability is simultaneously a CSMS activity (responding to identified risk) and a SUMS activity (managing a software change with type approval implications).</p>
+            <p>The SUMS includes records that span the lifecycle: for any given vehicle, the manufacturer must be able to answer what software was installed on what date, who authorised the update, what the impact assessment said, and what the verification produced. Years later, these records are what allow forensic reconstruction of which vehicles were affected by a discovered vulnerability.</p>
             <!-- DOK 2 Section 6 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>The EU Cyber Resilience Act (CRA)</h3>
+            <p>The Cyber Resilience Act, which entered into force in 2024 with full application from late 2027, is horizontal EU legislation covering cybersecurity of products with digital elements. It does not target the vehicle itself — that is R155's territory — but it applies to many components that go into a vehicle, and to the aftermarket products that vehicles connect with.</p>
+            <p>The CRA introduces lifecycle obligations of its own. Manufacturers of products with digital elements must:</p>
+            <ul class="content-list">
+                <li>Provide security updates for a defined support period (initially proposed as five years, with flexibility for products designed for longer use).</li>
+                <li>Report actively exploited vulnerabilities to ENISA within 24 hours of becoming aware and provide a follow-up notification within 72 hours.</li>
+                <li>Maintain a Software Bill of Materials (SBOM) so that components and their dependencies are traceable.</li>
+            </ul>
+            <p>The CRA's significance for automotive is that it formalises lifecycle obligations that were previously industry-specific or voluntary and applies them to the supply chain. A Tier 2 sensor manufacturer that previously had no direct regulatory obligation to maintain security updates may now have one under the CRA — and that obligation flows up to the Tier 1 and OEM that depend on the component.</p>
+            <p>The three instruments operate at different levels: the CSMS at the organisational level, the SUMS at the change-management level, and the CRA at the product-component level. Together they form a lifecycle framework that no single instrument provides alone.</p>
             <!-- DOK 2 Section 7 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>TARA as a recurring process, not a one-off</h3>
+            <p>In Module 2 you encountered TARA — Threat Analysis and Risk Assessment — as the structured methodology by which manufacturers identify and assess cybersecurity risks. At that point we treated it largely as a concept-phase activity: the assessment that feeds initial cybersecurity goals.</p>
+            <p>In lifecycle terms, that framing is incomplete. TARA is not done once. It is re-run whenever the conditions on which the previous assessment was based have changed materially. The CSMS requires this; ISO/SAE 21434 specifies it; and good engineering practice would do it anyway.</p>
+            <p>Potential triggers for re-running a TARA include:</p>
+            <ul>
+                <li>A new vulnerability is discovered in a component the TARA had assumed was safe.</li>
+                <li>A new attack technique is published that affects a class of systems present in the vehicle.</li>
+                <li>A planned OTA update changes the vehicle's behaviour, architecture, or attack surface.</li>
+                <li>A supplier change introduces components whose threat profile differs from the original.</li>
+                <li>Field data — anomaly reports, incident response output, monitoring telemetry — shows a previously unrecognised pattern of attack or attempted attack.</li>
+                <li>Cryptographic primitives or protocols used by the vehicle are deprecated or shown to be weak.</li>
+            </ul>
+            <p>Each re-assessment produces a delta: what is now different about the risk profile, and what mitigations (if any) need to change in response. The records of these re-assessments accumulate across the vehicle's life. They are part of what an auditor reviews at CSMS renewal, and what a regulator may demand if a vehicle is implicated in an incident.</p>
+            <p>The practical consequence is that an OEM's TARA library for a single vehicle platform may contain dozens of related assessments by the time the platform is several years old. The discipline is not in producing the first one — it is in keeping them coherent over time, so that the assumptions in one assessment can be traced through to the conclusions of another, and the cumulative picture remains legible.</p>
             <!-- DOK 2 Section 8 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 2 Section 9 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 2 Section 10 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 2 Section 11 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 2 Section 12 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>Responsibility split between OEM, Tier 1, and Tier 2</h3>
+            <p>The lifecycle is not the work of a single organisation. It is divided across the supply chain, and the division is uneven by design.</p>
+            <p>At a structural level:</p>
+            <ul>
+                <li><strong>The OEM is responsible to the regulator.</strong> It holds the CSMS certificate and the per-vehicle-type cybersecurity type approval. From the type approval authority's perspective, the OEM is the responsible party for everything that happens in the vehicle, including the parts supplied by others.</li>
+                <li><strong>Tier 1 suppliers are responsible to the OEM.</strong> They deliver complete systems — infotainment platforms, ADAS modules, body controllers, gateways. Their contractual obligations include cybersecurity work products: their own TARAs for the components they supply, evidence of secure development, vulnerability response commitments, and update mechanisms compatible with the OEM's SUMS.</li>
+                <li><strong>Tier 2 suppliers are responsible to the Tier 1. </strong> They supply the components inside the Tier 1's systems — semiconductors, sensors, communication modules, software libraries. Their cybersecurity obligations are largely defined by the Tier 1 contract, with the CRA increasingly imposing direct regulatory obligations on top.</li>
+            </ul>
+            <p>In lifecycle terms, this means that operations-and-maintenance work is also distributed. A vulnerability discovered in field operation may need:</p>
+            <ul>
+                <li>The OEM to triage the issue, assess type approval impact, and notify the regulator.</li>
+                <li>The Tier 1 to identify which component is affected and develop a fix.</li>
+                <li>The Tier 2 to provide an updated component, patch, or workaround.</li>
+                <li>The OEM to package and deliver the fix via SUMS-governed OTA, retaining records of which vehicles received it.</li>
+            </ul> 
+            <p>If any link in that chain is missing — the Tier 2 has discontinued the component, the Tier 1 no longer has the engineering capacity, the OEM's OTA mechanism does not reach a particular generation of vehicle — the fix may not happen, even though all three parties accept that it should. The chain is contractual; the chain is also physical and economic, and economics does not always cooperate with the contract. We return to this at DOK 3.</p>           
             <!-- DOK 2 QA cards/Questions section -->
             <div>
-                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 1 DOK level 1. Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the cards to see what matters. </span></p>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 3 DOK level 2. If at the end of this section you can describe what happens inside each phase, how the V-model relates design to verification, and how the CSMS, SUMS, and CRA layer on top of one another, you have what DOK 2 is meant to produce. The next section will ask you to stress-test all of it. A lifecycle looks clean on a diagram. These questions ask you to follow the connections between the phases — not just to know that they exist. <span class="marker">Flip the cards to see what matters. </span></p>
+
                 <div class="cards-grid">
                     <!-- QA 1 -->
                     <div class="flip-card">
@@ -480,14 +308,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-01</p>
                                 <p class="card-q">
-                                    What is an ECU, and approximately how many does a modern vehicle contain?
+                                    The V-model places verification activities opposite their corresponding design activities. Why does this matter for cybersecurity specifically, beyond the general engineering rationale?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    An Electronic Control Unit is a small, embedded computer that controls a specific function in the vehicle. A modern vehicle contains between 70 and 150 of them.
+                                    V-model for cybersecurity. Cybersecurity vulnerabilities discovered late are often symptoms of design or specification problems made early. A penetration test that finds a way to send unauthorized commands to the powertrain CAN bus is reporting a problem; the cause may be an architectural decision about gateway filtering made years before. The V-model makes the relationship between the level of finding and the level of original cause explicit, which is why late-stage cybersecurity fixes often unravel upstream design and re-validate downstream work.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -499,14 +327,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-02</p>
                                 <p class="card-q">
-                                    Name three wireless communication technologies found in connected vehicles.
+                                    CSMS and SUMS overlap significantly when an OTA update fixes a security vulnerability. What does each instrument require in that situation, and where would gaps appear if only one of them were in place?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Bluetooth, Wi-Fi, and cellular (4G/5G). V2X and the key fob RF also count.
+                                    CSMS and SUMS overlap. The CSMS requires that the manufacturer identify the vulnerability, assess risk, and decide on a treatment — the cybersecurity decision-making. The SUMS requires that the resulting software change be designed, validated, distributed, and recorded — the change-management mechanics. Without the CSMS, the change has no governance behind it (why was this update issued and is it the right one?). Without the SUMS, the decision has no reliable mechanism for reaching the vehicle (where did the update go, did it install, what is the new RxSWIN?). They are interlocked: each requires the other to be operationally complete.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -518,14 +346,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-03</p>
                                 <p class="card-q">
-                                    What does OTA stand for, and what does it allow a manufacturer to do?
+                                    TARA is described as a recurring rather than a one-off activity. What does this imply about the documentation and audit trail an OEM must maintain across the lifecycle of a single vehicle platform?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Over-the-Air. It allows a manufacturer to deliver software updates to the vehicle remotely, without a physical connection at a dealership.
+                                    TARA documentation across the lifecycle. The OEM must maintain a coherent set of TARAs that evolves over time — the initial concept-phase assessment, plus re-assessments triggered by new vulnerabilities, supplier changes, OTA-driven architecture changes, and field data. Each must be traceable to the previous: which assumptions changed, which conclusions changed, what mitigations were added or removed. The cumulative library is what allows the CSMS auditor to verify that risk management has been continuous rather than performed once and abandoned. It is also what allows a regulator to reconstruct, after an incident, what was known and when.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -537,14 +365,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-04</p>
                                 <p class="card-q">
-                                    Why does increased connectivity increase the cybersecurity attack surface of a vehicle?
+                                    A vulnerability in a Tier 2 component requires a fix that reaches vehicles in the field. Trace the chain of responsibility and identify at least two points where the chain can fail.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Every communication channel is a potential entry point. A vehicle that communicates over cellular, Bluetooth, Wi-Fi, and V2X simultaneously has multiple interfaces that did not exist in purely mechanical vehicles — each one a path through which malicious input could be introduced.
+                                    The Tier 2 fix chain. The OEM triages, assesses impact, and notifies the regulator. The Tier 1 identifies the affected component and develops the integration fix. The Tier 2 supplies the corrected component or patch. The OEM delivers the update via SUMS. The chain can fail in several places: the Tier 2 may have discontinued the component or gone out of business; the Tier 1 may no longer have engineering staff who worked on that integration; the OEM's OTA mechanism may not reach the vehicle generation in question (older cellular standard, end-of-support cohort). When any link fails, the fix may not reach the vehicle even though all three parties acknowledge it should.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -562,6 +390,14 @@
             <p></p>
             <p></p>
             <p></p>
+            <ul class="content-list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
             <p></p>
             <p></p>
             <p></p>
@@ -582,6 +418,14 @@
             <p></p>
             <p></p>
             <p></p>
+            <ul class="content-list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
             <p></p>
             <p></p>
             <p></p>
@@ -593,6 +437,14 @@
             <p></p>
             <p></p>
             <p></p>
+            <ul class="content-list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
             <p></p>
             <p></p>
             <p></p>
@@ -608,6 +460,14 @@
             <p></p>
             <p></p>
             <p></p>
+            <ul class="content-list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
             <p></p>
             <p></p>
             <p></p>
@@ -622,6 +482,14 @@
             <p></p>
             <p></p>
             <p></p>
+            <ul class="content-list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
             <p></p>
             <p></p>
             <p></p>
@@ -635,6 +503,14 @@
             <p></p>
             <p></p>
             <p></p>
+            <ul class="content-list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
             <p></p>
             <p></p>
             <p></p>
