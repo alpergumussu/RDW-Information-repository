@@ -1,6 +1,8 @@
-# Connected Vehicle Landscape � Cybersecurity Reference Site
+# Connected Vehicle Landscape   Cybersecurity Reference Site
 
-> Exploring the evolution of connected vehicles � from modern attack surfaces to regulatory frameworks and the ethical dimensions of automotive cybersecurity.
+The index file in the root is there to facilitate routing for GitHub pages.
+
+> Exploring the evolution of connected vehicles   from modern attack surfaces to regulatory frameworks and the ethical dimensions of automotive cybersecurity.
 
 ---
 
@@ -26,7 +28,7 @@ It covers the broader context surrounding modern automotive cybersecurity: how v
 
 ## Project Context
 
-| **Client** | RDW � Rijksdienst voor het Wegverkeer |
+| **Client** | RDW   Rijksdienst voor het Wegverkeer |
 | **Institution** | Windesheim University of Applied Sciences |
 | **Programme** | HBO-ICT, Security Engineering / Cyber routes |
 | **Scope** | Automotive cyber security awareness and pen-testing |
