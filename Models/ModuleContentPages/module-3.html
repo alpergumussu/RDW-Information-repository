@@ -270,7 +270,7 @@
             <p>In Module 2 you encountered TARA — Threat Analysis and Risk Assessment — as the structured methodology by which manufacturers identify and assess cybersecurity risks. At that point we treated it largely as a concept-phase activity: the assessment that feeds initial cybersecurity goals.</p>
             <p>In lifecycle terms, that framing is incomplete. TARA is not done once. It is re-run whenever the conditions on which the previous assessment was based have changed materially. The CSMS requires this; ISO/SAE 21434 specifies it; and good engineering practice would do it anyway.</p>
             <p>Potential triggers for re-running a TARA include:</p>
-            <ul>
+            <ul class="content-list">
                 <li>A new vulnerability is discovered in a component the TARA had assumed was safe.</li>
                 <li>A new attack technique is published that affects a class of systems present in the vehicle.</li>
                 <li>A planned OTA update changes the vehicle's behaviour, architecture, or attack surface.</li>
@@ -284,13 +284,13 @@
             <h3>Responsibility split between OEM, Tier 1, and Tier 2</h3>
             <p>The lifecycle is not the work of a single organisation. It is divided across the supply chain, and the division is uneven by design.</p>
             <p>At a structural level:</p>
-            <ul>
+            <ul class="content-list">
                 <li><strong>The OEM is responsible to the regulator.</strong> It holds the CSMS certificate and the per-vehicle-type cybersecurity type approval. From the type approval authority's perspective, the OEM is the responsible party for everything that happens in the vehicle, including the parts supplied by others.</li>
                 <li><strong>Tier 1 suppliers are responsible to the OEM.</strong> They deliver complete systems — infotainment platforms, ADAS modules, body controllers, gateways. Their contractual obligations include cybersecurity work products: their own TARAs for the components they supply, evidence of secure development, vulnerability response commitments, and update mechanisms compatible with the OEM's SUMS.</li>
                 <li><strong>Tier 2 suppliers are responsible to the Tier 1. </strong> They supply the components inside the Tier 1's systems — semiconductors, sensors, communication modules, software libraries. Their cybersecurity obligations are largely defined by the Tier 1 contract, with the CRA increasingly imposing direct regulatory obligations on top.</li>
             </ul>
             <p>In lifecycle terms, this means that operations-and-maintenance work is also distributed. A vulnerability discovered in field operation may need:</p>
-            <ul>
+            <ul class="content-list">
                 <li>The OEM to triage the issue, assess type approval impact, and notify the regulator.</li>
                 <li>The Tier 1 to identify which component is affected and develop a fix.</li>
                 <li>The Tier 2 to provide an updated component, patch, or workaround.</li>
@@ -385,226 +385,65 @@
             <!-- DOK 2 content end -->
             <!-- DOK 3 content -->
             <h2>DOK Level 3 — Strategic Thinking</h2>
+            <p>At DOK 1 you mapped the phases. At DOK 2 you mapped the work inside them. This section asks what happens when the lifecycle is stressed — when timelines compress, suppliers fail, vehicles change hands repeatedly, and the boundary between "still supported" and "effectively abandoned" becomes a matter of judgment rather than policy. None of these questions have settled answers. You are working with the same incomplete information that practitioners in this field work with.</p>
             <!-- DOK 3 Section 1 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>Supply chain continuity when a supplier fails</h3>
+            <p>The lifecycle frameworks assume that the supply chain remains in place across the years a vehicle is supported. Tier 1s continue trading, Tier 2s continue producing, and components remain available either as original parts or as compatible replacements. The CSMS and the contractual chain are designed around that assumption.</p>
+            <p>In practice the assumption breaks regularly. Suppliers go bankrupt, are acquired, exit the automotive market, or simply discontinue product lines that the OEM still depends on. The 2020s alone saw notable consolidations across the automotive semiconductor industry, the infotainment platform space, and the cellular module market. Each consolidation closed product lines and ended support contracts that had been counted on.</p>
+            <p>Consider a concrete scenario. An OEM ships a vehicle in 2022 with a TCU containing a cellular modem from a specific Tier 2 supplier. In 2027, that supplier is acquired by a larger company that decides to discontinue the product line. The Tier 1 that integrates the TCU still has stock for some years but no engineering support for new firmware. In 2029, a vulnerability is published in that modem's baseband firmware. The OEM's CSMS requires a response. The Tier 1 has no fix. The Tier 2 no longer exists in a form that can produce one.</p>
+            <p>What should the OEM do? The options are all unsatisfactory:</p> 
             <ul class="content-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>Reverse-engineer the modem firmware and produce a fix in-house. Likely outside the OEM's competence and possibly outside what the licence terms with the (now-defunct) supplier permitted.</li>
+                <li>Compensate by hardening other layers. Tighten gateway filtering, restrict what the TCU can do, accept that the baseband vulnerability remains but limit what it can be used to reach. A reasonable mitigation but not a fix.</li>
+                <li>Issue a recall for hardware replacement. Possible but extremely expensive, and requires a replacement part that may not exist.</li>
+                <li>Disable the affected functionality. Possibly turning off remote services, eCall, or OTA capability itself. The vehicle becomes less of a connected vehicle, which is a degradation owners did not sign up for.</li>
+                <li>Accept the risk and document the rationale. Formally acceptable under CSMS if properly justified, but uncomfortable territory if the vulnerability is severe and the vehicle population is large.</li>
             </ul>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-
+            <p>The CSMS requires the OEM to make a decision and document it. It does not provide a mechanism that fixes the underlying problem: a piece of the supply chain on which the vehicle's security depends no longer exists. The framework assumes continuity that the market does not guarantee.</p>
+            <p>The deeper question is whether the framework should require something different upstream — perhaps mandated escrow of firmware source code and signing keys, perhaps required engineering succession plans, perhaps regulator-funded support arrangements for orphaned components. Each of those interventions has costs and consequences of its own, and none is currently in place at the regulatory level.</p>         
             <!-- DOK 3 Section 2 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <ul class="content-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>End of Life and End of Support: two dates that are often confused</h3>
+            <p>The lifecycle ends, eventually — but it ends twice, and the two endings are not the same. The vocabulary matters because the obligations attached to each are different, and conflating them produces a misleading picture of when a manufacturer's cybersecurity duties actually finish.</p>
+            <p>End of Life (EOL) is the point at which the item is no longer being produced or sold. The manufacturing line for that vehicle model has closed. Spare parts may still be available; vehicles already produced are still in active operation in the field. EOL is a production decision, not a cybersecurity decision. Crucially, ISO/SAE 21434 cybersecurity obligations may still apply during the period after EOL, because vehicles remain on the road for 10–15 or more years after production ends.</p>
+            <p>End of Support (EOS) is the point at which the manufacturer formally declares that it will no longer provide cybersecurity support — patches, updates, monitoring — for the item. ISO/SAE 21434 requires this declaration to be explicitly defined and communicated to all relevant stakeholders. EOS is the cybersecurity decision, and it has direct regulatory consequences: after EOS, the operational and maintenance obligations associated with that vehicle population end.</p>
+            <p>EOL and EOS do not necessarily coincide. A vehicle model may go out of production years before its cybersecurity support window closes. A common pattern looks like this: production ends in 2030 (EOL), but the manufacturer commits to ten further years of cybersecurity support, declaring EOS for 2040. During the EOL-to-EOS gap, vehicles are no longer being built, but the manufacturer must still monitor for vulnerabilities, issue OTA updates, and respond to incidents — under both R155's CSMS and R156's SUMS.</p>
+            <p>With the distinction in place, the questions that follow become sharper.</p>  
             <!-- DOK 3 Section 3 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <ul class="content-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>Whose decision is EOS?</h3>
+            <p>The OEM decides, in practice. ISO/SAE 21434 requires the declaration to be explicit and communicated to stakeholders, but it does not set a minimum date. The CRA, applied to component manufacturers, proposed a minimum support period (five years was the initial figure, with discretion to extend for products with longer expected use). Automotive practice in major markets typically commits to longer support — ten or fifteen years from EOL for some OEMs — but this is policy, not regulation.</p>
+            <p>Owners are informed of EOS but have no veto. This is reasonable from an industrial perspective — the OEM bears the cost — and uncomfortable from an ownership perspective. A vehicle that is still functional, still on the road, still being driven by someone who paid for it, may be declared cybersecurity-unsupported by a decision in which the owner had no say. The EOL date is irrelevant to that owner; the EOS date is what determines whether their vehicle will receive a patch when the next vulnerability lands.</p>     
             <!-- DOK 3 Section 4 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>What does EOS actually mean in practice?</h3>
+            <p>The term EOS is doing a lot of work. Different OEMs draw the line at different points, and ISO/SAE 21434 requires the declaration to be defined but does not specify what it must contain. EOS can mean any of the following:</p>        
             <ul class="content-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>No new feature updates, but security patches continue.</li>
+                <li>No new security patches, but the OTA infrastructure continues to function.</li>
+                <li>Neither updates nor backend services — the vehicle is no longer a connected vehicle in the OEM's eyes.</li>
+                <li>Active termination — keys revoked, backend connections refused, eCall services withdrawn.</li>        
             </ul>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <p>Two OEMs can both legitimately use the term EOS to mean meaningfully different things. The owner reading the warranty booklet rarely catches the distinction. The standard requires the manufacturer to declare what EOS covers; it does not require the declaration to be comparable across manufacturers.</p>   
             <!-- DOK 3 Section 5 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <ul class="content-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>What happens to data and credentials between EOL and EOS — and after?</h3>
+            <p>Between EOL and EOS, the vehicle is in a state that is well-defined regulatorily but commercially awkward: still supported, no longer being produced, often quietly deprioritized by the OEM whose engineering attention has moved to newer models. Cybersecurity obligations remain in force. Whether they are fulfilled with the same rigor as for current production vehicles is an empirical question, and one that CSMS auditors have to actively examine rather than assume.</p>
+            <p>After EOS, the situation is different. A past EOS vehicle still holds cryptographic keys, may still contain personal data in its infotainment system, may still be associated with the original owner's accounts at the OEM. Few frameworks address this cleanly: should keys be revoked centrally at EOS? Should the vehicle be decommissioned in a positive sense — wiped, disconnected, formally retired? In practice, the vehicle simply continues, perhaps in the hands of an owner several rungs down the resale chain, still containing whatever it contained when EOS was declared, and possibly still connecting to backend services that the OEM has wound down or repurposed.</p>
             <!-- DOK 3 Section 6 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <ul class="content-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>And what about second-hand owners?</h3>
+            <p>EOS policy is almost always written from the first owner's perspective. The owner who buys a vehicle new and trades it in after seven years has experienced a different lifecycle than the owner who buys the same vehicle at fourteen years old from a small lot. The second owner's relationship with the OEM is often non-existent. The information about update history, EOL date, EOS date, and known vulnerabilities is in the OEM's system, not in the vehicle's documentation. Many second-hand buyers do not know what they have bought, from a cybersecurity perspective, and have no easy way to find out — including whether the vehicle has already passed EOS.</p>
+            <p>This is one of the genuinely under-addressed problems in the lifecycle framework. R155 governs the OEM's process. R156 governs the update mechanism. Neither has a strong instrument for the question of how cybersecurity status — including EOL and EOS dates — should follow the vehicle as it changes hands across two decades.</p>  
             <!-- DOK 3 Section 7 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 3 Section 8 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 3 Section 9 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 3 Section 10 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 3 Section 11 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 3 Section 12 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>Strategic implications</h3>
+            <p>The supply chain continuity problem and the EOS problem are not separate. They are different faces of the same structural condition: regulatory frameworks address what the OEM should do, but a vehicle's lifecycle is longer than any single party's reliable engagement with it. Suppliers exit faster than vehicles wear out. OEMs declare EOS before vehicles end use. Owners change more often than software does. The system assumed continuity that the underlying market does not produce.</p>
+            <p>There are several broad directions reform might take. Each involves trade-offs and none is uncontroversial.</p>
+            <ul class="content-list">
+                <li>Mandated longer EOS windows. Forces OEMs to plan for longer post-EOL support but raises the price of new vehicles and may discourage feature investment.</li>
+                <li>Escrow and succession requirements. Require suppliers to deposit critical IP — firmware source, signing keys, design documentation — into escrow that becomes accessible if the supplier fails. Increases costs and creates IP-protection complexity, but materially improves continuity, particularly across the EOL-to-EOS gap.</li>
+                <li>A second-market cybersecurity transparency regime. Require that cybersecurity status — update history, known vulnerabilities, EOL date, EOS date — be disclosed at every vehicle sale. Closer to consumer-protection regulation than to current automotive practice.</li>
+                <li>A regulated post-EOS decommissioning protocol — formal retirement of the vehicle's connected functions at or after EOS, central key revocation, defined wind-down of backend services. Closer to the regulatory model used for aircraft retirement than to anything currently in automotive practice.</li>
+            </ul>
+            <p>These are not technical questions. They are policy questions about how risk and cost should be distributed between manufacturers, suppliers, owners, and the public. The DOK 3 questions below ask you to reason through some of them. There are no correct answers — only better and worse-reasoned ones.</p>                
             <!-- DOK 3 QA cards/Questions section -->
             <div>
-                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 1 DOK level 1. Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the cards to see what matters. </span></p>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 3 DOK level 3. The lifecycle frameworks describe what should happen. This section asked what happens when the conditions that make those frameworks workable stop holding. If you have left the section with sharper questions than you entered with, that is the section working as intended. These questions ask what actually happens when timelines are compressed, budgets are cut, suppliers change hands, and vehicles outlive the organisations that built them. Reason carefully. <span class="marker"> Flip the cards to see what matters. </span></p>
                 <div class="cards-grid">
                     <!-- QA 1 -->
                     <div class="flip-card">
@@ -612,14 +451,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-01</p>
                                 <p class="card-q">
-                                    What is an ECU, and approximately how many does a modern vehicle contain?
+                                    An OEM discovers a serious vulnerability in a component supplied by a Tier 2 that no longer exists as an operating company. Walk through the options available to the OEM under the current CSMS framework. Identify which option you would recommend and why — and what residual risk remains regardless of which option is chosen.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    An Electronic Control Unit is a small, embedded computer that controls a specific function in the vehicle. A modern vehicle contains between 70 and 150 of them.
+                                    Five options are available — reverse engineering, compensating controls, recall and hardware replacement, functional disable, and risk acceptance with documentation. The recommended option will depend on the severity of the vulnerability and the size of the affected vehicle population, but compensating controls plus risk acceptance is the most common real-world response. The residual risk is what your option leaves on the table; if you cannot name that residual risk specifically, you have not finished the analysis.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -631,14 +470,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-02</p>
                                 <p class="card-q">
-                                    Name three wireless communication technologies found in connected vehicles.
+                                    EOS dates are set by the OEM and communicated to the original buyer, but a vehicle's average operational life involves multiple owners — many of whom never had a direct relationship with the OEM and may not even know their vehicle's EOL or EOS dates. Propose a mechanism that would make cybersecurity status follow the vehicle rather than the original owner. Identify what would have to change in current frameworks for your proposal to work.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Bluetooth, Wi-Fi, and cellular (4G/5G). V2X and the key fob RF also count.
+                                    If your mechanism relies entirely on the OEM voluntarily transferring information at point of sale, you have not addressed the problem — most resale does not pass through OEM channels. The structural change required is making cybersecurity status part of the vehicle's regulated documentation, on a par with the V5C or the APK certificate, rather than part of the customer relationship.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -650,14 +489,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-03</p>
                                 <p class="card-q">
-                                    What does OTA stand for, and what does it allow a manufacturer to do?
+                                    A regulator considers mandating fifteen years of cybersecurity support after EOL for all new vehicles. Analyse the consequences for OEM behaviour, supplier behaviour, vehicle prices, and the second-hand market. Argue whether the policy is net positive or net negative, acknowledging the strongest counterargument.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Over-the-Air. It allows a manufacturer to deliver software updates to the vehicle remotely, without a physical connection at a dealership.
+                                    A fifteen-year mandate raises prices for new vehicles. Whether that is net positive depends on whether the security gains over the lifecycle exceed the welfare loss from higher prices and possibly delayed fleet renewal. The strongest counterargument is that the secondary effect — delayed fleet turnover — may keep older, less safe vehicles on the road longer, with consequences that exceed the cybersecurity gain. A good answer engages with that counterargument; a weaker one ignores it.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -669,14 +508,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-04</p>
                                 <p class="card-q">
-                                    Why does increased connectivity increase the cybersecurity attack surface of a vehicle?
+                                    The supply chain continuity problem and the EOL-to-EOS problem are described as faces of the same structural condition. Identify the structural condition in your own words, and propose whether it is better addressed by regulation, by industry self-organisation, by market mechanisms (e.g. insurance), or by some combination. Justify your position.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Every communication channel is a potential entry point. A vehicle that communicates over cellular, Bluetooth, Wi-Fi, and V2X simultaneously has multiple interfaces that did not exist in purely mechanical vehicles — each one a path through which malicious input could be introduced.
+                                    The structural condition is asymmetry of duration: the vehicle outlasts the engagement of every party responsible for its security. Whatever mechanism you propose must address that asymmetry, not just the symptoms of it. If your proposal still relies on the original parties remaining engaged, you have restated the problem.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -689,178 +528,49 @@
             <!-- DOK 3 content end -->
             <!-- DOK 4 content -->
             <h2>DOK Level 4 — Extended Thinking</h2>
+            <p>You have reached the end of the lifecycle — which is also, in a connected vehicle, the beginning of the next one. What follows are not questions about process or compliance. They are questions about what it means to be responsible for a system that will outlast your engagement with it, your organization’s engagement with it, and possibly the regulatory framework that governed it at the start.</p>
             <!-- DOK 4 Section 1 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-
+            <h3>Open problem: stewardship across institutional time</h3>
+            <p>A vehicle on the road in 2044 was designed in 2024. The engineers who designed it are, on average, no longer at the company that built it. The regulator who approved it may have been reorganized, merged, and renamed. The cryptographic algorithms it depends on may be deprecated. The supplier base that produced its components has, in part, ceased to exist. The framework that governed its cybersecurity at launch — UN R155 — has had at least one round of substantial revision, possibly more.</p>
+            <p>Every party with a contractual or institutional duty toward that vehicle's cybersecurity has, in some sense, moved on. The vehicle has not.</p>
+            <p>This is not a unique feature of automotive. Aircraft remain in service for thirty to forty years; some military equipment lasts longer. What is unique is that none of those long-lived systems have, until recently, been continuously connected to networks they did not control, exposed to actively evolving adversaries, and dependent on cryptographic protections that have known expiry conditions.</p>
+            <p>The lifecycle frameworks we have are organizational frameworks. They specify what manufacturers, suppliers, and regulators should do during the period in which they remain meaningfully engaged. They do not specify what happens to security responsibility once that engagement effectively ends — neither because the support period is over (that is at least defined) nor because the relevant party has dissolved, been absorbed, or simply lost the institutional memory required to act.</p>
+            <p>This raises a question that the regulatory framework has not yet answered: what does it mean to be responsible for the security of a system whose operational life exceeds the institutional life of the parties responsible for it?</p>
+            <p>There are several broad models the answer might take, each with deep consequences.</p>
+            <ul class="content-list">
+                <li>The retirement model. At EOS, the vehicle is formally decommissioned from a connected-systems perspective — keys revoked, backend disconnection enforced, V2X participation disabled. The vehicle continues to exist as a vehicle but ceases to exist as a connected vehicle. This mirrors aviation, where aircraft are formally retired from registers and their type certificates closed. It requires a regulatory infrastructure capable of executing the retirement, and an owner population willing to accept that their vehicle has been substantially altered without their decision.</li>
+                <li>The transfer model. Cybersecurity responsibility is transferred at EOS to a designated successor — perhaps an independent industry body, perhaps a regulator-administered fund, perhaps the owner of the vehicle. Each has problems. Industry bodies need funding and a mandate they currently do not have. Regulators are not engineering organisations. Owners are not security professionals, and most cannot reasonably be expected to maintain their own vehicle's firmware.</li>
+                <li>The acceptance model. Society accepts that some level of cybersecurity degradation is inevitable in older connected vehicles, and manages the consequences through other mechanisms — insurance, road regulation, possibly access restrictions to certain infrastructure (urban areas, autonomous-vehicle corridors). The vehicle remains in use but is implicitly understood to be a different kind of risk than a newer one. This is closer to how we treat older vehicles for emissions and active-safety equipment today, where PTI-style inspections gradually disqualify them from certain uses.</li>
+                <li>The collective stewardship model. Cybersecurity for connected vehicles past EOS becomes a publicly-funded function — not because the OEM has failed, but because the vehicles are now part of public infrastructure in a way that no longer fits a purely private support model. The argument is that the externalities of insecure vehicles fall on the public: a compromised vehicle disrupts traffic, interferes with V2X infrastructure, contributes to cascading incidents, and creates safety risks for road users who never bought the vehicle. If the public bears the cost of the risk, there is a case for the public bearing the cost of mitigation once the original manufacturer has, by agreement, stepped away.</li>
+            </ul>
+            <p>None of these models is currently in operation. None has been seriously debated at the regulatory level in the way that pre-market cybersecurity has been debated. The DOK 4 questions below sit in this territory.</p>        
             <!-- DOK 4 Section 2 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>Open problem: cryptographic deprecation across the lifecycle</h3>
+            <p>A second open problem deserves naming separately, because it is one of the few in this masterclass with a known schedule. The cryptographic algorithms that currently protect vehicle communications, OTA updates, and stored credentials are not permanent. Specific deprecation timelines are visible:</p>
+            <ul class="content-list">
+                <li>SHA-1 has been considered weak since the mid-2010s and is being removed from active use across IT systems. Some automotive systems still depend on it in legacy paths.</li>
+                <li>RSA with smaller key sizes (1024-bit, and increasingly 2048-bit for long-lived signatures) is approaching the end of its trusted life within current best-practice horizons.</li>
+                <li>Conventional public-key cryptography overall — RSA, elliptic-curve cryptography (ECC) — is at risk from sufficiently large quantum computers. Estimates of when such machines will exist vary widely, but the post-quantum cryptography (PQC) transition is being actively standardised by NIST and others, with the first PQC standards published in 2024.</li>
+            </ul>
+            <p>The lifecycle problem is that a vehicle designed today, with current cryptography, will still be on the road when at least some of these transitions have happened. A vehicle whose OTA signing keys are RSA-2048 in 2026 may be in operation in 2042 with signing keys that would now be considered marginal. A vehicle whose V2X messages are signed with current ECC may, by then, be exchanging messages with a V2X ecosystem that has moved to PQC.</p>
+            <p>The technical mitigation — crypto agility, the ability to update cryptographic primitives via software — is well understood and increasingly required by standards. The operational mitigation — actually performing the migration across a fielded vehicle population over the years available — is much less well understood. It is one of the largest open lifecycle problems and one of the few with a forced timeline.</p>
             <!-- DOK 4 Section 3 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 4 Section 4 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 4 Section 5 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 4 Section 6 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 4 Section 7 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 4 Section 8 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 4 Section 9 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 4 Section 10 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 4 Section 11 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <!-- DOK 4 Section 12 content -->
-            <h3>Placeholder</h3>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <h3>The synthesis prompt</h3>
+            <p>This is the DOK 4 exercise. The questions that follow it are shorter and more bounded; this is where the heaviest reasoning happens.</p>
+            <p><strong>The question is:</strong></p>
+            <p>Design a cybersecurity lifecycle framework (or a specific extension to the current framework) that addresses the stewardship problem identified above. Your proposal must work for vehicles that will be in operation in 2045 and beyond, designed and approved under conditions that may no longer apply.</p>
+            <p><strong>Your proposal should:</strong></p>
+            <ul class="content-list">
+                <li><strong>Identify the specific aspect of the stewardship problem the proposal addresses.</strong>"Long-term security" is not a problem; organizational discontinuity, cryptographic deprecation, and orphaned components are. Name what you are solving.</li>
+                <li><strong>Reference the existing framework.</strong> Where does your proposal sit in relation to R155, R156, ISO/SAE 21434, the CRA? Is it an extension, a replacement, a complement? Frameworks built without reference to what already exists tend not to survive contact with regulatory reality.</li>
+                <li><strong>Specify what changes — institutionally, contractually, technically.</strong> Who does something they are not currently doing? Who pays? Who has authority they do not currently have? "Better coordination" is not a proposal.</li>
+                <li><strong>Identify the stakeholders whose interests are in tension, and how your proposal navigates them.</strong> OEMs, suppliers, regulators, owners, second-hand buyers, the public. A proposal that helps everyone equally is suspicious; most worthwhile policy distributes costs and benefits unevenly and acknowledges the trade-off.</li>
+                <li><strong>State what your proposal does not solve. </strong>There is no proposal that closes every gap. Naming the residual problem honestly is a sign of analytical maturity.</li>          
+            </ul>
+            <p>The format is one you might find in a working group submission, a regulatory consultation, or an industry position paper. What matters is the reasoning, not the institutional polish.</p>            
             <!-- DOK 4 QA cards/Questions section -->
             <div>
-                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 1 DOK level 1. Before moving on, take a moment to check what you have taken in. These questions require nothing beyond what you have just read — no prior knowledge, no analysis. If you find yourself uncertain, the answer is in the text above.  <span class="marker"> Flip the cards to see what matters. </span></p>
+                <p style="font-weight: bold; max-width: 820px;">You have reached the end of module 3. And therefore reached the edge of what the lifecycle framework can currently tell you. The questions below sit beyond it. They are not designed to be solved within an evening. They are the questions that remain after everything else has been answered. They are designed to be carried with you. Take your time with them. <span class="marker"> Flip the cards to see what matters. </span></p>
                 <div class="cards-grid">
                     <!-- QA 1 -->
                     <div class="flip-card">
@@ -868,14 +578,14 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-01</p>
                                 <p class="card-q">
-                                    Placeholder
+                                    Cryptographic deprecation is one of the few lifecycle problems with a known schedule. Vehicles being designed now will operate through at least one major cryptographic transition. What is the right relationship between regulatory mandates and engineering judgment in managing that transition? Where would you place the line — and what does where you place it reveal about your underlying view of how regulation should work?
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Placeholder
+                                    Where you placed the line is the answer. The reasoning behind where you placed it is the better answer.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
@@ -887,58 +597,19 @@
                             <div class="flip-front">
                                 <p class="card-num">Q-02</p>
                                 <p class="card-q">
-                                    Placeholder
+                                    A second-hand owner buys a fourteen-year-old connected vehicle from a small dealer. They have no relationship with the OEM. The vehicle has six years of operational life remaining and is still on the road. From a lifecycle responsibility perspective, who owes this owner what? Construct your answer carefully — there is more than one defensible position, and the choice between them is moral as much as technical.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                             </div>
                             <div class="flip-back">
                                 <p class="card-back-label">Answer</p>
                                 <p class="card-a">
-                                    Placeholder
+                                    The defensible positions are not equivalent. Notice which one you reached for first and ask why.
                                 </p>
                                 <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
                             </div>
                         </div>
-                    </div>
-                    <!-- QA 3 -->
-                    <div class="flip-card">
-                        <div class="flip-inner">
-                            <div class="flip-front">
-                                <p class="card-num">Q-03</p>
-                                <p class="card-q">
-                                    Placeholder
-                                </p>
-                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
-                            </div>
-                            <div class="flip-back">
-                                <p class="card-back-label">Answer</p>
-                                <p class="card-a">
-                                    Placeholder
-                                </p>
-                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- QA 4 -->
-                    <div class="flip-card">
-                        <div class="flip-inner">
-                            <div class="flip-front">
-                                <p class="card-num">Q-04</p>
-                                <p class="card-q">
-                                    Placeholder
-                                </p>
-                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
-                            </div>
-                            <div class="flip-back">
-                                <p class="card-back-label">Answer</p>
-                                <p class="card-a">
-                                    Placeholder
-                                </p>
-                                <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip back</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- QA 4 end -->
+                    </div>               
                 </div>
             </div>
             <!-- DOK 4 QA cards/Questions section end -->
