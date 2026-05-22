@@ -244,7 +244,7 @@
                         <div class="flip-front">
                             <p class="card-num">Q-03</p>
                             <p class="card-q">
-                               A vehicle's ADAS system relies on cloud-based processing for object classification. The cloud backend becomes unavailable due to a DDoS attack. At the same time, the vehicle's V2X module starts receiving anomalous messages from a compromised roadside unit. What does graceful degradation require in this scenario, and what happens if the system was not designed with these two simultaneous failures in mind?
+                                A vehicle's ADAS system relies on cloud-based processing for object classification. The cloud backend becomes unavailable due to a DDoS attack. At the same time, the vehicle's V2X module starts receiving anomalous messages from a compromised roadside unit. What does graceful degradation require in this scenario, and what happens if the system was not designed with these two simultaneous failures in mind?
                             </p>
                             <span class="card-hint"><i class="ti ti-refresh" style="font-size:13px" aria-hidden="true"></i> flip for answer</span>
                         </div>
@@ -296,12 +296,34 @@
             <p>The result is a trust relationship with a formal asymmetry at its core. The vehicle that receives a V2X message is certified to a standard that includes continuous monitoring, incident response, and supply chain security requirements. The roadside unit that sent it may not be. As V2X transitions from advisory to operational, that asymmetry stops being a theoretical concern and becomes a liability question: when a vehicle acts on a V2X message from infrastructure that was not held to the same standard, and something goes wrong, who is responsible?</p>
             <p>That question has no answer in current frameworks. It will need one.</p>
             <!-- DOK 3 Section 2 content -->
+            <h3>
+                Quantum computing and the cryptographic foundations of vehicle security
+            </h3>
+            <p>
+                Every security mechanism covered in this masterclass — secure boot, OTA integrity, V2X message authentication, PKI certificate hierarchies — depends on cryptography. Specifically, it depends on the computational difficulty of certain mathematical problems. RSA encryption relies on the difficulty of factoring large numbers. Elliptic curve cryptography, the preferred approach in automotive systems, relies on the difficulty of the elliptic curve discrete logarithm problem. These problems are hard for classical computers. They are not hard for a sufficiently powerful quantum computer.
+            </p>
+            <p>
+                Shor's algorithm, developed in 1994, can solve both problems in polynomial time on a quantum computer. A quantum computer capable of running Shor's algorithm at scale would render RSA and ECC effectively broken — meaning every digital signature, every certificate, every authenticated OTA update, and every V2X message in the current automotive security architecture would lose its cryptographic foundation.
+            </p>
+            <p>
+                That computer does not exist yet. Current quantum hardware is noisy, error-prone, and limited to hundreds or low thousands of qubits. Breaking RSA-2048 is estimated to require millions of error-corrected logical qubits. The timeline is genuinely uncertain — estimates from serious researchers range from ten to thirty years, with some arguing it may never be practically achievable at that scale.
+            </p>
+            <p>
+                The concern is not that quantum computers will break vehicle cryptography tomorrow. The concern is a property called harvest now, decrypt later. An adversary with sufficient storage can record encrypted or signed traffic today — OTA update packages, V2X messages, telematics streams — and decrypt them retroactively once quantum capability exists. For data with long-term sensitivity, the threat is present even if the decryption capability is years away.
+            </p>
+            <p>
+                NIST completed its post-quantum cryptography standardisation process in 2024, publishing the first wave of quantum-resistant algorithms — CRYSTALS-Kyber for key encapsulation and CRYSTALS-Dilithium for digital signatures. These algorithms are designed to resist attacks from both classical and quantum computers. The automotive industry will eventually need to migrate to these or equivalent standards.
+            </p>
+            <p>
+                The migration problem is significant. Vehicles have operational lifetimes of fifteen to twenty years. A vehicle certified today under R155, using ECC-based cryptography, may still be on the road when quantum capability reaches a relevant threshold. Retrofitting cryptographic algorithms via OTA is possible in principle but requires that the hardware security modules and ECUs support the new algorithms — which current generation hardware may not. The migration is not just a software update. It is a hardware generation problem.
+            </p>
+            <!-- DOK 3 Section 3 content -->
             <h3>Where manufacturers come from — and what their governments can do</h3>
             <p>A vehicle contains components from dozens of countries. The ECU might be designed in Germany, fabricated in Taiwan, programmed with software from a US company, using a cellular modem from a Chinese supplier, running an open-source library maintained by a developer in Russia.</p>
             <p>Each of those suppliers operates under the laws of their jurisdiction. Those laws may require cooperation with intelligence services. They may permit — or mandate — the insertion of capabilities that would not be disclosed to the OEM or the end customer.</p>
             <p>This is not a novel concern. The debate around Huawei's role in 5G infrastructure turned on exactly this question — whether a company subject to Chinese national security law can be trusted with critical communications infrastructure. The automotive supply chain is more complex, more opaque, and less scrutinized than the 5G supply chain.</p>
             <p>The specific risk is not necessarily a deliberate backdoor — though that is possible. It is that a supplier operating under a foreign jurisdiction may be legally compelled to provide access to data flowing through their component, or to enable a capability that was not disclosed in the component specification. The OEM may not know. The type approval authority almost certainly does not.</p>
-            <!-- DOK 3 Section 3 content -->
+            <!-- DOK 3 Section 4 content -->
             <h3>Coordination, interoperability, and the dissolving boundary</h3>
             <p>The Netherlands has an unusually dense institutional landscape for automotive cybersecurity. What they do not yet do systematically is operate together — and that gap matters, because the threat landscape does not respect organizational mandates.</p>
             <p>But the coordination problem does not stop at national borders. A Dutch-registered vehicle driving through Germany, France, and Spain crosses four regulatory jurisdictions. R155 applies throughout — but implementation varies. A V2X message generated by French roadside infrastructure must be interpretable by a vehicle certified under Dutch type approval. An OTA update delivered via a roaming cellular connection crosses multiple network operators and potentially multiple legal jurisdictions simultaneously.</p>
@@ -310,7 +332,7 @@
             <p>The boundary of the connected vehicle is already dissolving. Autonomous delivery drones, last-mile logistics robots, and humanoid platforms like Boston Dynamics or Tesla Optimus are variations on the same architecture — software-defined, network-connected, physically present in the world, and operating in proximity to people. They share attack surfaces, infrastructure dependencies, and in many cases software stacks with passenger vehicles. The cybersecurity engineering challenges are identical: secure boot, authenticated communication, OTA integrity, sensor spoofing resistance, safe fallback behavior.</p>
             <p>The frameworks being built for automotive today — ISO/SAE 21434, R155, TARA methodology — are the first iteration of what will eventually need to govern all of these platforms. The institutions that learn to coordinate now, across organizational and national boundaries, will be better positioned than those that wait until the overlap forces them to.</p>
             <p>The question is the same one as before: will the coordination happen deliberately, or will it be forced by an incident that made the gap impossible to ignore?</p>
-            <!-- DOK 3 Section 3 content -->
+            <!-- DOK 3 Section 5 content -->
             <!-- DOK 3 QA cards/Questions section -->
             <p style="font-weight: bold; max-width: 820px;"> You have reached the end of module 4 DOK level 3. The systems described above interact in ways that are not always obvious until something goes wrong. These questions ask you to trace those interactions before they become incidents. <span class="marker"> Flip the cards to see what matters. </span></p>
             <div class="cards-grid">
