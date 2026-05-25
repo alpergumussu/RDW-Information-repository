@@ -19,7 +19,9 @@
 
 .flip-card {
     height: 375px;
-    cursor: pointer
+    cursor: pointer;
+
+    overflow: hidden; /* important for Firefox */
 }
 
     .flip-card.tall {
@@ -35,7 +37,9 @@
     width: 100%;
     height: 100%;
     transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
-    transform-style: preserve-3d
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    will-change: transform; /* Firefox compositing fix */
 }
 
 .flip-card.flipped .flip-inner {
@@ -55,7 +59,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: var(--color-background-primary)
+    background: var(--color-background-primary);
+    /* Firefox fixes */
+    overflow: hidden;
+    isolation: isolate;
 }
 
 [Data-theme="dark"] .flip-front, [Data-theme="dark"] .flip-back {
@@ -73,8 +80,12 @@
     justify-content: space-between;
 }
 
+.flip-front {
+    transform: rotateY(0deg) translateZ(1px);
+}
+
 .flip-back {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) translateZ(1px);
 }
 
 .card-num {
